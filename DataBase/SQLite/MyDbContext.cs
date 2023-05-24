@@ -21,9 +21,16 @@ namespace DataBase.SQLite
         /// 分类
         /// </summary>
         public DbSet<CategoryModel> Categorys { get; set; }
-
-        private static string dbFilePath = Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location), "Data", "data.db");
-
-        
+        private string DbPath { get; }
+        public MyDbContext()
+        {
+            var folder = Environment.SpecialFolder.LocalApplicationData;
+            var path = Environment.GetFolderPath(folder);
+            DbPath = Path.Join(path, "database.db");
+        }
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseSqlite($"Data Source={DbPath}");
+        }
     }
 }
