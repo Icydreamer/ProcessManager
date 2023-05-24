@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DataBase.Models
 {
@@ -11,6 +13,7 @@ namespace DataBase.Models
     /// </summary>
     public class AppModel
     {
+        [Key]
         public int ID { get; set; }
 
         /// <summary>
@@ -37,6 +40,7 @@ namespace DataBase.Models
         /// 累计使用时长
         /// </summary>
         public int TotalTime { get; set; }
+        [ForeignKey("CategoryID")]
         public virtual CategoryModel Category { get; set; }
     }
 }

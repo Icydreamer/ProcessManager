@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DataBase.Models
 {
@@ -11,9 +13,7 @@ namespace DataBase.Models
     /// </summary>
     public class CategoryModel
     {
-        /// <summary>
-        /// 分类ID
-        /// </summary>
+        [Key]
         public int ID { get; set; }
         /// <summary>
         /// 分类名称
