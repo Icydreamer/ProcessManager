@@ -14,7 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ProcessManager.Views
+namespace MvvmTutorials.ToolkitMessages.Views
 {
     /// <summary>
     /// Page4.xaml 的交互逻辑
@@ -42,6 +42,11 @@ namespace ProcessManager.Views
 
         }
         public ObservableCollection<Foo> DataList { get; } = new ObservableCollection<Foo>();
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 
     public class Foo

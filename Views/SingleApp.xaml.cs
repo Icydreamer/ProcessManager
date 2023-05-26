@@ -15,7 +15,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using HandyControl.Data;
 
-namespace ProcessManager
+namespace MvvmTutorials.ToolkitMessages.Views
 {
     /// <summary>
     /// Page3.xaml 的交互逻辑
@@ -49,7 +49,7 @@ namespace ProcessManager
             //list
             for (int i = 0; i < 100; i++)
             {
-                DataList.Add(new Foo()
+                DataList.Add(new Foo2()
                 {
                     Index = i,
                     Name = "lindexi",
@@ -61,9 +61,9 @@ namespace ProcessManager
 
 
         }
-        public ObservableCollection<Foo> DataList { get; } = new ObservableCollection<Foo>();
+        public ObservableCollection<Foo2> DataList { get; } = new ObservableCollection<Foo2>();
     }
-    public class Foo
+    public class Foo2
     {
         public int Index { get; set; }
         public string Name { get; set; }

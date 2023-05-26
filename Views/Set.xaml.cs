@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ProcessManager
+namespace MvvmTutorials.ToolkitMessages.Views
 {
     /// <summary>
     /// Page2.xaml 的交互逻辑
