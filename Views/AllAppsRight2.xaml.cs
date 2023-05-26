@@ -32,7 +32,7 @@ namespace ProcessManager.Views
             pie.ShowValues = true;
             pie.ShowLabels = true;
             plt.Legend();
-            plt.SaveFig("..\\Resources\\pie_showEverything.png");//绘制扇形图
+            plt.SaveFig("Resources\\pie_showEverything.png");//绘制扇形图
         }
     }
 }

@@ -29,5 +29,10 @@ namespace ProcessManager.Views
         {
 
         }
+
+        private void Button_Completed(object sender, EventArgs e)
+        {
+
+        }
     }
 }

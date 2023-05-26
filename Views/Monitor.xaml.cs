@@ -37,6 +37,9 @@ namespace ProcessManager.Views
             DataContext = this;
 
 
+
+
+
         }
         public ObservableCollection<Fool> DataList { get; } = new ObservableCollection<Fool>();
     }

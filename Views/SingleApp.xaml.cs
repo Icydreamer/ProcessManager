@@ -35,17 +35,11 @@ namespace ProcessManager
                 WpfPlot2.Plot.AddScatter(dataX, dataZ);
                 WpfPlot2.Plot.Title("标题");
                 WpfPlot2.Plot.XLabel("时间/天");
-                WpfPlot2.Plot.YLabel("时长/小时，次数/次");
+                WpfPlot2.Plot.YLabel("时长/小时");
                 WpfPlot2.Refresh();
             }
             WpfPlot2.Refresh();
-            //绘制时间条
-            for (int i = 0; i < 10; i++)
-        {
-            var hour = 6 * i;
-            TimeBarDemo.Hotspots.Add(new DateTimeRange(DateTime.Today.AddHours(hour), DateTime.Today.AddHours(hour + 1)));
-            TimeBarDemo.Hotspots.Add(new DateTimeRange(DateTime.Today.AddHours(-hour), DateTime.Today.AddHours(-hour + 1)));
-        }
+        
             //list
             for (int i = 0; i < 100; i++)
             {

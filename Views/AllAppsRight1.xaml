@@ -4,13 +4,15 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:ProcessManager.Views"
+       xmlns:hc="https://handyorg.github.io/handycontrol"
+       xmlns:system="clr-namespace:System;assembly=mscorlib"
       mc:Ignorable="d" 
       d:DesignHeight="600" d:DesignWidth="500"
       Title="Page6">
 
     <Grid>
         <StackPanel Grid.Column="1">
-            <WpfPlot x:Name="WpfPlot2" HorizontalAlignment="Left" VerticalAlignment="Top" Height="372" Width="500"/>
+            <WpfPlot x:Name="WpfPlot2" HorizontalAlignment="Left" VerticalAlignment="Top" Height="372" Width="450"/>
             <Grid Height="20"></Grid>
             <WrapPanel>
                 <Grid Width="50"></Grid>
@@ -22,7 +24,7 @@
                 <Grid Width="50"></Grid>
                 <Image Source="..\Resources\4.jpg" Width="50" Height="40"></Image>
             </WrapPanel>
-            <Grid Height="40"></Grid>
+            <hc:DatePicker Height="20" Width="300" hc:InfoElement.ShowClearButton="True" SelectedDate="{x:Static system:DateTime.Now}"/>
             <Border BorderThickness="10" BorderBrush="Black" CornerRadius="8,8,8,8" Height="120"  Background="#FF0079F6" Margin="10,0,10,0" Padding="0,10,0,10">
                 <StackPanel>
                     <TextBlock Text="使用最多的应用qq时长为24个小时" FontSize="20" Foreground="White" HorizontalAlignment="Center"></TextBlock>

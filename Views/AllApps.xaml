@@ -7,7 +7,7 @@
       xmlns:hc="https://handyorg.github.io/handycontrol"
       mc:Ignorable="d" 
       d:DesignHeight="600" d:DesignWidth="1000"
-      Title="Page4">
+      Title="AllApps">
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -18,11 +18,10 @@
             <WrapPanel Height="50">
                 <Grid Width="20"></Grid>
                 <Button Height="40" Content="折线图" FontSize="20"></Button>
-                <Grid Width="20"></Grid>
-                <Button Height="40" Content="扇形图" FontSize="20"></Button>
-                <Grid Width="20"></Grid>
-                <Button Height="40" Content="列表" FontSize="20"></Button>
                 <Grid Width="60"></Grid>
+                <Button Height="40" Content="扇形图" FontSize="20"></Button>
+ 
+                <Grid Width="140"></Grid>
                 <Button Height="40" Content="确认" FontSize="20"></Button>
             </WrapPanel>
         <DataGrid Height="500" hc:DataGridAttach.CanUnselectAllWithBlankArea="True" HeadersVisibility="All" RowHeaderWidth="50" AutoGenerateColumns="False" ItemsSource="{Binding DataList}">
@@ -58,6 +57,6 @@
                 <Button Height="40" Content="设置" FontSize="20"></Button>
             </WrapPanel>
         </StackPanel>
-        <Frame Grid.Column="1" Source="AllAppsRight1.xaml" ></Frame>
+        <Frame Grid.Column="1" Source="AllAppsRight2.xaml" ></Frame>
     </Grid>
 </Page>
