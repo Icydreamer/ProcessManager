@@ -13,16 +13,21 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ProcessManager
+namespace ProcessManager.Views
 {
     /// <summary>
-    /// Page2.xaml 的交互逻辑
+    /// Page1.xaml 的交互逻辑
     /// </summary>
-    public partial class Page2 : Window
+    public partial class HomePage : Page
     {
-        public Page2()
+        public HomePage()
         {
             InitializeComponent();
+        }
+
+        private void ColumnDefinition_Confirmed(object sender, HandyControl.Data.FunctionEventArgs<Color> e)
+        {
+
         }
     }
 }

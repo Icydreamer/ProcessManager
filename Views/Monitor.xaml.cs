@@ -19,9 +19,9 @@ namespace ProcessManager.Views
     /// <summary>
     /// Page5.xaml 的交互逻辑
     /// </summary>
-    public partial class Page5 : Page
+    public partial class Monitor : Page
     {
-        public Page5()
+        public Monitor()
         {
             InitializeComponent();
             for (int i = 0; i < 100; i++)

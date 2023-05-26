@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
@@ -6,7 +6,8 @@
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-    <GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>    
+    <GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>
+    <ApplicationIcon>Resources\1.ico</ApplicationIcon>    
   </PropertyGroup>
 
   <ItemGroup>
@@ -17,19 +18,60 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Resources\1.gif" />
+    <None Remove="Resources\1.png" />
+    <None Remove="Resources\2.jpg" />
+    <None Remove="Resources\2.png" />
+    <None Remove="Resources\3.jpg" />
+    <None Remove="Resources\3.png" />
+    <None Remove="Resources\4.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Resources\1.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\1.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\1.gif">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\2.jpg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\2.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\3.jpg" />
+    <Resource Include="Resources\3.png" />
+    <Resource Include="Resources\4.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.0" />
     <PackageReference Include="HandyControl" Version="3.4.0" />
     <PackageReference Include="Microsoft.Data.Sqlite.Core" Version="7.0.5" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.5">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
+    <PackageReference Include="ScottPlot" Version="4.1.64" />
     <PackageReference Include="ScottPlot.WPF" Version="4.1.64" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="DataBase\DataBase.csproj" />
     <ProjectReference Include="ProcessMonitor\ProcessMonitor.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Resources\1.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\1.jpg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   
 </Project>
