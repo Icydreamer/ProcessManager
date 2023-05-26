@@ -1,13 +1,16 @@
-﻿<Page x:Class="ProcessManager.Views.AllApps"
+<Page x:Class="MvvmTutorials.ToolkitMessages.Views.AllApps"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:ProcessManager.Views"
+      xmlns:local="clr-namespace:MvvmTutorials.ToolkitMessages.ViewModels"
       xmlns:hc="https://handyorg.github.io/handycontrol"
       mc:Ignorable="d" 
       d:DesignHeight="600" d:DesignWidth="1000"
-      Title="AllApps">
+      Title="Page4">
+    <Page.DataContext>
+        <local:MainWindowViewModel />
+    </Page.DataContext>
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -48,7 +51,7 @@
             
             <WrapPanel Height="50">
                 <Grid Width="20"></Grid>
-                <Button Height="40" Content="主页" FontSize="20"></Button>
+                <Button Height="40" Content="主页" FontSize="20" Command="{Binding ButtonClickCommand}"></Button>
                 <Grid Width="20"></Grid>
                 <Button Height="40" Content="单个应用" FontSize="20"></Button>
                 <Grid Width="20"></Grid>

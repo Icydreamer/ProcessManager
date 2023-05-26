@@ -12,6 +12,10 @@ public partial class MainWindowViewModel: ObservableRecipient
     [ObservableProperty]
     private int totalTime = 0;//总时长
 
+    //页面路径
+    [ObservableProperty]
+    private string pageSource = "AllApps.xaml";
+
     //设置部分
     [ObservableProperty]
     private bool autoStart = false;//开机自启
@@ -44,10 +48,17 @@ public partial class MainWindowViewModel: ObservableRecipient
 
     [ObservableProperty]
     private int lastUse = 0;//距离上次使用已经过去
-    
-    [RelayCommand]
-    private void ClickMe()
+
+/*    public RelayCommand ButtonClickCommand { get; }
+
+    public MainWindowViewModel() 
     {
-        TotalTime += 1;
+        ButtonClickCommand = new RelayCommand(() => PageSource = "HomePage.xaml");z
+    }*/
+    [RelayCommand]
+    private void ButtonClick()
+    {
+
+        PageSource = "HomePage.xaml";
     }
 }
