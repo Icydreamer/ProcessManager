@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ProcessManager.Views
+namespace MvvmTutorials.ToolkitMessages.Views
 {
     /// <summary>
     /// Page1.xaml 的交互逻辑
@@ -26,6 +26,11 @@ namespace ProcessManager.Views
         }
 
         private void ColumnDefinition_Confirmed(object sender, HandyControl.Data.FunctionEventArgs<Color> e)
+        {
+
+        }
+
+        private void Button_Completed(object sender, EventArgs e)
         {
 
         }

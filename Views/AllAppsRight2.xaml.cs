@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ProcessManager.Views
+namespace MvvmTutorials.ToolkitMessages.Views
 {
     /// <summary>
     /// Page7.xaml 的交互逻辑
@@ -32,7 +32,7 @@ namespace ProcessManager.Views
             pie.ShowValues = true;
             pie.ShowLabels = true;
             plt.Legend();
-            plt.SaveFig("..\\Resources\\pie_showEverything.png");//绘制扇形图
+            plt.SaveFig("Resources\\pie_showEverything.png");//绘制扇形图
         }
     }
 }

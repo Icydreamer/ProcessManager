@@ -15,7 +15,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using HandyControl.Data;
 
-namespace ProcessManager
+namespace MvvmTutorials.ToolkitMessages.Views
 {
     /// <summary>
     /// Page3.xaml 的交互逻辑
@@ -35,21 +35,15 @@ namespace ProcessManager
                 WpfPlot2.Plot.AddScatter(dataX, dataZ);
                 WpfPlot2.Plot.Title("标题");
                 WpfPlot2.Plot.XLabel("时间/天");
-                WpfPlot2.Plot.YLabel("时长/小时，次数/次");
+                WpfPlot2.Plot.YLabel("时长/小时");
                 WpfPlot2.Refresh();
             }
             WpfPlot2.Refresh();
-            //绘制时间条
-            for (int i = 0; i < 10; i++)
-        {
-            var hour = 6 * i;
-            TimeBarDemo.Hotspots.Add(new DateTimeRange(DateTime.Today.AddHours(hour), DateTime.Today.AddHours(hour + 1)));
-            TimeBarDemo.Hotspots.Add(new DateTimeRange(DateTime.Today.AddHours(-hour), DateTime.Today.AddHours(-hour + 1)));
-        }
+        
             //list
             for (int i = 0; i < 100; i++)
             {
-                DataList.Add(new Foo()
+                DataList.Add(new Foo2()
                 {
                     Index = i,
                     Name = "lindexi",
@@ -61,9 +55,9 @@ namespace ProcessManager
 
 
         }
-        public ObservableCollection<Foo> DataList { get; } = new ObservableCollection<Foo>();
+        public ObservableCollection<Foo2> DataList { get; } = new ObservableCollection<Foo2>();
     }
-    public class Foo
+    public class Foo2
     {
         public int Index { get; set; }
         public string Name { get; set; }

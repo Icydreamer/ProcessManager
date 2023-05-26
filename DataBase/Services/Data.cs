@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -119,6 +119,12 @@ namespace DataBase.Services
                 }
             });
         }
+        /// <summary>
+        /// 查询指定范围数据
+        /// </summary>
+        /// <param name="start"></param>
+        /// <param name="end"></param>
+        /// <returns></returns>
         public IEnumerable<DailyLogModel> GetDateRangelogList(DateTime start, DateTime end, int take = -1, int skip = -1)
         {
 
@@ -183,6 +189,10 @@ namespace DataBase.Services
                 return res;
             }
         }
+        /// <summary>
+        /// 获取今天的数据
+        /// </summary>
+        /// <returns></returns>
         public List<DailyLogModel> GetTodaylogList()
         {
             using (var db = dataBase.GetReaderContext())
@@ -192,6 +202,10 @@ namespace DataBase.Services
                 return res.ToList();
             }
         }
+        /// <summary>
+        /// 获取本周的数据
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<DailyLogModel> GetThisWeeklogList()
         {
             DateTime weekStartDate = DateTime.Now, weekEndDate = DateTime.Now;
@@ -214,6 +228,10 @@ namespace DataBase.Services
 
             return GetDateRangelogList(weekStartDate, weekEndDate);
         }
+        /// <summary>
+        /// 获取上周的数据
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<DailyLogModel> GetLastWeeklogList()
         {
             DateTime weekStartDate = DateTime.Now, weekEndDate = DateTime.Now;
@@ -230,6 +248,12 @@ namespace DataBase.Services
 
             return GetDateRangelogList(weekStartDate, weekEndDate);
         }
+        /// <summary>
+        /// 获取指定进程某个月的数据
+        /// </summary>
+        /// <param name="processName"></param>
+        /// <param name="month"></param>
+        /// <returns></returns>
         public List<DailyLogModel> GetProcessMonthLogList(int AppID, DateTime month)
         {
             using (var db = dataBase.GetReaderContext())
@@ -248,6 +272,12 @@ namespace DataBase.Services
                 return new List<DailyLogModel>();
             }
         }
+        /// <summary>
+        /// 获取指定进程某天的数据
+        /// </summary>
+        /// <param name="processName"></param>
+        /// <param name="day"></param>
+        /// <returns></returns>
         public DailyLogModel GetProcess(int AppID, DateTime day)
         {
 
@@ -285,158 +315,6 @@ namespace DataBase.Services
                 db.SaveChanges();
             }
         }
-        public struct CategoryHoursDataModel
-        {
-            public int Total { get; set; }
-            public int CategoryID { get; set; }
-            public DateTime Time { get; set; }
-
-        }
-        /*
-        public List<HoursDataModel> GetCategoryHoursData(DateTime date)
-        {
-            using (var db = dataBase.GetReaderContext())
-            {
-                //  查出有数据的分类
-
-                //var categorys = db.Database.SqlQuery<CategoryHoursDataModel>("select sum(Time) as Total,AppModels.CategoryID,HoursLogModels.DataTime as Time from HoursLogModels join AppModels on AppModels.ID=HoursLogModels.AppModelID where AppModels.CategoryID<>0 and HoursLogModels.DataTime>='" + date.Date.ToString("yyyy-MM-dd HH:mm:ss") + "' and HoursLogModels.DataTime<= '" + date.Date.ToString("yyyy-MM-dd 23:59:59") + "' GROUP BY AppModels.CategoryID ").ToArray();
-
-
-                //var data = db.Database.SqlQuery<CategoryHoursDataModel>("select sum(Time) as Total,AppModels.CategoryID,HoursLogModels.DataTime as Time from HoursLogModels join AppModels on AppModels.ID=HoursLogModels.AppModelID where AppModels.CategoryID<>0 and HoursLogModels.DataTime>='" + date.Date.ToString("yyyy-MM-dd HH:mm:ss") + "' and HoursLogModels.DataTime<= '" + date.Date.ToString("yyyy-MM-dd 23:59:59") + "' GROUP BY AppModels.CategoryID,HoursLogModels.DataTime ").ToArray();
-                var categorys = db.Database.SqlQuery<CategoryHoursDataModel>("select sum(Time) as Total,AppModels.CategoryID,HoursLogModels.DataTime as Time from HoursLogModels join AppModels on AppModels.ID=HoursLogModels.AppModelID where  HoursLogModels.DataTime>='" + date.Date.ToString("yyyy-MM-dd HH:mm:ss") + "' and HoursLogModels.DataTime<= '" + date.Date.ToString("yyyy-MM-dd 23:59:59") + "' GROUP BY AppModels.CategoryID ").OrderByDescending(m => m.CategoryID).ToArray();
-
-
-                var data = db.Database.SqlQuery<CategoryHoursDataModel>("select sum(Time) as Total,AppModels.CategoryID,HoursLogModels.DataTime as Time from HoursLogModels join AppModels on AppModels.ID=HoursLogModels.AppModelID where  HoursLogModels.DataTime>='" + date.Date.ToString("yyyy-MM-dd HH:mm:ss") + "' and HoursLogModels.DataTime<= '" + date.Date.ToString("yyyy-MM-dd 23:59:59") + "' GROUP BY AppModels.CategoryID,HoursLogModels.DataTime ").ToArray();
-
-                List<HoursDataModel> list = new List<HoursDataModel>();
-                foreach (var category in categorys)
-                {
-                    list.Add(new HoursDataModel()
-                    {
-                        CategoryID = category.CategoryID,
-                        Values = new double[24]
-                    });
-                }
-
-                for (int i = 0; i < 24; i++)
-                {
-                    string hours = i < 10 ? "0" + i : i.ToString();
-                    var time = date.ToString($"yyyy-MM-dd {hours}:00:00");
-                    foreach (var category in categorys)
-                    {
-                        var log = data.Where(m => m.CategoryID == category.CategoryID && m.Time.ToString("yyyy-MM-dd HH:00:00") == time).FirstOrDefault();
-
-                        var item = list.Where(m => m.CategoryID == category.CategoryID).FirstOrDefault();
-
-                        item.Values[i] = log.Total;
-                    }
-                }
-                return list;
-            }
-        }
-        public List<HoursDataModel> GetCategoryRangeData(DateTime start, DateTime end)
-        {
-            using (var db = dataBase.GetReaderContext())
-            {
-                //  查出有数据的分类
-
-                //var categorys = db.Database.SqlQuery<CategoryHoursDataModel>("select sum(Time) as Total,AppModels.CategoryID,DailyLogModels.Date as Time from DailyLogModels join AppModels on AppModels.ID=DailyLogModels.AppModelID where AppModels.CategoryID<>0 and DailyLogModels.Date>='" + start.Date.ToString("yyyy-MM-dd HH:mm:ss") + "' and DailyLogModels.Date<= '" + end.Date.ToString("yyyy-MM-dd HH:mm:ss") + "' GROUP BY AppModels.CategoryID").ToArray();
-
-
-                //var data = db.Database.SqlQuery<CategoryHoursDataModel>("select sum(Time) as Total,AppModels.CategoryID,DailyLogModels.Date as Time from DailyLogModels join AppModels on AppModels.ID=DailyLogModels.AppModelID where AppModels.CategoryID<>0 and DailyLogModels.Date>='" + start.Date.ToString("yyyy-MM-dd HH:mm:ss") + "' and DailyLogModels.Date<= '" + end.Date.ToString("yyyy-MM-dd HH:mm:ss") + "' GROUP BY AppModels.CategoryID,DailyLogModels.Date ").ToArray();
-                var categorys = db.Database.SqlQuery<CategoryHoursDataModel>("select sum(Time) as Total,AppModels.CategoryID,DailyLogModels.Date as Time from DailyLogModels join AppModels on AppModels.ID=DailyLogModels.AppModelID where  DailyLogModels.Date>='" + start.Date.ToString("yyyy-MM-dd HH:mm:ss") + "' and DailyLogModels.Date<= '" + end.Date.ToString("yyyy-MM-dd HH:mm:ss") + "' GROUP BY AppModels.CategoryID").OrderByDescending(m => m.CategoryID).ToArray();
-
-
-                var data = db.Database.SqlQuery<CategoryHoursDataModel>("select sum(Time) as Total,AppModels.CategoryID,DailyLogModels.Date as Time from DailyLogModels join AppModels on AppModels.ID=DailyLogModels.AppModelID where  DailyLogModels.Date>='" + start.Date.ToString("yyyy-MM-dd HH:mm:ss") + "' and DailyLogModels.Date<= '" + end.Date.ToString("yyyy-MM-dd HH:mm:ss") + "' GROUP BY AppModels.CategoryID,DailyLogModels.Date ").ToArray();
-
-                var ts = end - start;
-                var days = ts.TotalDays + 1;
-
-
-                List<HoursDataModel> list = new List<HoursDataModel>();
-
-
-                foreach (var category in categorys)
-                {
-                    list.Add(new HoursDataModel()
-                    {
-                        CategoryID = category.CategoryID,
-                        Values = new double[(int)days]
-                    });
-                }
-
-
-
-                for (int i = 0; i < days; i++)
-                {
-                    string day = i < 10 ? "0" + i : i.ToString();
-                    var time = start.AddDays(i).ToString($"yyyy-MM-dd 00:00:00");
-                    //Debug.WriteLine(time);
-                    foreach (var category in categorys)
-                    {
-                        var log = data.Where(m => m.CategoryID == category.CategoryID && m.Time.ToString("yyyy-MM-dd 00:00:00") == time).FirstOrDefault();
-
-                        var item = list.Where(m => m.CategoryID == category.CategoryID).FirstOrDefault();
-
-                        item.Values[i] = log.Total;
-                    }
-                }
-                return list;
-            }
-        }
-        public List<HoursDataModel> GetCategoryYearData(DateTime date)
-        {
-            using (var db = dataBase.GetReaderContext())
-            {
-                //  查出有数据的分类
-
-                var dateArr = Time.GetYearDate(date);
-
-                //var categorys = db.Database.SqlQuery<CategoryHoursDataModel>("select sum(Time) as Total,AppModels.CategoryID,DailyLogModels.Date as Time from DailyLogModels join AppModels on AppModels.ID=DailyLogModels.AppModelID where AppModels.CategoryID<>0 and DailyLogModels.Date>='" + dateArr[0].Date.ToString("yyyy-MM-dd HH:mm:ss") + "' and DailyLogModels.Date<= '" + dateArr[1].Date.ToString("yyyy-MM-dd HH:mm:ss") + "' GROUP BY AppModels.CategoryID").ToArray();
-
-
-                //var data = db.Database.SqlQuery<CategoryHoursDataModel>("select sum(Time) as Total,AppModels.CategoryID,DailyLogModels.Date as Time from DailyLogModels join AppModels on AppModels.ID=DailyLogModels.AppModelID where AppModels.CategoryID<>0 and DailyLogModels.Date>='" + dateArr[0].Date.ToString("yyyy-MM-dd HH:mm:ss") + "' and DailyLogModels.Date<= '" + dateArr[1].Date.ToString("yyyy-MM-dd HH:mm:ss") + "' GROUP BY AppModels.CategoryID,DailyLogModels.Date ").ToArray();
-
-                var categorys = db.Database.SqlQuery<CategoryHoursDataModel>("select sum(Time) as Total,AppModels.CategoryID,DailyLogModels.Date as Time from DailyLogModels join AppModels on AppModels.ID=DailyLogModels.AppModelID where  DailyLogModels.Date>='" + dateArr[0].Date.ToString("yyyy-MM-dd HH:mm:ss") + "' and DailyLogModels.Date<= '" + dateArr[1].Date.ToString("yyyy-MM-dd HH:mm:ss") + "' GROUP BY AppModels.CategoryID").OrderByDescending(m => m.CategoryID).ToArray();
-
-
-                var data = db.Database.SqlQuery<CategoryHoursDataModel>("select sum(Time) as Total,AppModels.CategoryID,DailyLogModels.Date as Time from DailyLogModels join AppModels on AppModels.ID=DailyLogModels.AppModelID where DailyLogModels.Date>='" + dateArr[0].Date.ToString("yyyy-MM-dd HH:mm:ss") + "' and DailyLogModels.Date<= '" + dateArr[1].Date.ToString("yyyy-MM-dd HH:mm:ss") + "' GROUP BY AppModels.CategoryID,DailyLogModels.Date ").ToArray();
-                //var ts = end - start;
-                //var days = ts.TotalDays + 1;
-
-
-                List<HoursDataModel> list = new List<HoursDataModel>();
-
-
-                foreach (var category in categorys)
-                {
-                    list.Add(new HoursDataModel()
-                    {
-                        CategoryID = category.CategoryID,
-                        Values = new double[12]
-                    });
-                }
-
-
-
-                for (int i = 1; i < 13; i++)
-                {
-                    string month = i < 10 ? "0" + i : i.ToString();
-                    var dayArr = Time.GetMonthDate(new DateTime(date.Year, i, 1));
-
-                    //Debug.WriteLine(dayArr);
-                    foreach (var category in categorys)
-                    {
-                        var total = data.Where(m => m.CategoryID == category.CategoryID && m.Time >= dayArr[0] && m.Time <= dayArr[1]).Sum(m => m.Total);
-
-                        var item = list.Where(m => m.CategoryID == category.CategoryID).FirstOrDefault();
-
-                        item.Values[i - 1] = total;
-                    }
-                }
-                return list;
-            }
-        }
         public struct ColumnItemDataModel
         {
             public int Total { get; set; }
@@ -444,6 +322,7 @@ namespace DataBase.Services
             public DateTime Time { get; set; }
 
         }
+        /*
         public List<HoursDataModel> GetAppDayData(int AppID, DateTime date)
         {
             using (var db = dataBase.GetReaderContext())
@@ -565,60 +444,6 @@ namespace DataBase.Services
                 db.Database.ExecuteSqlCommand("delete from DailyLogModels  where Date>='" + start.Date.ToString("yyyy-MM-01 00:00:00") + "' and Date<= '" + end.Date.ToString("yyyy-MM-dd 23:59:59") + "'");
 
                 db.Database.ExecuteSqlCommand("delete from HoursLogModels  where DataTime>='" + start.Date.ToString("yyyy-MM-01 00:00:00") + "' and DataTime<= '" + end.Date.ToString("yyyy-MM-dd 23:59:59") + "'");
-            }
-        }
-
-        public void ExportToExcel(string dir, DateTime start, DateTime end)
-        {
-            start = new DateTime(start.Year, start.Month, 1, 0, 0, 0);
-            end = new DateTime(end.Year, end.Month, DateTime.DaysInMonth(end.Year, end.Month), 23, 59, 59);
-
-            using (var db = dataBase.GetReaderContext())
-            {
-                var day = db.DailyLog.Where(m => m.Date >= start.Date && m.Date <= end.Date)
-                    .Select(m => new
-                    {
-                        日期 = m.Date,
-                        应用 = m.AppModel != null ? m.AppModel.Name : "未知",
-                        描述 = m.AppModel != null ? m.AppModel.Description : "未知",
-                        时长 = m.Time,
-                        分类 = m.AppModel != null && m.AppModel.Category != null ? m.AppModel.Category.Name : "未知"
-                    })
-                    .ToList();
-
-                var hours = db.HoursLog.Where(m => m.DataTime >= start && m.DataTime <= end)
-                    .Select(m => new
-                    {
-                        时段 = m.DataTime,
-                        应用 = m.AppModel != null ? m.AppModel.Name : "未知",
-                        描述 = m.AppModel != null ? m.AppModel.Description : "未知",
-                        时长 = m.Time,
-                        分类 = m.AppModel != null && m.AppModel.Category != null ? m.AppModel.Category.Name : "未知"
-                    })
-                    .ToList();
-                var mapper = new Mapper();
-                mapper.Put(day, "每日");
-                mapper.Put(hours, "时段");
-
-                string name = $"Tai数据({start.ToString("yyyy年MM月")}-{end.ToString("yyyy年MM月")})";
-                if (start.Year == end.Year && start.Month == end.Month)
-                {
-                    name = $"Tai数据({start.ToString("yyyy年MM月")})";
-                }
-                mapper.Save(Path.Combine(dir, $"{name}.xlsx"));
-
-                //  导出csv
-                using (var writer = new StreamWriter(Path.Combine(dir, $"{name}-每日.csv"), false, System.Text.Encoding.UTF8))
-                using (var csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
-                {
-                    csv.WriteRecords(day);
-                }
-
-                using (var writer = new StreamWriter(Path.Combine(dir, $"{name}-时段.csv"), false, System.Text.Encoding.UTF8))
-                using (var csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
-                {
-                    csv.WriteRecords(hours);
-                }
             }
         }
         public int GetDateRangeAppCount(DateTime start, DateTime end)

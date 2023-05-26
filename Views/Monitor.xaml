@@ -1,9 +1,9 @@
-﻿<Page x:Class="ProcessManager.Views.Monitor"
+﻿<Page x:Class="MvvmTutorials.ToolkitMessages.Views.Monitor"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:ProcessManager.Views"
+      xmlns:local="clr-namespace:MvvmTutorials.ToolkitMessages.Views"
       xmlns:hc="https://handyorg.github.io/handycontrol"
       mc:Ignorable="d" 
       d:DesignHeight="600" d:DesignWidth="1000"
@@ -24,7 +24,7 @@
             <Grid Width="20"></Grid>
             <Button Height="40" Content="单个应用" FontSize="20"></Button>
             <Grid Width="20"></Grid>
-            <Button Height="40" Content="通知" FontSize="20"></Button>
+            <Button Height="40" Content="所有应用" FontSize="20"></Button>
             <Grid Width="20"></Grid>
             <Button Height="40" Content="设置" FontSize="20"></Button>
         </WrapPanel>
@@ -48,6 +48,10 @@
             <Grid Height="50"></Grid>
             <TextBlock Text="填写最长使用时间"  FontSize="20" HorizontalAlignment="Center"></TextBlock>
             <TextBox Width="200"></TextBox>
+            <Grid Height="50"></Grid>
+            <TextBlock Text="今日剩余60分钟" FontSize="20" HorizontalAlignment="Center"></TextBlock>
+            
+            <ProgressBar Width="300" Style="{StaticResource ProgressBarWarning}" Value="80"/>
             <Grid Height="200"></Grid>
             <Button Content="确认" FontSize="20" Height="40" HorizontalAlignment="Right" Margin="0,0,10,0" ></Button>
         </StackPanel>

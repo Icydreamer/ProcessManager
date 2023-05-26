@@ -14,7 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ProcessManager.Views
+namespace MvvmTutorials.ToolkitMessages.Views
 {
     /// <summary>
     /// Page5.xaml 的交互逻辑
@@ -35,6 +35,9 @@ namespace ProcessManager.Views
 
             }
             DataContext = this;
+
+
+
 
 
         }
