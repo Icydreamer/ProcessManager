@@ -19,9 +19,9 @@ namespace ProcessManager.Views
     /// <summary>
     /// Page6.xaml 的交互逻辑
     /// </summary>
-    public partial class Page6 : Page
+    public partial class AllAppsRight1 : Page
     {
-        public Page6()
+        public AllAppsRight1()
         {
             InitializeComponent();
             ///条形图

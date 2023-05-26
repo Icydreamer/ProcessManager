@@ -1,4 +1,4 @@
-﻿<Page x:Class="ProcessManager.Views.Page4"
+﻿<Page x:Class="ProcessManager.Views.AllApps"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -58,6 +58,6 @@
                 <Button Height="40" Content="设置" FontSize="20"></Button>
             </WrapPanel>
         </StackPanel>
-        <Frame Grid.Column="1" Source="Page7.xaml" ></Frame>
+        <Frame Grid.Column="1" Source="AllAppsRight1.xaml" ></Frame>
     </Grid>
 </Page>

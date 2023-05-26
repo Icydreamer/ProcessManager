@@ -20,9 +20,9 @@ namespace ProcessManager
     /// <summary>
     /// Page3.xaml 的交互逻辑
     /// </summary>
-    public partial class Page3 : Page
+    public partial class SingleApp : Page
     {
-        public Page3()
+        public SingleApp()
         {
             InitializeComponent();
             if (WpfPlot2 != null)

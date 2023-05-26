@@ -18,9 +18,9 @@ namespace ProcessManager.Views
     /// <summary>
     /// Page7.xaml 的交互逻辑
     /// </summary>
-    public partial class Page7 : Page
+    public partial class AllAppsRight2 : Page
     {
-        public Page7()
+        public AllAppsRight2()
         {
             InitializeComponent();
             var plt = new ScottPlot.Plot(600, 400);
