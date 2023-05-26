@@ -16,6 +16,10 @@ namespace DataBase.SQLite
         /// 每日数据
         /// </summary>
         public DbSet<DailyLogModel> DailyLog { get; set; }
+        /// <summary>
+        /// 时段数据
+        /// </summary>
+        public DbSet<HoursLogModel> HoursLog { get; set; }
         public DbSet<AppModel> App { get; set; }
         /// <summary>
         /// 分类
