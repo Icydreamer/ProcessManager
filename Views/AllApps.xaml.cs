@@ -19,9 +19,9 @@ namespace ProcessManager.Views
     /// <summary>
     /// Page4.xaml 的交互逻辑
     /// </summary>
-    public partial class Page4 : Page
+    public partial class AllApps : Page
     {
-        public Page4()
+        public AllApps()
         {
             InitializeComponent();
             for (int i = 0; i < 10; i++)

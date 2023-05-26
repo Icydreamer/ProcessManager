@@ -20,7 +20,7 @@
             <RowDefinition Height="600"></RowDefinition>
             <RowDefinition Height="100"></RowDefinition>
         </Grid.RowDefinitions>
-        <Frame Source="Page5.xaml" ></Frame>
+        <Frame Source="AllApps.xaml" ></Frame>
         <WrapPanel Grid.Row="1" >
             <hc:FlipClock  Opacity="0.8" Height="100" Width="550" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" RenderTransformOrigin="0.2,0" >
                 <hc:FlipClock.RenderTransform>
