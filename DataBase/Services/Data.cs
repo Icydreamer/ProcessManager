@@ -292,6 +292,7 @@ namespace DataBase.Services
             public DateTime Time { get; set; }
 
         }
+        /*
         public List<HoursDataModel> GetCategoryHoursData(DateTime date)
         {
             using (var db = dataBase.GetReaderContext())
@@ -715,5 +716,6 @@ namespace DataBase.Services
                 return result;
             }
         }
+        */
     }
 }
