@@ -1,19 +1,20 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Text.Json;
 
 namespace ProcessMonitor
 {
-
     /// <summary>
     /// 定义配置项
     /// </summary>
     class Config
     {
         // 是否开机自启
-        public bool StartupEnabled { get; private set; }
-
+        public bool StartupEnabled { get; set; }
         // 主题颜色选择
-        public string ThemeColor { get; private set; }
+        public string ThemeColor { get; set; }
+        // 是否桌面提醒
+        public bool NotificationEnabled { get; set; }
 
         public static Config LoadConfig()
         {
@@ -32,8 +33,9 @@ namespace ProcessMonitor
                 // 创建新的配置文件并设置初始值
                 Config newConfig = new Config
                 {
-                    StartupEnabled = true,
-                    ThemeColor = "dark"
+                    StartupEnabled = false, // 默认开机不自启
+                    ThemeColor = "dark", // 默认暗色主题
+                    NotificationEnabled = false, // 默认关闭桌面提醒
                 };
 
                 // 序列化新的配置对象为JSON字符串
