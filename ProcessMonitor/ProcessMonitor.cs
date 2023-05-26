@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Formats.Asn1;
@@ -15,25 +15,25 @@ namespace ProcessMonitor
     //{
     //    static void Main(string[] args)
     //    {
-    //        var config = new Config();
-    //        config.LoadConfig();
-
-    //        bool startupEnabled = config.StartupEnabled;
+    //        var config = Config.LoadConfig();
     //        string themeColor = config.ThemeColor;
 
-    //        if (startupEnabled)
+    //        Console.WriteLine(themeColor);
+    //        if (config.StartupEnabled)
     //        {
-    //            // Ö´ĞĞ¿ª»ú×ÔÆôÂß¼­
-    //            Console.WriteLine("¿ª»ú×ÔÆôÒÑÆôÓÃ");
+    //            // æ‰§è¡Œå¼€æœºè‡ªå¯é€»è¾‘
+    //            Console.WriteLine("å¼€æœºè‡ªå¯å·²å¯ç”¨ã€‚");
     //        }
     //        else
     //        {
-    //            Console.WriteLine("¿ª»ú×ÔÆôÒÑ½ûÓÃ");
+    //            Console.WriteLine("å¼€æœºè‡ªå¯å·²ç¦ç”¨ã€‚");
     //        }
+
     //        var processMonitorMonitor = new ProcessMonitor();
     //        processMonitorMonitor.StartMonitoring();
 
     //        Console.ReadLine();
+
     //    }
     //}
     class ProcessMonitor
@@ -44,7 +44,7 @@ namespace ProcessMonitor
 
         public ProcessMonitor()
         {
-            activeProcessName = GetActiveProcessName(); // ³õÊ¼»¯Îªµ±Ç°»î¶¯µÄÈí¼şÃû³Æ
+            activeProcessName = GetActiveProcessName(); // â”‚âŒ¡â•©â•â•—Â»â•¬Â¬â•¡â–’â•Ÿâ–‘â•—Îµâ•¢Â»â•¡â”€â•šÏ†â•â– â”œâˆšâ”‚â•
             stopwatch = new Stopwatch();
             records = new List<Record>();
         }
@@ -72,11 +72,11 @@ namespace ProcessMonitor
 
                     records = records.OrderByDescending(r => r.Duration).ToList();
 
-                    Console.WriteLine("Ó¦ÓÃÊ¹ÓÃÊ±³¤¼ÇÂ¼£º");
+                    Console.WriteLine("â•™Âªâ•™â”œâ•©â•£â•™â”œâ•©â–’â”‚Ã±â•â•Ÿâ”¬â•Ãºâ•‘");
                     foreach (var record in records)
                     {
                         var formattedDuration = DurationFormatter.FormatDuration(record.Duration);
-                        Console.WriteLine($"Ó¦ÓÃ: {record.ProcessName}, Ê¹ÓÃÊ±³¤: {formattedDuration}");
+                        Console.WriteLine($"â•™Âªâ•™â”œ: {record.ProcessName}, â•©â•£â•™â”œâ•©â–’â”‚Ã±: {formattedDuration}");
                         record.FormattedDuration = formattedDuration;
                     }
 
