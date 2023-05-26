@@ -33,7 +33,7 @@ namespace ProcessMonitor
 
         public ProcessMonitor()
         {
-            activeProcessName = GetActiveProcessName(); // │⌡╩╝╗»╬¬╡▒╟░╗ε╢»╡─╚φ╝■├√│╞
+            activeProcessName = GetActiveProcessName(); // 初始化为当前活动的软件名称
             stopwatch = new Stopwatch();
             records = new List<Record>();
         }
@@ -61,11 +61,11 @@ namespace ProcessMonitor
 
                     records = records.OrderByDescending(r => r.Duration).ToList();
 
-                    Console.WriteLine("╙ª╙├╩╣╙├╩▒│ñ╝╟┬╝ú║");
+                    Console.WriteLine("应用使用时长记录：");
                     foreach (var record in records)
                     {
                         var formattedDuration = DurationFormatter.FormatDuration(record.Duration);
-                        Console.WriteLine($"╙ª╙├: {record.ProcessName}, ╩╣╙├╩▒│ñ: {formattedDuration}");
+                        Console.WriteLine($"应用: {record.ProcessName}, 使用时长: {formattedDuration}");
                         record.FormattedDuration = formattedDuration;
                     }
 
