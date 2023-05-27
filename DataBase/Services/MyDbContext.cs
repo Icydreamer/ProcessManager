@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Sqlite;
 using DataBase.Models;
 
-namespace DataBase.SQLite
+namespace DataBase.Services
 {
     public class MyDbContext : DbContext
     {
