@@ -249,6 +249,29 @@ namespace DataBase.Services
             return GetDateRangelogList(weekStartDate, weekEndDate);
         }
         /// <summary>
+        /// 获取指定进程某天的数据
+        /// </summary>
+        /// <param name="processName"></param>
+        /// <param name="day"></param>
+        /// <returns></returns>
+        public DailyLogModel GetProcess(int AppID, DateTime day)
+        {
+
+            using (var db = dataBase.GetReaderContext())
+            {
+                var res = db.DailyLog.Where(m =>
+                    m.AppModelID == AppID
+                    && m.Date.Year == day.Year
+                    && m.Date.Month == day.Month
+                    && m.Date.Day == day.Day);
+                if (res != null)
+                {
+                    return res.FirstOrDefault();
+                }
+                return null;
+            }
+        }
+        /// <summary>
         /// 获取指定进程某个月的数据
         /// </summary>
         /// <param name="processName"></param>
@@ -270,29 +293,6 @@ namespace DataBase.Services
                     return res.ToList();
                 }
                 return new List<DailyLogModel>();
-            }
-        }
-        /// <summary>
-        /// 获取指定进程某天的数据
-        /// </summary>
-        /// <param name="processName"></param>
-        /// <param name="day"></param>
-        /// <returns></returns>
-        public DailyLogModel GetProcess(int AppID, DateTime day)
-        {
-
-            using (var db = dataBase.GetReaderContext())
-            {
-                var res = db.DailyLog.Where(m =>
-                    m.AppModelID == AppID
-                    && m.Date.Year == day.Year
-                    && m.Date.Month == day.Month
-                    && m.Date.Day == day.Day);
-                if (res != null)
-                {
-                    return res.FirstOrDefault();
-                }
-                return null;
             }
         }
         public void Clear(int AppID, DateTime month)
@@ -322,7 +322,12 @@ namespace DataBase.Services
             public DateTime Time { get; set; }
 
         }
-        
+        /// <summary>
+        /// 根据AppID获取某日使用时长
+        /// </summary>
+        /// <param name="AppID"></param>
+        /// <param name="date"></param>
+        /// <returns></returns>
         public List<HoursDataModel> GetAppDayData(int AppID, DateTime date)
         {
             using (var db = dataBase.GetReaderContext())
@@ -356,6 +361,13 @@ namespace DataBase.Services
                 return list;
             }
         }
+        /// <summary>
+        /// 根据AppID获取指定时间段使用时长
+        /// </summary>
+        /// <param name="AppID"></param>
+        /// <param name="start"></param>
+        /// <param name="end"></param>
+        /// <returns></returns>
         public List<HoursDataModel> GetAppRangeData(int AppID, DateTime start, DateTime end)
         {
             using (var db = dataBase.GetReaderContext())
@@ -394,6 +406,12 @@ namespace DataBase.Services
                 return list;
             }
         }
+        /// <summary>
+        /// 根据AppID获取某年使用时长
+        /// </summary>
+        /// <param name="AppID"></param>
+        /// <param name="date"></param>
+        /// <returns></returns>
         public List<HoursDataModel> GetAppYearData(int AppID, DateTime date)
         {
             using (var db = dataBase.GetReaderContext())
