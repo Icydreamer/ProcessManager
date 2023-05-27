@@ -16,11 +16,9 @@ namespace DataBase.Services
         {
             this.dataBase = dataBase;
         }
-        public List<AppModel> GetAllApps()
-        {
-            return apps;
-        }
-
+        /// <summary>
+        /// 加载已存储的app列表，仅建议在启动时调用一次，无必要请勿再次调用
+        /// </summary>
         public void Load()
         {
             //Debug.WriteLine("加载app开始");
@@ -61,13 +59,31 @@ namespace DataBase.Services
                 dataBase.CloseWriter();
             }
         }
+        /// <summary>
+        /// 通过进程名称获取app
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
         public AppModel GetApp(string name)
         {
             return apps.Where(m => m.Name == name).FirstOrDefault();
         }
+        /// <summary>
+        /// 通过进程ID获取app
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
         public AppModel GetApp(int id)
         {
             return apps.Where(m => m.ID == id).FirstOrDefault();
+        }
+        /// <summary>
+        /// 获取所有app
+        /// </summary>
+        /// <returns></returns>
+        public List<AppModel> GetAllApps()
+        {
+            return apps;
         }
         public void AddApp(AppModel app)
         {
@@ -86,12 +102,6 @@ namespace DataBase.Services
                 }
                 dataBase.CloseWriter();
             }
-        }
-
-
-        public List<AppModel> GetAppsByCategoryID(int categoryID)
-        {
-            return apps.Where(m => m.CategoryID == categoryID).ToList();
         }
     }
 }
