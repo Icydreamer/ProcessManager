@@ -323,7 +323,7 @@ namespace DataBase.Services
 
         }
         /// <summary>
-        /// 根据AppID获取某日使用时长
+        /// 根据AppID获取某日每小时使用时长
         /// </summary>
         /// <param name="AppID"></param>
         /// <param name="date"></param>
@@ -362,7 +362,7 @@ namespace DataBase.Services
             }
         }
         /// <summary>
-        /// 根据AppID获取指定时间段使用时长
+        /// 根据AppID获取指定时间段每小时使用时长
         /// </summary>
         /// <param name="AppID"></param>
         /// <param name="start"></param>
@@ -407,7 +407,7 @@ namespace DataBase.Services
             }
         }
         /// <summary>
-        /// 根据AppID获取某年使用时长
+        /// 根据AppID获取某年每小时使用时长
         /// </summary>
         /// <param name="AppID"></param>
         /// <param name="date"></param>
