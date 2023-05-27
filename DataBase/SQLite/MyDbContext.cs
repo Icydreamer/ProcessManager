@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Sqlite;
 using DataBase.Models;
 
 namespace DataBase.SQLite
@@ -25,12 +26,12 @@ namespace DataBase.SQLite
         /// 分类
         /// </summary>
         public DbSet<CategoryModel> Categorys { get; set; }
-        private string DbPath { get; }
+        private string DbPath { get; set; }
         public MyDbContext()
         {
-            var folder = Environment.SpecialFolder.LocalApplicationData;
-            var path = Environment.GetFolderPath(folder);
-            DbPath = Path.Join(path, "database.db");
+            string dbPath = @"DataBase.db";
+            DbPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, dbPath);
+
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
