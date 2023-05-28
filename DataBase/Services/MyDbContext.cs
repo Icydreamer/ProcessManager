@@ -25,7 +25,7 @@ namespace DataBase.Services
         /// <summary>
         /// 分类
         /// </summary>
-        public DbSet<CategoryModel> Categorys { get; set; }
+        //public DbSet<CategoryModel> Categorys { get; set; }
         private string DbPath { get; set; }
         public MyDbContext()
         {
