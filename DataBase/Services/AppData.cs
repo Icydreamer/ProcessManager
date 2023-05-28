@@ -10,8 +10,8 @@ namespace DataBase.Services
     public class AppData
     {
         private List<AppModel> apps;
-
         private readonly DataBase dataBase;
+        private readonly object _locker = new object();
         public AppData(DataBase dataBase)
         {
             this.dataBase = dataBase;
@@ -24,17 +24,10 @@ namespace DataBase.Services
             //Debug.WriteLine("加载app开始");
             using (var db = dataBase.GetReaderContext())
             {
-                apps = (
-                    from app in db.App
-                    join c in db.Categorys
-                    on app.CategoryID equals c.ID into itdata
-                    from n in itdata.DefaultIfEmpty()
-                    select app
-                    ).ToList()
+                apps = db.App.ToList()
                     .Select(m => new AppModel
                     {
                         ID = m.ID,
-                        Category = m.Category != null ? m.Category : null,
                         CategoryID = m.CategoryID,
                         Description = m.Description,
                         File = m.File,
@@ -43,6 +36,25 @@ namespace DataBase.Services
                         TotalTime = m.TotalTime
                     })
                     .ToList();
+                //apps = (
+                //    from app in db.App
+                //    join c in db.Categorys
+                //    on app.CategoryID equals c.ID into itdata
+                //    from n in itdata.DefaultIfEmpty()
+                //    select app
+                //    ).ToList()
+                //    .Select(m => new AppModel
+                //    {
+                //        ID = m.ID,
+                //        Category = m.Category != null ? m.Category : null,
+                //        CategoryID = m.CategoryID,
+                //        Description = m.Description,
+                //        File = m.File,
+                //        IconFile = m.IconFile,
+                //        Name = m.Name,
+                //        TotalTime = m.TotalTime
+                //    })
+                //    .ToList();
             }
         }
 
@@ -64,18 +76,24 @@ namespace DataBase.Services
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
-        public AppModel GetApp(string name)
+        public AppModel? GetApp(string name)
         {
-            return apps.Where(m => m.Name == name).FirstOrDefault();
+            lock (_locker)
+            {
+                return apps.Where(m => m.Name == name).FirstOrDefault();
+            }
         }
         /// <summary>
         /// 通过进程ID获取app
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
-        public AppModel GetApp(int id)
+        public AppModel? GetApp(int id)
         {
-            return apps.Where(m => m.ID == id).FirstOrDefault();
+            lock (_locker)
+            {
+                return apps.Where(m => m.ID == id).FirstOrDefault();
+            }
         }
         /// <summary>
         /// 获取所有app
