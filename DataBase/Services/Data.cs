@@ -58,7 +58,8 @@ namespace DataBase.Services
                         app.TotalTime += time;
 
                         // 更新每日数据
-                        var dailyLog = db.DailyLog.SingleOrDefault(m => m.Date == startDateTime && m.AppModelID == app.ID);
+                        var newDailyTime = startDateTime.Date;
+                        var dailyLog = db.DailyLog.SingleOrDefault(m => m.Date == newDailyTime && m.AppModelID == app.ID);
                         if (dailyLog == null)
                         {
                             // 创建新模型
