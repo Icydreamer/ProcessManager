@@ -249,6 +249,17 @@ namespace DataBase.Services
             return GetDateRangelogList(weekStartDate, weekEndDate);
         }
         /// <summary>
+        /// 获取所有进程本月数据
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<DailyLogModel> GetMonthLogList()
+        {
+            DateTime monthStartTime = DateTime.Now.AddDays(1 - DateTime.Now.Day).Date;
+            DateTime monthEndTime = DateTime.Now.AddDays(1 - DateTime.Now.Day).Date.AddMonths(1).AddSeconds(-1);
+
+            return GetDateRangelogList(monthStartTime, monthEndTime);
+        }
+        /// <summary>
         /// 获取指定进程某天的数据
         /// </summary>
         /// <param name="processName"></param>
@@ -269,6 +280,46 @@ namespace DataBase.Services
                     return res.FirstOrDefault();
                 }
                 return null;
+            }
+        }
+        /// <summary>
+        /// 获取指定进程本周的数据
+        /// </summary>
+        /// <param name="AppID"></param>
+        /// <param name="week"></param>
+        /// <returns></returns>
+        public List<DailyLogModel> GetProcessThisWeekLogList(int AppID, DateTime week)
+        {
+            DateTime weekStartDate = DateTime.Now, weekEndDate = DateTime.Now;
+            if (DateTime.Now.DayOfWeek == DayOfWeek.Monday)
+            {
+                weekStartDate = DateTime.Now.Date;
+                weekEndDate = DateTime.Now.Date.AddDays(6);
+            }
+            else
+            {
+                int weekNum = (int)DateTime.Now.DayOfWeek;
+                if (weekNum == 0)
+                {
+                    weekNum = 7;
+                }
+                weekNum -= 1;
+                weekStartDate = DateTime.Now.Date.AddDays(-weekNum);
+                weekEndDate = weekStartDate.Date.AddDays(6);
+            }
+            using (var db = dataBase.GetReaderContext())
+            {
+
+                var res = db.DailyLog.Include(m => m.AppModel).Where(
+                m =>
+                m.Date >= weekStartDate && m.Date <= weekEndDate
+                && m.AppModelID == AppID
+                );
+                if (res != null)
+                {
+                    return res.ToList();
+                }
+                return new List<DailyLogModel>();
             }
         }
         /// <summary>
@@ -315,144 +366,144 @@ namespace DataBase.Services
                 db.SaveChanges();
             }
         }
-        public struct ColumnItemDataModel
-        {
-            public int Total { get; set; }
-            public int AppID { get; set; }
-            public DateTime Time { get; set; }
+        //public struct ColumnItemDataModel
+        //{
+        //    public int Total { get; set; }
+        //    public int AppID { get; set; }
+        //    public DateTime Time { get; set; }
 
-        }
-        /// <summary>
-        /// 根据AppID获取某日每小时使用时长
-        /// </summary>
-        /// <param name="AppID"></param>
-        /// <param name="date"></param>
-        /// <returns></returns>
-        public List<HoursDataModel> GetAppDayData(int AppID, DateTime date)
-        {
-            using (var db = dataBase.GetReaderContext())
-            {
+        //}
+        ///// <summary>
+        ///// 根据AppID获取某日每小时使用时长
+        ///// </summary>
+        ///// <param name="AppID"></param>
+        ///// <param name="date"></param>
+        ///// <returns></returns>
+        //public List<HoursDataModel> GetAppDayData(int AppID, DateTime date)
+        //{
+        //    using (var db = dataBase.GetReaderContext())
+        //    {
 
-                var data = db.Database.SqlQuery<ColumnItemDataModel>(FormattableStringFactory.Create("select sum(Time) as Total,AppModelID as AppID,DataTime as Time from HoursLogModels  where AppModelID=" + AppID + " and DataTime>='" + date.Date.ToString("yyyy-MM-dd HH:mm:ss") + "' and DataTime<= '" + date.Date.ToString("yyyy-MM-dd 23:59:59") + "' GROUP BY AppModelID,DataTime ")).ToArray();
-
-
-                List<HoursDataModel> list = new List<HoursDataModel>();
+        //        var data = db.Database.SqlQuery<ColumnItemDataModel>(FormattableStringFactory.Create("select sum(Time) as Total,AppModelID as AppID,DataTime as Time from HoursLogModels  where AppModelID=" + AppID + " and DataTime>='" + date.Date.ToString("yyyy-MM-dd HH:mm:ss") + "' and DataTime<= '" + date.Date.ToString("yyyy-MM-dd 23:59:59") + "' GROUP BY AppModelID,DataTime ")).ToArray();
 
 
-                list.Add(new HoursDataModel()
-                {
-                    AppID = AppID,
-                    Values = new double[24]
-                });
-
-                var item = list[0];
-
-                for (int i = 0; i < 24; i++)
-                {
-                    string hours = i < 10 ? "0" + i : i.ToString();
-                    var time = date.ToString($"yyyy-MM-dd {hours}:00:00");
-
-                    var log = data.Where(m => m.Time.ToString("yyyy-MM-dd HH:00:00") == time).FirstOrDefault();
+        //        List<HoursDataModel> list = new List<HoursDataModel>();
 
 
+        //        list.Add(new HoursDataModel()
+        //        {
+        //            AppID = AppID,
+        //            Values = new double[24]
+        //        });
 
-                    item.Values[i] = log.Total;
-                }
-                return list;
-            }
-        }
-        /// <summary>
-        /// 根据AppID获取指定时间段每小时使用时长
-        /// </summary>
-        /// <param name="AppID"></param>
-        /// <param name="start"></param>
-        /// <param name="end"></param>
-        /// <returns></returns>
-        public List<HoursDataModel> GetAppRangeData(int AppID, DateTime start, DateTime end)
-        {
-            using (var db = dataBase.GetReaderContext())
-            {
-                //  查出有数据的分类
+        //        var item = list[0];
 
-                var data = db.Database.SqlQuery<ColumnItemDataModel>(FormattableStringFactory.Create("select sum(Time) as Total,AppModelID as AppID,Date as Time from DailyLogModels where AppModelID=" + AppID + " and Date>='" + start.Date.ToString("yyyy-MM-dd HH:mm:ss") + "' and Date<= '" + end.Date.ToString("yyyy-MM-dd HH:mm:ss") + "' GROUP BY Date ")).ToArray();
+        //        for (int i = 0; i < 24; i++)
+        //        {
+        //            string hours = i < 10 ? "0" + i : i.ToString();
+        //            var time = date.ToString($"yyyy-MM-dd {hours}:00:00");
 
-
-                var ts = end - start;
-                var days = ts.TotalDays + 1;
-
-
-                List<HoursDataModel> list = new List<HoursDataModel>();
+        //            var log = data.Where(m => m.Time.ToString("yyyy-MM-dd HH:00:00") == time).FirstOrDefault();
 
 
 
-                list.Add(new HoursDataModel()
-                {
-                    AppID = AppID,
-                    Values = new double[(int)days]
-                });
+        //            item.Values[i] = log.Total;
+        //        }
+        //        return list;
+        //    }
+        //}
+        ///// <summary>
+        ///// 根据AppID获取指定时间段每小时使用时长
+        ///// </summary>
+        ///// <param name="AppID"></param>
+        ///// <param name="start"></param>
+        ///// <param name="end"></param>
+        ///// <returns></returns>
+        //public List<HoursDataModel> GetAppRangeData(int AppID, DateTime start, DateTime end)
+        //{
+        //    using (var db = dataBase.GetReaderContext())
+        //    {
+        //        //  查出有数据的分类
+
+        //        var data = db.Database.SqlQuery<ColumnItemDataModel>(FormattableStringFactory.Create("select sum(Time) as Total,AppModelID as AppID,Date as Time from DailyLogModels where AppModelID=" + AppID + " and Date>='" + start.Date.ToString("yyyy-MM-dd HH:mm:ss") + "' and Date<= '" + end.Date.ToString("yyyy-MM-dd HH:mm:ss") + "' GROUP BY Date ")).ToArray();
 
 
-                var item = list[0];
-
-                for (int i = 0; i < days; i++)
-                {
-                    string day = i < 10 ? "0" + i : i.ToString();
-                    var time = start.AddDays(i).ToString($"yyyy-MM-dd 00:00:00");
-
-                    var log = data.Where(m => m.Time.ToString("yyyy-MM-dd 00:00:00") == time).FirstOrDefault();
-
-                    item.Values[i] = log.Total;
-                }
-                return list;
-            }
-        }
-        /// <summary>
-        /// 根据AppID获取某年每小时使用时长
-        /// </summary>
-        /// <param name="AppID"></param>
-        /// <param name="date"></param>
-        /// <returns></returns>
-        public List<HoursDataModel> GetAppYearData(int AppID, DateTime date)
-        {
-            using (var db = dataBase.GetReaderContext())
-            {
-                //  查出有数据的分类
-
-                var dateArr = Time.GetYearDate(date);
+        //        var ts = end - start;
+        //        var days = ts.TotalDays + 1;
 
 
-                var data = db.Database.SqlQuery<ColumnItemDataModel>(FormattableStringFactory.Create("select sum(Time) as Total,AppModelID as AppID,Date as Time from DailyLogModels  where  AppModelID=" + AppID + " and Date>='" + dateArr[0].Date.ToString("yyyy-MM-dd HH:mm:ss") + "' and Date<= '" + dateArr[1].Date.ToString("yyyy-MM-dd HH:mm:ss") + "' GROUP BY Date")).ToArray();
+        //        List<HoursDataModel> list = new List<HoursDataModel>();
 
 
 
-
-                List<HoursDataModel> list = new List<HoursDataModel>();
-
-
-                list.Add(new HoursDataModel()
-                {
-                    AppID = AppID,
-                    Values = new double[12]
-                });
+        //        list.Add(new HoursDataModel()
+        //        {
+        //            AppID = AppID,
+        //            Values = new double[(int)days]
+        //        });
 
 
-                var item = list[0];
+        //        var item = list[0];
 
-                for (int i = 1; i < 13; i++)
-                {
-                    string month = i < 10 ? "0" + i : i.ToString();
-                    var dayArr = Time.GetMonthDate(new DateTime(date.Year, i, 1));
+        //        for (int i = 0; i < days; i++)
+        //        {
+        //            string day = i < 10 ? "0" + i : i.ToString();
+        //            var time = start.AddDays(i).ToString($"yyyy-MM-dd 00:00:00");
 
-                    //Debug.WriteLine(dayArr);
+        //            var log = data.Where(m => m.Time.ToString("yyyy-MM-dd 00:00:00") == time).FirstOrDefault();
 
-                    var total = data.Where(m => m.Time >= dayArr[0] && m.Time <= dayArr[1]).Sum(m => m.Total);
+        //            item.Values[i] = log.Total;
+        //        }
+        //        return list;
+        //    }
+        //}
+        ///// <summary>
+        ///// 根据AppID获取某年每小时使用时长
+        ///// </summary>
+        ///// <param name="AppID"></param>
+        ///// <param name="date"></param>
+        ///// <returns></returns>
+        //public List<HoursDataModel> GetAppYearData(int AppID, DateTime date)
+        //{
+        //    using (var db = dataBase.GetReaderContext())
+        //    {
+        //        //  查出有数据的分类
+
+        //        var dateArr = Time.GetYearDate(date);
 
 
-                    item.Values[i - 1] = total;
-                }
-                return list;
-            }
-        }
+        //        var data = db.Database.SqlQuery<ColumnItemDataModel>(FormattableStringFactory.Create("select sum(Time) as Total,AppModelID as AppID,Date as Time from DailyLogModels  where  AppModelID=" + AppID + " and Date>='" + dateArr[0].Date.ToString("yyyy-MM-dd HH:mm:ss") + "' and Date<= '" + dateArr[1].Date.ToString("yyyy-MM-dd HH:mm:ss") + "' GROUP BY Date")).ToArray();
+
+
+
+
+        //        List<HoursDataModel> list = new List<HoursDataModel>();
+
+
+        //        list.Add(new HoursDataModel()
+        //        {
+        //            AppID = AppID,
+        //            Values = new double[12]
+        //        });
+
+
+        //        var item = list[0];
+
+        //        for (int i = 1; i < 13; i++)
+        //        {
+        //            string month = i < 10 ? "0" + i : i.ToString();
+        //            var dayArr = Time.GetMonthDate(new DateTime(date.Year, i, 1));
+
+        //            //Debug.WriteLine(dayArr);
+
+        //            var total = data.Where(m => m.Time >= dayArr[0] && m.Time <= dayArr[1]).Sum(m => m.Total);
+
+
+        //            item.Values[i - 1] = total;
+        //        }
+        //        return list;
+        //    }
+        //}
         /// <summary>
         /// 清空指定时间范围数据
         /// </summary>
@@ -509,80 +560,80 @@ namespace DataBase.Services
                 return res;
             }
         }
-        public struct TimeDataModel
-        {
-            public int Total { get; set; }
-            public DateTime Time { get; set; }
-        }
-        /// <summary>
-        /// 获取指定时间范围内的汇总数据
-        /// </summary>
-        /// <param name="start"></param>
-        /// <param name="end"></param>
-        /// <returns></returns>
-        public double[] GetRangeTotalData(DateTime start, DateTime end)
-        {
-            using (var db = dataBase.GetReaderContext())
-            {
-                if (start.Date == end.Date)
-                {
-                    //  获取24小时
-                    var data = db.Database.SqlQuery<TimeDataModel>(FormattableStringFactory.Create("select sum(Time) as Total,DataTime as Time from HoursLogModels where  HoursLogModels.DataTime>='" + start.Date.ToString("yyyy-MM-dd 00:00:00") + "' and HoursLogModels.DataTime<= '" + start.Date.ToString("yyyy-MM-dd 23:59:59") + "' GROUP BY DataTime ")).ToArray();
+        //public struct TimeDataModel
+        //{
+        //    public int Total { get; set; }
+        //    public DateTime Time { get; set; }
+        //}
+        ///// <summary>
+        ///// 获取指定时间范围内的汇总数据
+        ///// </summary>
+        ///// <param name="start"></param>
+        ///// <param name="end"></param>
+        ///// <returns></returns>
+        //public double[] GetRangeTotalData(DateTime start, DateTime end)
+        //{
+        //    using (var db = dataBase.GetReaderContext())
+        //    {
+        //        if (start.Date == end.Date)
+        //        {
+        //            //  获取24小时
+        //            var data = db.Database.SqlQuery<TimeDataModel>(FormattableStringFactory.Create("select sum(Time) as Total,DataTime as Time from HoursLogModels where  HoursLogModels.DataTime>='" + start.Date.ToString("yyyy-MM-dd 00:00:00") + "' and HoursLogModels.DataTime<= '" + start.Date.ToString("yyyy-MM-dd 23:59:59") + "' GROUP BY DataTime ")).ToArray();
 
-                    double[] result = new double[24];
-                    for (int i = 0; i < 24; i++)
-                    {
-                        string hours = i < 10 ? "0" + i : i.ToString();
-                        var time = start.ToString($"yyyy-MM-dd {hours}:00:00");
-                        var log = data.Where(m => m.Time.ToString("yyyy-MM-dd HH:00:00") == time).FirstOrDefault();
-                        result[i] = log.Total;
-                    }
-                    return result;
-                }
-                else
-                {
-                    //  获取日期
-                    var ts = end.Date - start.Date;
-                    int days = (int)ts.TotalDays + 1;
+        //            double[] result = new double[24];
+        //            for (int i = 0; i < 24; i++)
+        //            {
+        //                string hours = i < 10 ? "0" + i : i.ToString();
+        //                var time = start.ToString($"yyyy-MM-dd {hours}:00:00");
+        //                var log = data.Where(m => m.Time.ToString("yyyy-MM-dd HH:00:00") == time).FirstOrDefault();
+        //                result[i] = log.Total;
+        //            }
+        //            return result;
+        //        }
+        //        else
+        //        {
+        //            //  获取日期
+        //            var ts = end.Date - start.Date;
+        //            int days = (int)ts.TotalDays + 1;
 
 
-                    var data = db.Database.SqlQuery<TimeDataModel>(FormattableStringFactory.Create("select sum(Time) as Total,Date as Time from DailyLogModels where  DailyLogModels.Date>='" + start.Date.ToString("yyyy-MM-dd 00:00:00") + "' and DailyLogModels.Date<= '" + end.Date.ToString("yyyy-MM-dd 23:59:59") + "' GROUP BY Date ")).ToArray();
+        //            var data = db.Database.SqlQuery<TimeDataModel>(FormattableStringFactory.Create("select sum(Time) as Total,Date as Time from DailyLogModels where  DailyLogModels.Date>='" + start.Date.ToString("yyyy-MM-dd 00:00:00") + "' and DailyLogModels.Date<= '" + end.Date.ToString("yyyy-MM-dd 23:59:59") + "' GROUP BY Date ")).ToArray();
 
-                    double[] result = new double[days];
-                    for (int i = 0; i < days; i++)
-                    {
-                        var time = start.Date.AddDays(i).ToString($"yyyy-MM-dd 00:00:00");
-                        var log = data.Where(m => m.Time.ToString("yyyy-MM-dd 00:00:00") == time).FirstOrDefault();
-                        result[i] = log.Total;
-                    }
+        //            double[] result = new double[days];
+        //            for (int i = 0; i < days; i++)
+        //            {
+        //                var time = start.Date.AddDays(i).ToString($"yyyy-MM-dd 00:00:00");
+        //                var log = data.Where(m => m.Time.ToString("yyyy-MM-dd 00:00:00") == time).FirstOrDefault();
+        //                result[i] = log.Total;
+        //            }
 
-                    return result;
-                }
-            }
-        }
-        /// <summary>
-        /// 获取指定年份按月统计数据
-        /// </summary>
-        /// <param name="year"></param>
-        /// <returns></returns>
-        public double[] GetMonthTotalData(DateTime date)
-        {
-            using (var db = dataBase.GetReaderContext())
-            {
-                var dateArr = Time.GetYearDate(date);
-                var data = db.Database.SqlQuery<TimeDataModel>(FormattableStringFactory.Create("select sum(Time) as Total,Date as Time from DailyLogModels  where   Date>='" + dateArr[0].Date.ToString("yyyy-MM-dd HH:mm:ss") + "' and Date<= '" + dateArr[1].Date.ToString("yyyy-MM-dd HH:mm:ss") + "' GROUP BY Date")).ToArray();
-                double[] result = new double[12];
+        //            return result;
+        //        }
+        //    }
+        //}
+        ///// <summary>
+        ///// 获取指定年份按月统计数据
+        ///// </summary>
+        ///// <param name="year"></param>
+        ///// <returns></returns>
+        //public double[] GetMonthTotalData(DateTime date)
+        //{
+        //    using (var db = dataBase.GetReaderContext())
+        //    {
+        //        var dateArr = Time.GetYearDate(date);
+        //        var data = db.Database.SqlQuery<TimeDataModel>(FormattableStringFactory.Create("select sum(Time) as Total,Date as Time from DailyLogModels  where   Date>='" + dateArr[0].Date.ToString("yyyy-MM-dd HH:mm:ss") + "' and Date<= '" + dateArr[1].Date.ToString("yyyy-MM-dd HH:mm:ss") + "' GROUP BY Date")).ToArray();
+        //        double[] result = new double[12];
 
-                for (int i = 1; i < 13; i++)
-                {
-                    string month = i < 10 ? "0" + i : i.ToString();
-                    var dayArr = Time.GetMonthDate(new DateTime(date.Year, i, 1));
-                    var total = data.Where(m => m.Time >= dayArr[0] && m.Time <= dayArr[1]).Sum(m => m.Total);
+        //        for (int i = 1; i < 13; i++)
+        //        {
+        //            string month = i < 10 ? "0" + i : i.ToString();
+        //            var dayArr = Time.GetMonthDate(new DateTime(date.Year, i, 1));
+        //            var total = data.Where(m => m.Time >= dayArr[0] && m.Time <= dayArr[1]).Sum(m => m.Total);
 
-                    result[i - 1] = total;
-                }
-                return result;
-            }
-        }
+        //            result[i - 1] = total;
+        //        }
+        //        return result;
+        //    }
+        //}
     }
 }
