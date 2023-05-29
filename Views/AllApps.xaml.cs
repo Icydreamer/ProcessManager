@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MvvmTutorials.ToolkitMessages.Views;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -19,7 +20,7 @@ namespace ProcessManager.Views
     /// <summary>
     /// Page4.xaml 的交互逻辑
     /// </summary>
-    public partial class AllApps : Page
+    public partial class AllApps : UserControl
     {
         public AllApps()
         {
@@ -42,8 +43,25 @@ namespace ProcessManager.Views
 
         }
         public ObservableCollection<Foo> DataList { get; } = new ObservableCollection<Foo>();
+        private void HomePageClick(object sender, RoutedEventArgs e)
+        {
+            HomePage HomePage = new HomePage();
+            GlobalUse._Messager.PageContent = HomePage;
+        }
+        private void SingleAppClick(object sender, RoutedEventArgs e)
+        {
+            SingleApp SingleApp = new SingleApp();
+            GlobalUse._Messager.PageContent = SingleApp;
+
+        }
+        private void MonitorClick(object sender, RoutedEventArgs e)
+        {
+            Monitor Monitor = new Monitor();
+            GlobalUse._Messager.PageContent = Monitor;
+        }
     }
 
+   
     public class Foo
     {
         public int Index { get; set; }

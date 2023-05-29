@@ -14,14 +14,15 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using HandyControl.Data;
+using MvvmTutorials.ToolkitMessages.Views;
+using ProcessManager.Views;
 
 namespace ProcessManager
 {
     /// <summary>
     /// Page3.xaml 的交互逻辑
     /// </summary>
-    public partial class SingleApp : Page
-    {
+    public partial class SingleApp : UserControl    {
         public SingleApp()
         {
             InitializeComponent();
@@ -56,6 +57,22 @@ namespace ProcessManager
 
         }
         public ObservableCollection<Foo> DataList { get; } = new ObservableCollection<Foo>();
+        private void HomePageClick(object sender, RoutedEventArgs e)
+        {
+            HomePage HomePage = new HomePage();
+            GlobalUse._Messager.PageContent = HomePage;
+        }
+        private void AllAppsClick(object sender, RoutedEventArgs e)
+        {
+
+            AllApps AllApps = new AllApps();
+            GlobalUse._Messager.PageContent = AllApps;
+        }
+        private void MonitorClick(object sender, RoutedEventArgs e)
+        {
+            Monitor Monitor = new Monitor();
+            GlobalUse._Messager.PageContent = Monitor;
+        }
     }
     public class Foo
     {

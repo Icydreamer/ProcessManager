@@ -19,7 +19,7 @@ namespace ProcessManager.Views
     /// <summary>
     /// Page6.xaml 的交互逻辑
     /// </summary>
-    public partial class AllAppsRight1 : Page
+    public partial class AllAppsRight1 : UserControl
     {
         public AllAppsRight1()
         {
