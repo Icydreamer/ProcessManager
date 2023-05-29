@@ -9,7 +9,8 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
 using System.Windows.Media.Media3D;
-
+using DataBase.Models;
+using DataBase.Services;
 namespace ProcessMonitor
 {
     //class Program
@@ -32,13 +33,21 @@ namespace ProcessMonitor
         private Stopwatch stopwatch;
         private List<Record> records;
         private bool isMonitoring;
-
+        private readonly MyDbContext dbContext;
+        private readonly DataBase.Services.DataBase dataBase;
+        private readonly AppData appData;
+        private readonly Data data;
         public ProcessMonitor()
         {
             activeProcessName = GetActiveProcessName(); // 初始化为当前活动的软件名称
             stopwatch = new Stopwatch();
             records = new List<Record>();
             isMonitoring = true;
+            dbContext = new MyDbContext();
+            dataBase = new DataBase.Services.DataBase(dbContext);
+            appData = new AppData(dataBase);
+            data = new Data(appData, dataBase);
+            appData.Load();
         }
 
         public void StartMonitoring()
@@ -58,6 +67,24 @@ namespace ProcessMonitor
                             int elapsedRoundedSeconds = elapsedSeconds < 1 ? 0 : (int)Math.Ceiling(elapsedSeconds);
                             Console.WriteLine($"应用: {activeProcessName} | 开始时间: {DateTime.Now:yyyy-MM-dd HH:mm:ss} | 使用时长: {elapsedRoundedSeconds} 秒");
                             WriteLog($"应用: {activeProcessName} | 开始时间: {DateTime.Now:yyyy-MM-dd HH:mm:ss} | 使用时长: {elapsedRoundedSeconds} 秒");
+
+
+
+                            // 提取icon
+
+                            // 添加到AppModel表
+                            appData.AddApp(new AppModel()
+                            {
+                                Name = activeProcessName,
+                                Description = "test",
+                                File = "test",
+                                CategoryID = 0,
+                                IconFile = "test",
+                            });
+
+                            // 更新description、file
+
+                            data.SaveAppTime(activeProcessName, elapsedRoundedSeconds, DateTime.Now);
 
                             stopwatch.Restart();
                             activeProcessName = currentProcessName;
