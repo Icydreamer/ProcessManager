@@ -73,6 +73,12 @@ namespace ProcessManager
             Monitor Monitor = new Monitor();
             GlobalUse._Messager.PageContent = Monitor;
         }
+        private void SetClick(object sender, RoutedEventArgs e)
+        {
+            Set window = new Set();
+            window.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            window.ShowDialog();
+        }
     }
     public class Foo
     {

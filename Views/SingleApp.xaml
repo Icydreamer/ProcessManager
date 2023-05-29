@@ -39,7 +39,7 @@
                 <Grid Width="20"></Grid>
                 <Button Height="40" Content="监视" FontSize="20" Click="MonitorClick"></Button>
                 <Grid Width="20"></Grid>
-                <Button Height="40" Content="设置" FontSize="20"></Button>
+                <Button Height="40" Content="设置" FontSize="20" Click="SetClick"></Button>
             </WrapPanel>
         </StackPanel>
         <hc:Drawer Name="DrawerLeft" Dock="Left" ShowMode="Push">

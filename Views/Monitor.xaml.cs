@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Drawing.Printing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -59,6 +60,12 @@ namespace ProcessManager.Views
 
             AllApps AllApps = new AllApps();
             GlobalUse._Messager.PageContent = AllApps;
+        }
+        private void SetClick(object sender, RoutedEventArgs e)
+        {
+            Set window = new Set();
+            window.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            window.ShowDialog();
         }
     }
     public class Fool

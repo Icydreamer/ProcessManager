@@ -11,7 +11,7 @@
 
     <Grid>
         <StackPanel Grid.Column="1">
-            <WpfPlot x:Name="WpfPlot2" HorizontalAlignment="Left" VerticalAlignment="Top" Height="372" Width="450"/>
+            <WpfPlot x:Name="WpfPlot1" HorizontalAlignment="Left" VerticalAlignment="Top" Height="372" Width="450"/>
             <Grid Height="20"></Grid>
             <WrapPanel>
                 <Grid Width="50"></Grid>

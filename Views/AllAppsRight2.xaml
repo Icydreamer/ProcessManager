@@ -9,7 +9,7 @@
 
     <Grid>
         <StackPanel>
-            <Image Source="../Resources/pie_showEverything.png" Height="400"></Image>
+            <Image Source="..\Resources\AllApps.png" Height="400"></Image>
             <Grid Height="50"></Grid>
             <Border BorderThickness="10" BorderBrush="Black" CornerRadius="8,8,8,8" Height="120"  Background="#FF0079F6" Margin="10,0,10,0" Padding="0,10,0,10">
                 <StackPanel>

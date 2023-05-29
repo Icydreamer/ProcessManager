@@ -25,7 +25,7 @@
             <Grid Width="20"></Grid>
                 <Button Height="40" Content="全部应用" FontSize="20" Click="AllAppsClick"></Button>
             <Grid Width="20"></Grid>
-            <Button Height="40" Content="设置" FontSize="20"></Button>
+                <Button Height="40" Content="设置" FontSize="20"  Click="SetClick" ></Button>
         </WrapPanel>
         </StackPanel>
         <StackPanel Grid.Column="1">

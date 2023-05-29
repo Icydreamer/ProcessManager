@@ -16,9 +16,9 @@
         <StackPanel>
             <WrapPanel Height="50">
                 <Grid Width="20"></Grid>
-                <Button Height="40" Content="折线图" FontSize="20"></Button>
+                <Button Height="40" Content="折线图" FontSize="20" Click="Right1"></Button>
                 <Grid Width="60"></Grid>
-                <Button Height="40" Content="扇形图" FontSize="20"></Button>
+                <Button Height="40" Content="扇形图" FontSize="20" Click="Right2"></Button>
  
                 <Grid Width="140"></Grid>
                 <Button Height="40" Content="确认" FontSize="20"></Button>
@@ -53,9 +53,9 @@
                 <Grid Width="20"></Grid>
                 <Button Height="40" Content="监视" FontSize="20" Click="MonitorClick"></Button>
                 <Grid Width="20"></Grid>
-                <Button Height="40" Content="设置" FontSize="20"></Button>
+                <Button Height="40" Content="设置" FontSize="20" Click="SetClick"></Button>
             </WrapPanel>
         </StackPanel>
-        <Frame Grid.Column="1" Source="AllAppsRight2.xaml" ></Frame>
+        <ContentPresenter  Content="{Binding RightContent}" Grid.Column="1"/>
     </Grid>
 </UserControl>
