@@ -9,11 +9,11 @@
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         Title="白驹" 
-        Icon="D:\又学废了\大二下\软件构造基础\大作业\ProcessManager\Resources\1.ico"
+        Icon="..\Resources\1.ico"
         ResizeMode="CanMinimize"
         Height="716" Width="1000">
     <Window.DataContext>
-        <vm:MainWindowViewModel IsActive="True" />
+        <vm:MainWindowViewModel  />
     </Window.DataContext>
     <Grid>
         <Grid.RowDefinitions>
@@ -36,7 +36,7 @@
         </WrapPanel>
         <Canvas Grid.Row="1" Width="300" Height="100">
 
-            <hc:ImageBlock Width="200" Height="100" Source="D:\又学废了\大二下\软件构造基础\大作业\ProcessManager\Resources\1.gif" RenderTransformOrigin="0,0" VerticalAlignment="Top" OverridesDefaultStyle="True" Canvas.Top="0" Canvas.Left="0" >
+            <hc:ImageBlock Width="200" Height="100" Source="..\Resources\1.gif" RenderTransformOrigin="0,0" VerticalAlignment="Top" OverridesDefaultStyle="True" Canvas.Top="0" Canvas.Left="0" >
                 <hc:ImageBlock.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform ScaleX="0.7" ScaleY="0.7"/>
@@ -44,10 +44,8 @@
                         <RotateTransform/>
                         <TranslateTransform/>
                     </TransformGroup>
-                </hc:GifImage.RenderTransform>
-            </hc:GifImage>
-
-
+                </hc:ImageBlock.RenderTransform>
+            </hc:ImageBlock>
         </Canvas> 
 
 

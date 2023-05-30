@@ -6,7 +6,7 @@ using CommunityToolkit.Mvvm.Messaging.Messages;
 
 namespace MvvmTutorials.ToolkitMessages.ViewModels;
 
-public partial class MainWindowViewModel: ObservableRecipient
+public partial class MainWindowViewModel: ObservableObject
 {
 
     [ObservableProperty]
@@ -60,5 +60,6 @@ public partial class MainWindowViewModel: ObservableRecipient
     {
 
         PageSource = "HomePage.xaml";
+        TotalTime = 100;
     }
 }
