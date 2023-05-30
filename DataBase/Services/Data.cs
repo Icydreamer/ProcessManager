@@ -373,45 +373,30 @@ namespace DataBase.Services
         //    public DateTime Time { get; set; }
 
         //}
-        ///// <summary>
-        ///// 根据AppID获取某日每小时使用时长
-        ///// </summary>
-        ///// <param name="AppID"></param>
-        ///// <param name="date"></param>
-        ///// <returns></returns>
-        //public List<HoursDataModel> GetAppDayData(int AppID, DateTime date)
-        //{
-        //    using (var db = dataBase.GetReaderContext())
-        //    {
-
-        //        var data = db.Database.SqlQuery<ColumnItemDataModel>(FormattableStringFactory.Create("select sum(Time) as Total,AppModelID as AppID,DataTime as Time from HoursLogModels  where AppModelID=" + AppID + " and DataTime>='" + date.Date.ToString("yyyy-MM-dd HH:mm:ss") + "' and DataTime<= '" + date.Date.ToString("yyyy-MM-dd 23:59:59") + "' GROUP BY AppModelID,DataTime ")).ToArray();
-
-
-        //        List<HoursDataModel> list = new List<HoursDataModel>();
-
-
-        //        list.Add(new HoursDataModel()
-        //        {
-        //            AppID = AppID,
-        //            Values = new double[24]
-        //        });
-
-        //        var item = list[0];
-
-        //        for (int i = 0; i < 24; i++)
-        //        {
-        //            string hours = i < 10 ? "0" + i : i.ToString();
-        //            var time = date.ToString($"yyyy-MM-dd {hours}:00:00");
-
-        //            var log = data.Where(m => m.Time.ToString("yyyy-MM-dd HH:00:00") == time).FirstOrDefault();
-
-
-
-        //            item.Values[i] = log.Total;
-        //        }
-        //        return list;
-        //    }
-        //}
+        /// <summary>
+        /// 根据AppID获取某日每小时使用时长
+        /// </summary>
+        /// <param name="AppID"></param>
+        /// <param name="date"></param>
+        /// <returns></returns>
+        public List<HoursLogModel> GetAppDayData(int AppID, DateTime date)
+        {
+            using (var db = dataBase.GetReaderContext())
+            {
+                var res = db.HoursLog.Include(m => m.AppModel).Where(
+                    m =>
+                    m.DataTime.Year == date.Year
+                    && m.DataTime.Month == date.Month
+                    && m.DataTime.Day == date.Day
+                    && m.AppModelID == AppID
+                    );
+                if (res != null)
+                {
+                    return res.ToList();
+                }
+                return new List<HoursLogModel>();
+            }
+        }
         ///// <summary>
         ///// 根据AppID获取指定时间段每小时使用时长
         ///// </summary>
