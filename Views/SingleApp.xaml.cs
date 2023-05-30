@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -14,14 +14,15 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using HandyControl.Data;
+using MvvmTutorials.ToolkitMessages.Views;
+using ProcessManager.Views;
 
 namespace MvvmTutorials.ToolkitMessages.Views
 {
     /// <summary>
     /// Page3.xaml 的交互逻辑
     /// </summary>
-    public partial class SingleApp : Page
-    {
+    public partial class SingleApp : UserControl    {
         public SingleApp()
         {
             InitializeComponent();
@@ -55,7 +56,29 @@ namespace MvvmTutorials.ToolkitMessages.Views
 
 
         }
-        public ObservableCollection<Foo2> DataList { get; } = new ObservableCollection<Foo2>();
+        public ObservableCollection<Foo> DataList { get; } = new ObservableCollection<Foo>();
+        private void HomePageClick(object sender, RoutedEventArgs e)
+        {
+            HomePage HomePage = new HomePage();
+            GlobalUse._Messager.PageContent = HomePage;
+        }
+        private void AllAppsClick(object sender, RoutedEventArgs e)
+        {
+
+            AllApps AllApps = new AllApps();
+            GlobalUse._Messager.PageContent = AllApps;
+        }
+        private void MonitorClick(object sender, RoutedEventArgs e)
+        {
+            Monitor Monitor = new Monitor();
+            GlobalUse._Messager.PageContent = Monitor;
+        }
+        private void SetClick(object sender, RoutedEventArgs e)
+        {
+            Set window = new Set();
+            window.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            window.ShowDialog();
+        }
     }
     public class Foo2
     {
