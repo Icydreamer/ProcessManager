@@ -5,8 +5,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using HandyControl.Controls;
-using ProcessManager;
-using ProcessManager.Views;
 using ScottPlot;
 namespace MvvmTutorials.ToolkitMessages.Views
 {

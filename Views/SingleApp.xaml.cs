@@ -15,7 +15,6 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using HandyControl.Data;
 using MvvmTutorials.ToolkitMessages.Views;
-using ProcessManager.Views;
 
 namespace MvvmTutorials.ToolkitMessages.Views
 {
@@ -56,7 +55,7 @@ namespace MvvmTutorials.ToolkitMessages.Views
 
 
         }
-        public ObservableCollection<Foo> DataList { get; } = new ObservableCollection<Foo>();
+        public ObservableCollection<Foo2> DataList { get; } = new ObservableCollection<Foo2>();
         private void HomePageClick(object sender, RoutedEventArgs e)
         {
             HomePage HomePage = new HomePage();
