@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Drawing.Printing;
 using System.Linq;
 using System.Text;
@@ -26,54 +27,43 @@ namespace ProcessManager.Views
         public Monitor()
         {
             InitializeComponent();
-            for (int i = 0; i < 100; i++)
+            //应用allapps里的app类，可考虑迁移
+            for (int i = 0; i < 20; i++)
             {
-                DataList.Add(new Fool()
+                DataList.Add(new AllApps.app()
                 {
                     Index = i,
-                    Name = "lindexi",
-
+                    ImgPath = "..\\Resources\\2.png",
+                    Name = "index" + i,
+                    IsSelected = true,
+                    Time = 10 * i
                 });
-
             }
-            DataContext = this;
+            monitorapp.DataContext = this;
 
-
+            //设置剩余时间条
+            progressview Progressvalue = new progressview()
+            {
+                text = "今日剩余20分钟",
+                value = 80
+            };
+    
+            progress.DataContext = Progressvalue;
 
 
 
         }
-        public ObservableCollection<Fool> DataList { get; } = new ObservableCollection<Fool>();
-        private void HomePageClick(object sender, RoutedEventArgs e)
-        {
-            HomePage HomePage = new HomePage();
-            GlobalUse._Messager.PageContent = HomePage;
-        }
-        private void SingleAppClick(object sender, RoutedEventArgs e)
-        {
-            SingleApp SingleApp = new SingleApp();
-            GlobalUse._Messager.PageContent = SingleApp;
+        public ObservableCollection<AllApps.app> DataList { get; } = new ObservableCollection<AllApps.app>();
 
-        }
-        private void AllAppsClick(object sender, RoutedEventArgs e)
+        //添加监视按钮
+        private void monitor(object sender, RoutedEventArgs e)
         {
-
-            AllApps AllApps = new AllApps();
-            GlobalUse._Messager.PageContent = AllApps;
-        }
-        private void SetClick(object sender, RoutedEventArgs e)
-        {
-            Set window = new Set();
-            window.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-            window.ShowDialog();
+            //获取TextBlock.text,
         }
     }
-    public class Fool
+    public class progressview
     {
-        public int Index { get; set; }
-        public string Name { get; set; }
-
-
+        public string text { get; set; }
+        public int value { get; set; }
     }
-
 }

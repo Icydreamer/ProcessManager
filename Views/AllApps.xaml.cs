@@ -23,116 +23,93 @@ namespace ProcessManager.Views
     /// </summary>
     public partial class AllApps : UserControl
     {
-        AllAppsRight1 AllAppsRight1 = new AllAppsRight1();
-        AllAppsRight2 AllAppsRight2 = new AllAppsRight2();
         public AllApps()
         {
-            GlobalUse1._Messager1.RightContent = AllAppsRight1;
             InitializeComponent();
-            for (int i = 0; i < 10; i++)
+
+            //右下角文字数据更改
+            textcombine Allappstext = new textcombine();
+            Allappstext.text1 = "本周共使用20个应用程序";
+            Allappstext.text2 = "一共100分钟";
+            Allappstext.text3 = "平均一天使用14分钟";
+            Allapptexts.DataContext = Allappstext;
+
+            //左侧应用修改
+            for (int i = 0; i < 20; i++)
             {
-                DataList.Add(new Foo()
+                DataList.Add(new app()
                 {
                     Index = i,
-                    ImgPath= "..\\Resources\\2.png",
-                    Name = "lindexi",
-                    IsSelected=true,
-                    Type="typei",
-                    Remark = "doubi"
+                    ImgPath = "..\\Resources\\2.png",
+                    Name = "index" + i,
+                    IsSelected = true,
+                    Time = 10 * i
                 });
-
             }
-            DataContext = this;
-            this.DataContext = GlobalUse1._Messager1;
-
-
-        }
-        public ObservableCollection<Foo> DataList { get; } = new ObservableCollection<Foo>();
-        private void HomePageClick(object sender, RoutedEventArgs e)
-        {
-            HomePage HomePage = new HomePage();
-            GlobalUse._Messager.PageContent = HomePage;
-        }
-        private void SingleAppClick(object sender, RoutedEventArgs e)
-        {
-            SingleApp SingleApp = new SingleApp();
-            GlobalUse._Messager.PageContent = SingleApp;
-
-        }
-        private void MonitorClick(object sender, RoutedEventArgs e)
-        {
-            Monitor Monitor = new Monitor();
-            GlobalUse._Messager.PageContent = Monitor;
-        }
-        private void SetClick(object sender, RoutedEventArgs e)
-        {
-            Set window = new Set();
-            window.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-            window.ShowDialog();
+            Appname.DataContext = this;
         }
 
-        private void Right1(object sender, RoutedEventArgs e)
+        //文字类
+        public class textcombine
         {
-     
-            GlobalUse1._Messager1.RightContent = AllAppsRight1;
+            public string text1 { get; set; }
+            public string text2 { get; set; }
+            public string text3 { get; set; }
         }
-        private void Right2(object sender, RoutedEventArgs e)
-        {
 
-            GlobalUse1._Messager1.RightContent = AllAppsRight2;
+        //应用类
+        public ObservableCollection<app> DataList { get; } = new ObservableCollection<app>();
+        //可考虑迁移
+        public class app
+        {
+            public int Index { get; set; }
+            public string ImgPath { get; set; }
+            public string Name { get; set; }
+            public bool IsSelected { set; get; }
+            public int Time { get; set; }
+
+            
         }
+
+        //三个按钮
+        private void Month(object sender, RoutedEventArgs e)
+        {
+            //添加默认起始日期
+            box.Text = "2023.3.1";
+            //其他数据更改
+
+        }
+        private void Week(object sender, RoutedEventArgs e)
+        {
+            //添加默认起始日期
+            box.Text = "2023.2.1";
+            //其他数据更改
+
+        }
+
+        private void Day(object sender, RoutedEventArgs e)
+        {
+            //添加默认起始日期
+            box.Text = "2023.1.1";
+            //其他数据更改
+
+        }
+
+        //确认按钮
+        private void sure(object sender, RoutedEventArgs e)
+        { 
+            //更改DataList的值
+        }
+
+        //切换视图按钮
+        private void style (object sender, RoutedEventArgs e)
+        {
+            //更改绘制视图的方法
+        }
+
+        //textbox相关内容指令！！！
+
     }
 
-   
-    public class Foo
-    {
-        public int Index { get; set; }
-        public string ImgPath { get; set; }
-        public string Name { get; set; }
-        public bool IsSelected { set; get; }
-        public string Type { get; set; }
-        public string Remark { get; set; }
-    }
-
-
-
-
-
-    //定义消息
-    public class Messager1 : INotifyPropertyChanged
-    {
-        private UserControl rightContent;
-        public UserControl RightContent
-        {
-            get { return rightContent; }
-            set
-            {
-                rightContent = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("RightContent"));
-            }
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        public void OnPropertyChanged(PropertyChangedEventArgs e)
-        {
-            if (PropertyChanged != null)
-                PropertyChanged(this, e);
-        }
-
-        public Messager1()
-        {
-
-            RightContent = null;
-        }
-    }
-
-    public class GlobalUse1
-    {
-        public static Messager1 _Messager1 { get; set; }
-        static GlobalUse1()
-        {
-            _Messager1 = new Messager1();
-        }
-    }
 
 }

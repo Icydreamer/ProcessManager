@@ -21,48 +21,12 @@ namespace ProcessManager.Views
     /// </summary>
     public partial class HomePage : UserControl
     {
-        public delegate void SendMessage(string value);
-        public SendMessage sendMessage;
+
         public HomePage()
         {
             InitializeComponent();
         }
 
-        private void ColumnDefinition_Confirmed(object sender, HandyControl.Data.FunctionEventArgs<Color> e)
-        {
-
-        }
-
-        private void Button_Completed(object sender, EventArgs e)
-        {
-
-        }
-
-        private void SingleAppClick(object sender, RoutedEventArgs e)
-        {
-            SingleApp SingleApp = new SingleApp();
-            GlobalUse._Messager.PageContent = SingleApp;
-
-        }
-
-
-        private void AllAppsClick(object sender, RoutedEventArgs e)
-        {
-
-            AllApps AllApps = new AllApps();
-            GlobalUse._Messager.PageContent = AllApps;
-        }
-
-        private void MonitorClick(object sender, RoutedEventArgs e)
-        {
-            Monitor Monitor = new Monitor();
-            GlobalUse._Messager.PageContent = Monitor;
-        }
-        private void SetClick(object sender, RoutedEventArgs e)
-        {
-            Set window = new Set();
-            window.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-            window.ShowDialog();
-        }
+      
     }
 }
