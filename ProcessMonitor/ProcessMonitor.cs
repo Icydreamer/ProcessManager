@@ -27,7 +27,7 @@ namespace ProcessMonitor
 
     //    }
     //}
-    class ProcessMonitor
+    public class ProcessMonitor
     {
         private string activeProcessName;
         private Stopwatch stopwatch;
