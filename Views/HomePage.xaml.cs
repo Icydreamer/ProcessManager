@@ -12,14 +12,17 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using MvvmTutorials.ToolkitMessages.Views;
 
 namespace MvvmTutorials.ToolkitMessages.Views
 {
     /// <summary>
     /// Page1.xaml 的交互逻辑
     /// </summary>
-    public partial class HomePage : Page
+    public partial class HomePage : UserControl
     {
+        public delegate void SendMessage(string value);
+        public SendMessage sendMessage;
         public HomePage()
         {
             InitializeComponent();
@@ -33,6 +36,33 @@ namespace MvvmTutorials.ToolkitMessages.Views
         private void Button_Completed(object sender, EventArgs e)
         {
 
+        }
+
+        private void SingleAppClick(object sender, RoutedEventArgs e)
+        {
+            SingleApp SingleApp = new SingleApp();
+            GlobalUse._Messager.PageContent = SingleApp;
+
+        }
+
+
+        private void AllAppsClick(object sender, RoutedEventArgs e)
+        {
+
+            AllApps AllApps = new AllApps();
+            GlobalUse._Messager.PageContent = AllApps;
+        }
+
+        private void MonitorClick(object sender, RoutedEventArgs e)
+        {
+            Monitor Monitor = new Monitor();
+            GlobalUse._Messager.PageContent = Monitor;
+        }
+        private void SetClick(object sender, RoutedEventArgs e)
+        {
+            Set window = new Set();
+            window.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            window.ShowDialog();
         }
     }
 }
