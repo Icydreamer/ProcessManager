@@ -40,7 +40,7 @@ namespace DataBase.Models
         /// 累计使用时长
         /// </summary>
         public int TotalTime { get; set; }
-        [ForeignKey("CategoryID")]
-        public virtual CategoryModel Category { get; set; }
+        //[ForeignKey("CategoryID")]
+        //public virtual CategoryModel Category { get; set; }
     }
 }
