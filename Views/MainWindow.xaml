@@ -6,6 +6,7 @@
         xmlns:vm="clr-namespace:MvvmTutorials.ToolkitMessages.ViewModels"
         xmlns:local="clr-namespace:MvvmTutorials.ToolkitMessages.Views"
         xmlns:hc="https://handyorg.github.io/handycontrol"
+        xmlns:tb="http://www.hardcodet.net/taskbar"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         Title="白驹" 
