@@ -24,18 +24,62 @@ namespace MvvmTutorials.ToolkitMessages.Views
     /// </summary>
     public partial class SingleApp : UserControl
     {
+        public bool ifContainTime(List<AppTimer> l, int num)//
+        {
+            foreach (var app in l)
+            {
+                string hh = app.time.Substring(0, 2);
+                DateTime dt = new DateTime(2023, 5, 31, hour: num, minute: 0, second: 0);
+                if (dt.ToString("t").Substring(0, 2) == hh)
+                {
+                    return true;//包含该时间点
+                }
+            }
+            return false;//不包含该时间点
+        }
+        public  void Appname_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            app emp = Appname.SelectedItem as app;
+            //右侧时间折线图
+            List<AppTimer> a1 = new List<AppTimer>();
+            var totayAllAppsTime = GlobalData.DataInstance.GetAppDayData(emp.Index, DateTime.Now);
+            foreach (var timer in totayAllAppsTime)
+            {
+                a1.Add(new AppTimer(timer.DataTime.ToString("t"), timer.Time));
+            }
+            int p = 0;
+            List<AppTimer> a2 = new List<AppTimer>();
+            for (int i = 0; i < 24; i++)
+            {
+                if (!ifContainTime(a1, i))
+                {
+                    a2.Add(new AppTimer(new DateTime(2023, 5, 31, i, 0, 0).ToString("t"), 0));
+                }
+                else
+                {
+                    a2.Add(a1[p]);
+                    p++;
+                }
+            }
+            AllTimer test = new AllTimer();
+            test.appTimersAll2 = a2;
+            AppTimers.DataContext = test;
+
+            //应用allapps里的app类，可考虑迁移
+            AllApps.app Singleapp = new AllApps.app()
+            {
+                Index = 0,
+                ImgPath = emp.ImgPath,
+                Name = emp.Name,
+                IsSelected = true,
+                Time = 100
+            };
+            //绑定数据
+            singleapp.DataContext = Singleapp;
+        }
         public SingleApp()
         {
             InitializeComponent();
-            //应用allapps里的app类，可考虑迁移
-            AllApps.app Singleapp = new AllApps.app() { Index = 0,
-                    ImgPath = "..\\Resources\\2.png",
-                    Name = "index0",
-                    IsSelected = true,
-                    Time = 100 };
-            //绑定数据
-            singleapp.DataContext = Singleapp;
-
 
             //左下角文字数据更改
             textcombine Allappstext = new textcombine();
@@ -44,23 +88,94 @@ namespace MvvmTutorials.ToolkitMessages.Views
             Allappstext.text3 = "平均每天使用1个小时";
             Allapptexts.DataContext = Allappstext;
 
-
-            //展开框的搜索栏更改
-            for (int i = 0; i < 20; i++)
+            //左侧应用修改
+            var appList = GlobalData.AppDataInstance.GetAllApps();
+            foreach (var i in appList)
             {
-                DataList.Add(new AllApps.app()
+                DataList.Add(new app()
                 {
-                    Index = i,
-                    ImgPath = "..\\Resources\\2.png",
-                    Name = "index" + i,
-                    IsSelected = true,
-                    Time = 10 * i
+                    Index = i.ID,
+                    ImgPath = i.IconFile,
+                    Name = i.Name,
+                    IsSelected = false,
+                    Time = i.TotalTime
                 });
             }
             Appname.DataContext = this;
+            //应用allapps里的app类，可考虑迁移
+            AllApps.app Singleapp = new AllApps.app()
+            {
+                Index = 0,
+                ImgPath = "..\\Resources\\2.png",
+                Name = DataList[0].Name,
+                IsSelected = true,
+                Time = 100
+            };
+            //绑定数据
+            singleapp.DataContext = Singleapp;
+
+            AllTimer test = new AllTimer();
+            AppTimers.DataContext = test;
         }
         public ObservableCollection<AllApps.app> DataList { get; } = new ObservableCollection<AllApps.app>();
 
+
+
+        //图标曲线类
+        public class AppTimer
+        {
+            public string time { get; set; }//时间点
+            public int length { get; set; }//使用时长
+            public AppTimer(string time, int length)
+            {
+                this.time = time;
+                this.length = length;
+            }
+        }
+        public class AllTimer
+        {
+            public List<AppTimer> appTimersAll { get; set; }
+            public List<AppTimer> appTimersAll2 { get; set; }
+            public string forTest { get; set; }
+            public bool ifContainTime(List<AppTimer> l, int num)//
+            {
+                foreach (var app in l)
+                {
+                    string hh = app.time.Substring(0, 2);
+                    DateTime dt = new DateTime(2023, 5, 31, hour: num, minute: 0, second: 0);
+                    if (dt.ToString("t").Substring(0, 2) == hh)
+                    {
+                        return true;//包含该时间点
+                    }
+                }
+                return false;//不包含该时间点
+            }
+
+            public AllTimer()
+            {
+                //右侧时间折线图
+                appTimersAll = new List<AppTimer>();
+                var totayAllAppsTime = GlobalData.DataInstance.GetAppDayData(1, DateTime.Now);
+                foreach (var timer in totayAllAppsTime)
+                {
+                    appTimersAll.Add(new AppTimer(timer.DataTime.ToString("t"), timer.Time));
+                }
+                int p = 0;
+                appTimersAll2 = new List<AppTimer>();
+                for (int i = 0; i < 24; i++)
+                {
+                    if (!ifContainTime(appTimersAll, i))
+                    {
+                        appTimersAll2.Add(new AppTimer(new DateTime(2023, 5, 31, i, 0, 0).ToString("t"), 0));
+                    }
+                    else
+                    {
+                        appTimersAll2.Add(appTimersAll[p]);
+                        p++;
+                    }
+                }
+            }
+        }
         //手动添加exe文件按钮
         private void add(object sender, RoutedEventArgs e)
         {

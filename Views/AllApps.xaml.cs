@@ -59,81 +59,12 @@ namespace MvvmTutorials.ToolkitMessages.Views
                                 appTimers.Add(new AppTimer(timer.DataTime.ToString(), timer.Time));
                             }
                         test.appTimersAll = appTimers;*/
-            AllTimer test = new AllTimer();
-             AppTimers.DataContext = test;
+
 
 
         }
-        public class Person
-        {
-            public string Name { get; set; }
 
-            public double Height { get; set; }
-        }
 
-        //图标曲线类
-        public class AppTimer
-        {
-            public string time { get; set; }//时间点
-            public int length { get; set; }//使用时长
-            public AppTimer(string time,int length)
-            {
-                this.time = time;
-                this.length = length;
-            }
-        }
-        public class AllTimer
-        {
-            public List<AppTimer> appTimersAll { get; set; }
-            public List<AppTimer> appTimersAll2 { get; set; }
-            public string forTest { get;set; }
-            public List<Person> Data { get; set; }
-            public bool ifContainTime(List<AppTimer> l,int num)//
-            {
-                foreach(var app in l)
-                {
-                    string hh = app.time.Substring(0, 2);
-                    DateTime dt = new DateTime(2023, 5, 31, hour: num, minute: 0, second: 0);
-                    if(dt.ToString("t").Substring(0, 2) == hh)
-                    {
-                        return true;//包含该时间点
-                    }
-                }
-                return false;//不包含该时间点
-            }
-
-            public AllTimer()
-            {
-                Data = new List<Person>()
-            {
-                new Person { Name = "David", Height = 180 },
-                new Person { Name = "Michael", Height = 170 },
-                new Person { Name = "Steve", Height = 160 },
-                new Person { Name = "Joel", Height = 182 }
-            };
-                //右侧时间折线图
-                appTimersAll = new List<AppTimer>();
-                var totayAllAppsTime = GlobalData.DataInstance.GetAppDayData(1, DateTime.Now);
-                foreach (var timer in totayAllAppsTime)
-                {
-                    appTimersAll.Add(new AppTimer(timer.DataTime.ToString("t"), timer.Time));
-                }
-                int p = 0;
-                appTimersAll2 = new List<AppTimer>();
-                for (int i = 0; i < 24; i++)
-                {
-                    if (!ifContainTime(appTimersAll, i))
-                    {
-                        appTimersAll2.Add(new AppTimer(new DateTime(2023, 5, 31,i,0,0).ToString("t"), 0));
-                    }
-                    else
-                    {
-                        appTimersAll2.Add(appTimersAll[p]);
-                        p++;
-                    }
-                }
-            }
-        }
         //文字类
         public class textcombine
         {
@@ -147,13 +78,20 @@ namespace MvvmTutorials.ToolkitMessages.Views
         //可考虑迁移
         public class app
         {
+            public int time;
             public int Index { get; set; }
             public string ImgPath { get; set; }
             public string Name { get; set; }
             public bool IsSelected { set; get; }
-            public int Time { get; set; }
+            public int Time
+            {
+                get => time;
+                set
+                {
 
-            
+                }
+            }
+
         }
 
         //三个按钮

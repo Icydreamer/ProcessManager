@@ -21,8 +21,8 @@
         <StackPanel>
             <Grid Height="20"></Grid>
             <Button Width="200" Content="主页" FontSize="20" Height="50" Click="ButtonClick1"></Button>
-            <Button Width="200" Content="所有" FontSize="20" Height="50" Click="ButtonClick2"></Button>
-            <Button Width="200" Content="单个" FontSize="20" Height="50" Click="ButtonClick3"></Button>
+            <Button Width="200" Content="单个" FontSize="20" Height="50" Click="ButtonClick2"></Button>
+            <Button Width="200" Content="所有" FontSize="20" Height="50" Click="ButtonClick3"></Button>
             <Button Width="200" Content="监视" FontSize="20" Height="50" Click="ButtonClick4"></Button>
             <Grid Height="300"></Grid>
             <Button Width="200" Content="设置" FontSize="20" Height="50" Click="ButtonClick5"></Button>
