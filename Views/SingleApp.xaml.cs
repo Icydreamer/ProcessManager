@@ -16,8 +16,7 @@ using System.Windows.Shapes;
 using HandyControl.Data;
 using Microsoft.Win32;
 using MvvmTutorials.ToolkitMessages.Views;
-using MvvmTutorials.ToolkitMessages.Views.AllApps;
-
+using static MvvmTutorials.ToolkitMessages.Views.AllApps;
 namespace MvvmTutorials.ToolkitMessages.Views
 {
     /// <summary>
