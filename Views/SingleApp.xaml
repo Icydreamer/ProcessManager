@@ -5,6 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:MvvmTutorials.ToolkitMessages.Views"
       xmlns:hc="https://handyorg.github.io/handycontrol"
+      xmlns:syncfusion="clr-namespace:Syncfusion.UI.Xaml.Charts;assembly=Syncfusion.SfChart.WPF"
       mc:Ignorable="d" 
       Height="600" Width="1000">
     <Grid>
@@ -29,10 +30,10 @@
                 <Grid>
                     <StackPanel>
                         <hc:SearchBar Height="50" Command="{Binding SearchCmd}" CommandParameter="{Binding Text,RelativeSource={RelativeSource Self}}" />
-                        <ListView ItemsSource="{Binding DataList}" x:Name="Appname" Height="500">
+                        <ListView ItemsSource="{Binding DataList}" x:Name="Appname" Height="500" SelectionChanged="Appname_SelectionChanged">
                             <ListView.View >
                                 <GridView >
-                                    <GridViewColumn Width="80"  DisplayMemberBinding="{Binding Name}" />
+                                    <GridViewColumn Width="80"  DisplayMemberBinding="{Binding Name}"  />
                                     <GridViewColumn Width="100" >
 
                                         <GridViewColumn.CellTemplate>
@@ -69,7 +70,35 @@
         </StackPanel>
         <Button Content="切换样式" Click="style" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top"></Button>
         <!--绘制视图-->
-    </Grid>
+        <syncfusion:SfChart Grid.Row="1" Grid.Column="1" >
+
+                <syncfusion:SfChart.PrimaryAxis>
+
+                <syncfusion:CategoryAxis Header="应用名称"  LabelsIntersectAction="Auto"/>
+
+                </syncfusion:SfChart.PrimaryAxis>
+
+                <syncfusion:SfChart.SecondaryAxis>
+                <syncfusion:NumericalAxis Header="使用时长/分钟">
+                    <syncfusion:NumericalAxis.RangeStyles>
+                        <syncfusion:ChartAxisRangeStyleCollection>
+                            <syncfusion:ChartAxisRangeStyle Start="0" End="60" >
+                                <syncfusion:ChartAxisRangeStyle.LabelStyle>
+                                    <syncfusion:LabelStyle Foreground="RoyalBlue" />
+                                </syncfusion:ChartAxisRangeStyle.LabelStyle>
+                            </syncfusion:ChartAxisRangeStyle>
+                        </syncfusion:ChartAxisRangeStyleCollection>
+                    </syncfusion:NumericalAxis.RangeStyles>
+                </syncfusion:NumericalAxis>
+
+
+                </syncfusion:SfChart.SecondaryAxis>
+
+                <syncfusion:ColumnSeries x:Name="AppTimers" ItemsSource="{Binding appTimersAll2}" XBindingPath="time" YBindingPath="length" >
+                </syncfusion:ColumnSeries>
+
+            </syncfusion:SfChart >
+        </Grid>
    
             
           
