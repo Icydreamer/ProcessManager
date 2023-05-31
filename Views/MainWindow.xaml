@@ -12,22 +12,92 @@
         Title="白驹" 
         Icon="..\Resources\1.ico"
         ResizeMode="CanMinimize"
-        Height="656" Width="1200">
+        Height="656" Width="1080">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="200"></ColumnDefinition>
+            <ColumnDefinition Width="80"></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <StackPanel>
+          
             <Grid Height="20"></Grid>
-            <Button Width="200" Content="主页" FontSize="20" Height="50" Click="ButtonClick1"></Button>
-            <Button Width="200" Content="所有" FontSize="20" Height="50" Click="ButtonClick2"></Button>
-            <Button Width="200" Content="单个" FontSize="20" Height="50" Click="ButtonClick3"></Button>
-            <Button Width="200" Content="监视" FontSize="20" Height="50" Click="ButtonClick4"></Button>
-            <Grid Height="300"></Grid>
-            <Button Width="200" Content="设置" FontSize="20" Height="50" Click="ButtonClick5"></Button>
-        </StackPanel>
-        <ContentPresenter  Content="{Binding UserContent}" Grid.Column="1"/>
+            <Button x:Name="Homepage"  Width="50" Height="60" Click="ButtonClick1" Padding="0,0,0,0" Grid.IsSharedSizeScope="True" UseLayoutRounding="True">
+                <Button.Template>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border BorderThickness="0" CornerRadius="10" Background="{TemplateBinding Background}">
+                            <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+               <StackPanel>
+                    <Image Width="32" Height="32" Source="../Resources/主页-32.png" ></Image>
+                    <TextBlock Text="主页" FontSize="10" HorizontalAlignment="Center"></TextBlock>
+                </StackPanel>
+            </Button>
+            <Grid Height="20"></Grid>
+            <Button Width="50"  Height="60" Click="ButtonClick2">
+                <Button.Template>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border BorderThickness="0" CornerRadius="10" Background="{TemplateBinding Background}">
+                            <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+                <StackPanel>
+                    <Image Width="32" Height="32" Source="../Resources/折线-50.png"></Image>
+                    <TextBlock Text="单个" FontSize="10" HorizontalAlignment="Center"></TextBlock>
+                </StackPanel>
+            </Button>
+            <Grid Height="20"></Grid>
+            <Button Width="50"  Height="60" Click="ButtonClick3">
+                <Button.Template>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border BorderThickness="0" CornerRadius="10" Background="{TemplateBinding Background}">
+                            <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+                <StackPanel>
+                    <Image Width="32" Height="32" Source="../Resources/扇形-50.png"></Image>
+                    <TextBlock Text="所有" FontSize="10" HorizontalAlignment="Center"></TextBlock>
+                </StackPanel>
+            </Button>
+            <Grid Height="20"></Grid>
+            <Button Width="50" Height="60" Click="ButtonClick4" >
+                <Button.Template>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border BorderThickness="0" CornerRadius="10" Background="{TemplateBinding Background}">
+                            <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+                <StackPanel>
+                    <Image Width="32" Height="32" Source="../Resources/折线-50.png"></Image>
+                    <TextBlock Text="监视" FontSize="10" HorizontalAlignment="Center"></TextBlock>
+                </StackPanel>
+            </Button>
+            <Grid Height="240"></Grid>
+            <Button Width="50"  Height="60" Click="ButtonClick5" >
+                <Button.Template>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border BorderThickness="0" CornerRadius="10" Background="{TemplateBinding Background}">
+                            <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+                <StackPanel>
+                    <Image Width="32" Height="32" Source="../Resources/设置-24.png"></Image>
+                    <TextBlock Text="设置" FontSize="10" HorizontalAlignment="Center" ></TextBlock>
+                </StackPanel>
+            </Button>
+           
+        </StackPanel >
+        <Grid Grid.Column="1"  Background="WhiteSmoke" >
+            <ContentPresenter  Content="{Binding UserContent}" />
+            </Grid>
+        <Canvas Grid.Column="1">
+            
+        </Canvas>
     </Grid>
  
 </Window>

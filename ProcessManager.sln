@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProcessManager", "ProcessMa
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataBase", "DataBase\DataBase.csproj", "{68CD2D7F-754F-404C-A4DA-5CBE5F9D9A53}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProcessMonitor", "ProcessMonitor\ProcessMonitor.csproj", "{1F12155D-52E6-4AED-B6D4-646F04A1AD4A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProcessMonitor", "ProcessMonitor\ProcessMonitor.csproj", "{1F12155D-52E6-4AED-B6D4-646F04A1AD4A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
