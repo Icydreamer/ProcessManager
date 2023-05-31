@@ -18,7 +18,7 @@ namespace MvvmTutorials.ToolkitMessages.Views
     /// <summary>
     /// Page7.xaml 的交互逻辑
     /// </summary>
-    public partial class AllAppsRight2 : Page
+    public partial class AllAppsRight2 : UserControl
     {
         public AllAppsRight2()
         {
@@ -32,7 +32,7 @@ namespace MvvmTutorials.ToolkitMessages.Views
             pie.ShowValues = true;
             pie.ShowLabels = true;
             plt.Legend();
-            plt.SaveFig("Resources\\pie_showEverything.png");//绘制扇形图
+            plt.SaveFig("Resources/AllApps.png");//绘制扇形图
         }
     }
 }
