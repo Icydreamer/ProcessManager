@@ -47,37 +47,18 @@
                 <hc:Shield Subject="c#" Status="7.0" Margin="4,0,0,0" Color="#1182c3"/>
                 <hc:Shield Subject="IDE" Status="2022" Margin="4,0,0,0" Color="#1182c3"/>
             </StackPanel>
-            <TextBlock Height="70" Text="高效进程时间统计工具" FontSize="30" FontFamily="KaiTi" FontWeight="Bold" HorizontalAlignment="Center"/>
+            <TextBlock Height="70" Text="高效进程时间统计工具" FontSize="30" FontFamily="Miscorft YaHei" FontWeight="Bold" HorizontalAlignment="Center"/>
             <WrapPanel Height="70" >
-                <TextBlock Height="40" Width="350" Text="开发者：倪海翔 李子萌 冯跃博 许凌波" FontSize="20" Foreground="#FFB0C2E9"></TextBlock>
-        
-                <Button Height="10" hc:IconElement.Geometry="{StaticResource InfoGeometry}" Padding="0,-10,0,0" VerticalContentAlignment="Center"></Button>
-                <TextBlock Height="30" Width="400" Text="https://github.com/Icydreamer/ProcessTimeManager.git" FontSize="14" Foreground="#FFB0C2E9"></TextBlock>
-            </WrapPanel>
-            <Border Width="400" Height="150" Background="#FF8796A4" BorderThickness="10" CornerRadius="18,18,13,13">
+                <TextBlock Height="40" Width="350" Text="开发者：倪海翔 李子萌 冯跃博 许凌波" FontSize="20" ></TextBlock>
 
-                <WrapPanel Height="130">
-                    <Line Grid.Row="1" X1="50" X2="50" Y1="0" Y2="120" StrokeThickness="6" Stroke="Black" ></Line>
-                    <Grid Width="100"></Grid>
-                    <StackPanel>
-                        <TextBlock Text="白驹过隙" FontFamily="LiSu" FontSize="40"></TextBlock>
-                        <Grid Height="20"></Grid>
-                        <TextBlock Text="时刻统计" FontFamily="LiSu" FontSize="40"></TextBlock>
-                    </StackPanel>
-                </WrapPanel>
-            </Border>
+                <Button Height="10" hc:IconElement.Geometry="{StaticResource InfoGeometry}" Padding="0,-10,0,0" VerticalContentAlignment="Center"></Button>
+            </WrapPanel>
+
         </StackPanel>
         <StackPanel Width="600" Grid.Column="2">
             <Grid Height="50"></Grid>
-            <Button Width="300" Height="100" Padding="0,0,0,0"  RenderTransformOrigin="0.5,0.5"  >
-                <Button.RenderTransform>
-                    <TransformGroup>
-                        <ScaleTransform/>
-                        <SkewTransform/>
-                        <RotateTransform/>
-                        <TranslateTransform X="-100"/>
-                    </TransformGroup>
-                </Button.RenderTransform>
+            <Button Width="300" Height="100" Padding="0,0,0,0"  RenderTransformOrigin="0.5,0.5"   hc:BorderElement.CornerRadius="20">
+               
                 <WrapPanel>
                     <Grid Width="50"></Grid>
                     <TextBlock  Text="单个程序统计" FontSize="30" Height="75" Width="100" TextWrapping="Wrap"/>
@@ -127,7 +108,7 @@
                 </WrapPanel>
             </Button>
             <Grid Height="70"></Grid>
-            <Button Width="300" Height="100" Padding="0,0,0,0"   >
+            <Button Width="300" Height="100" Padding="0,0,0,0"   hc:BorderElement.CornerRadius="20" >
                 <WrapPanel>
                     <Grid Width="50"></Grid>
                     <TextBlock  Text="全部程序统计" FontSize="30" Height="75" Width="100" TextWrapping="Wrap" />
@@ -145,15 +126,8 @@
                 </WrapPanel>
             </Button>
             <Grid Height="70"></Grid>
-            <Button Width="300" Height="100" Padding="0,0,0,0"  RenderTransformOrigin="0.5,0.5"  >
-                <Button.RenderTransform>
-                    <TransformGroup>
-                        <ScaleTransform/>
-                        <SkewTransform/>
-                        <RotateTransform/>
-                        <TranslateTransform X="100"/>
-                    </TransformGroup>
-                </Button.RenderTransform>
+            <Button Width="300" Height="100" Padding="0,0,0,0"  RenderTransformOrigin="0.5,0.5"  hc:BorderElement.CornerRadius="20" >
+          
                 <WrapPanel>
                     <Grid Width="50"></Grid>
                     <TextBlock  Text="程序使用追踪" FontSize="30" Height="75" Width="100" TextWrapping="Wrap" />
@@ -170,16 +144,18 @@
                     <Grid Width="20"></Grid>
                 </WrapPanel>
             </Button>
-            <TextBlock Width="400" Height="100" FontSize="50" FontFamily="STCaiyun"  Text="已守护您100分钟" Padding="0,0,0,0"  Margin="0,10,0,0"/>
 
         </StackPanel>
+        <Canvas HorizontalAlignment="Center" VerticalAlignment="Bottom" >
+            <TextBlock   Width="723" Height="100" FontSize="40" FontFamily="STCaiyun"  Text="白驹已守护您2天5小时100分钟" Padding="0,0,0,0" HorizontalAlignment="Left" Canvas.Left="176" Canvas.Top="-73" VerticalAlignment="Center"/>
+        </Canvas>
         <Canvas Grid.Column="2">
-            </Canvas>
+        </Canvas>
 
         <Canvas Grid.Row="1" Width="300" Height="100">
 
 
-            <hc:GifImage  Stretch="None" Uri="/ProcessManager;component/Resources/1.gif" RenderTransformOrigin="0,0" Canvas.Left="475" Canvas.Top="143">
+            <hc:GifImage  Stretch="None" Uri="/ProcessManager;component/Resources/1.gif" RenderTransformOrigin="0,0" Canvas.Left="271" Canvas.Top="-196">
                 <hc:GifImage.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform ScaleX="0.7" ScaleY="0.7"/>
