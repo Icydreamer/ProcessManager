@@ -6,6 +6,8 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using HandyControl.Controls;
 using ScottPlot;
+using ScottPlot.Styles;
+
 namespace MvvmTutorials.ToolkitMessages.Views
 {
     /// <summary>

@@ -98,14 +98,14 @@ namespace MvvmTutorials.ToolkitMessages.Views
         private void Month(object sender, RoutedEventArgs e)
         {
             //添加默认起始日期
-            box.Text = "2023.3.1";
+            box.SelectedDate = new DateTime(2023, 3, 1);
             //其他数据更改
 
         }
         private void Week(object sender, RoutedEventArgs e)
         {
             //添加默认起始日期
-            box.Text = "2023.2.1";
+            box.SelectedDate = new DateTime(2023, 2, 1);
             //其他数据更改
 
         }
@@ -113,7 +113,7 @@ namespace MvvmTutorials.ToolkitMessages.Views
         private void Day(object sender, RoutedEventArgs e)
         {
             //添加默认起始日期
-            box.Text = "2023.1.1";
+            box.SelectedDate = new DateTime(2023, 1, 1);
             //其他数据更改
 
         }

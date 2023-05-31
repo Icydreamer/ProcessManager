@@ -57,7 +57,8 @@
             <WrapPanel Height="60">
                 <Grid Width="30"></Grid>
                 <TextBlock Width="100" Text="起始日期" FontSize="20"></TextBlock>
-                <TextBox Width="150" x:Name="box" MaxLength="8" FontSize="20"></TextBox>
+           
+                <DatePicker x:Name="box" Width="150" />
                 <Grid Width="100"></Grid>
                 <Button Content="切换样式" Click="style"></Button>
             </WrapPanel>
