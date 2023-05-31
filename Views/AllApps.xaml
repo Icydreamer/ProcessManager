@@ -6,6 +6,8 @@
       xmlns:vm="clr-namespace:MvvmTutorials.ToolkitMessages.ViewModels"
       xmlns:local="clr-namespace:MvvmTutorials.ToolkitMessages.Views"
       xmlns:hc="https://handyorg.github.io/handycontrol"
+      xmlns:diag="clr-namespace:System.Diagnostics;assembly=WindowsBase"
+      xmlns:syncfusion="clr-namespace:Syncfusion.UI.Xaml.Charts;assembly=Syncfusion.SfChart.WPF"
       mc:Ignorable="d" 
       Height="600" Width="1000">
     <Grid>
@@ -61,7 +63,24 @@
             </WrapPanel>
             <!--绘制图表-->
             <Grid Height="300" Width="450">
-      
+                <syncfusion:SfChart>
+
+                    <syncfusion:SfChart.PrimaryAxis>
+
+                        <syncfusion:CategoryAxis Header="Name" />
+
+                    </syncfusion:SfChart.PrimaryAxis>
+
+                    <syncfusion:SfChart.SecondaryAxis>
+
+                        <syncfusion:NumericalAxis Header="Height(in cm)" />
+
+                    </syncfusion:SfChart.SecondaryAxis>
+
+                    <syncfusion:ColumnSeries x:Name="AppTimers" ItemsSource="{Binding appTimersAll2}" XBindingPath="time" YBindingPath="length" >
+                    </syncfusion:ColumnSeries>
+
+                </syncfusion:SfChart>
             </Grid>
             <Grid Height="50"></Grid>
             <!--右下角文字数据绑定-->
