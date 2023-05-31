@@ -11,56 +11,61 @@ namespace MvvmTutorials.ToolkitMessages.Views
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : System.Windows.Window
+    public partial class MainWindow : System.Windows.Window, INotifyPropertyChanged
     {
-        HomePage HomePage = new HomePage();
-        AllApps AllApps = new AllApps();
-        SingleApp SingleApp = new SingleApp();
-        Monitor Monitor = new Monitor();
-            public MainWindow()
+        private HomePage HomePage = new HomePage();//实例化用户控件1
+        private SingleApp SingleApp = new SingleApp();//实例化用户控件2
+        private AllApps AllApps = new AllApps();
+        private Monitor Monitor= new Monitor();
+        private Set Set = new Set();
+        public MainWindow()
             {
-             GlobalUse._Messager.PageContent =HomePage;
+            UserContent = HomePage;
             InitializeComponent();
-                this.DataContext = GlobalUse._Messager;   
-            }
-    
+            this.DataContext = this;
         }
-    
-    public class Messager : INotifyPropertyChanged
-    {
-        private UserControl pageContent;
-        public UserControl PageContent
+
+        private void ButtonClick1(object sender, RoutedEventArgs e)
         {
-            get { return pageContent; }
+            UserContent = HomePage;//内容呈现器绑定的UserContent赋值给用户控件1
+        }
+
+        private void ButtonClick2(object sender, RoutedEventArgs e)
+        {
+            UserContent = SingleApp;//内容呈现器绑定的UserContent赋值给用户控件2
+        }
+
+        private void ButtonClick3(object sender, RoutedEventArgs e)
+        {
+            UserContent = AllApps;//内容呈现器绑定的UserContent赋值给用户控件3
+        }
+        private void ButtonClick4(object sender, RoutedEventArgs e)
+        {
+            UserContent = Monitor;//内容呈现器绑定的UserContent赋值给用户控件4
+        }
+        private void ButtonClick5(object sender, RoutedEventArgs e)
+        {
+            UserContent = Set;//内容呈现器绑定的UserContent赋值给用户控件5
+        }
+
+        private UserControl _content;
+        //内容呈现器绑定到UserContent
+        public UserControl UserContent
+        {
+            get { return _content; }
             set
             {
-                pageContent = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("PageContent"));
+                _content = value;
+                OnPropertyChanged("UserContent");
             }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
-        public void OnPropertyChanged(PropertyChangedEventArgs e)
+        protected virtual void OnPropertyChanged(string propertyName)
         {
             if (PropertyChanged != null)
-                PropertyChanged(this, e);
-        }
+                PropertyChanged.Invoke(this, new PropertyChangedEventArgs(propertyName));
 
-        public Messager()
-        {
-
-            PageContent = null;
         }
     }
-
-    public class GlobalUse
-    {
-        public static Messager _Messager { get; set; }
-        static GlobalUse()
-        {
-            _Messager = new Messager();
-        }
-    }
-
-
 }

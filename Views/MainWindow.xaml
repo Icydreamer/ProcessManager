@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:vm="clr-namespace:MvvmTutorials.ToolkitMessages.ViewModels"
-        xmlns:local="clr-namespace:MvvmTutorials.ToolkitMessages.Views"
+        xmlns:local="clr-namespace:MvvmTutorials.ToolkitMessages.ViewModels"
         xmlns:hc="https://handyorg.github.io/handycontrol"
         xmlns:tb="http://www.hardcodet.net/taskbar"
         mc:Ignorable="d"
@@ -12,44 +12,22 @@
         Title="白驹" 
         Icon="..\Resources\1.ico"
         ResizeMode="CanMinimize"
-        Height="716" Width="1000">
-    <Window.DataContext>
-        <vm:MainWindowViewModel IsActive="True" />
-    </Window.DataContext>
+        Height="656" Width="1200">
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="600"></RowDefinition>
-            <RowDefinition Height="100"></RowDefinition>
-        </Grid.RowDefinitions>
-        <ContentPresenter  Content="{Binding PageContent}"/>
-        <WrapPanel Grid.Row="1" >
-            <hc:FlipClock  Opacity="0.8" Height="100" Width="550" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" RenderTransformOrigin="0.2,0" >
-                <hc:FlipClock.RenderTransform>
-                    <TransformGroup>
-                        <ScaleTransform ScaleY="0.5" ScaleX="0.5"/>
-                        <SkewTransform/>
-                        <RotateTransform/>
-                        <TranslateTransform/>
-                    </TransformGroup>
-                </hc:FlipClock.RenderTransform>
-            </hc:FlipClock>
-            <TextBlock Width="400" Height="100" FontSize="50" FontFamily="STCaiyun"  Text="{Binding TotalTime}" Padding="0,0,0,0"  Margin="0,10,0,0"/>
-        </WrapPanel>
-        <Canvas Grid.Row="1" Width="300" Height="100">
-
-            <hc:ImageBlock Width="200" Height="100" Source="..\Resources\1.gif" RenderTransformOrigin="0,0" VerticalAlignment="Top" OverridesDefaultStyle="True" Canvas.Top="0" Canvas.Left="0" >
-                <hc:ImageBlock.RenderTransform>
-                    <TransformGroup>
-                        <ScaleTransform ScaleX="0.7" ScaleY="0.7"/>
-                        <SkewTransform/>
-                        <RotateTransform/>
-                        <TranslateTransform/>
-                    </TransformGroup>
-                </hc:ImageBlock.RenderTransform>
-            </hc:ImageBlock>
-        </Canvas> 
-
-
-
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <StackPanel>
+            <Grid Height="20"></Grid>
+            <Button Width="200" Content="主页" FontSize="20" Height="50" Click="ButtonClick1"></Button>
+            <Button Width="200" Content="所有" FontSize="20" Height="50" Click="ButtonClick2"></Button>
+            <Button Width="200" Content="单个" FontSize="20" Height="50" Click="ButtonClick3"></Button>
+            <Button Width="200" Content="监视" FontSize="20" Height="50" Click="ButtonClick4"></Button>
+            <Grid Height="300"></Grid>
+            <Button Width="200" Content="设置" FontSize="20" Height="50" Click="ButtonClick5"></Button>
+        </StackPanel>
+        <ContentPresenter  Content="{Binding UserContent}" Grid.Column="1"/>
     </Grid>
+ 
 </Window>

@@ -6,80 +6,72 @@
       xmlns:local="clr-namespace:MvvmTutorials.ToolkitMessages.Views"
       xmlns:hc="https://handyorg.github.io/handycontrol"
       mc:Ignorable="d" 
-      d:DesignHeight="600" d:DesignWidth="1000">
-  
+      Height="600" Width="1000">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="150"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="400"></ColumnDefinition>
+            <ColumnDefinition Width="300"></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <StackPanel>
-            <Grid Height="40"></Grid>
-            <TextBlock Text="当前应用:" FontSize="40"></TextBlock>
-            <Grid Height="20"></Grid>
-            <Border Height="90" CornerRadius="10,10,10,10" BorderThickness="2" BorderBrush="#FFE51010" Margin="20,0,20,0">
-            <WrapPanel Margin="10,10,10,8" >
-                
-                    <Grid Width="50"></Grid>
-                    <TextBlock Text="白驹" FontSize="40"></TextBlock>
-                    <Grid Width="100"></Grid>
-                    <Image Width="64" Height="64"  Source="..\Resources\2.png"></Image>
-                
-            </WrapPanel>
-            </Border>
-            <Grid Height="20"></Grid>
-            <ToggleButton  Height="40" Content="更换应用" FontSize="20" IsChecked="{Binding IsOpen,ElementName=DrawerLeft}"/>
-            <Grid Height="40"></Grid>
-              <Grid Height="50"></Grid>
-            <WrapPanel>
-                <Grid Width="20"></Grid>
-                <Button Height="40" Content="主页" FontSize="20"  Click="HomePageClick"></Button>
-                <Grid Width="20"></Grid>
-                <Button Height="40" Content="全部应用" FontSize="20" Click="AllAppsClick"></Button>
-                <Grid Width="20"></Grid>
-                <Button Height="40" Content="监视" FontSize="20" Click="MonitorClick"></Button>
-                <Grid Width="20"></Grid>
-                <Button Height="40" Content="设置" FontSize="20" Click="SetClick"></Button>
-            </WrapPanel>
-        </StackPanel>
+        <TextBlock Text="当前应用:" FontSize="30" Grid.Column="0" Grid.Row="0"  VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+        <WrapPanel Grid.Column="1" x:Name="singleapp">
+            <Grid Width="50"></Grid>
+            <TextBlock Text="{Binding Name}" FontSize="40" Margin="0,45,0,0"/>
+            <Image Source="{Binding ImgPath}" Width="64" Height="64" Margin="45,40,0,0"/>
+        </WrapPanel>
+        <ToggleButton  Grid.Column="1" Height="40" Content="更换应用" FontSize="20" IsChecked="{Binding IsOpen,ElementName=DrawerLeft}" HorizontalAlignment="Right" Margin="0,0,30,0"/>
+        <!--展开框定义-->
         <hc:Drawer Name="DrawerLeft" Dock="Left" ShowMode="Push">
             <Border Grid.Column="1" Background="{DynamicResource RegionBrush}" Width="300" BorderThickness="0,1,0,0" BorderBrush="{DynamicResource BorderBrush}">
                 <Grid>
                     <StackPanel>
                         <hc:SearchBar Height="50" Command="{Binding SearchCmd}" CommandParameter="{Binding Text,RelativeSource={RelativeSource Self}}" />
-                        <ListBox Height="500" Margin="16" Width="200" ItemsSource="{Binding DataList}">
-                            <ListBox.ItemTemplate>
-                                <DataTemplate>
-                                    <TextBlock Text="{Binding Name}"/>
-                                </DataTemplate>
-                            </ListBox.ItemTemplate>
-                        </ListBox>
-                        <Button Height="50" Content="手动添加exe文件" FontSize="20" HorizontalAlignment="Right" BorderBrush="#FFDCD5D5" Margin="0,0,10,0"></Button>
+                        <ListView ItemsSource="{Binding DataList}" x:Name="Appname" Height="500">
+                            <ListView.View >
+                                <GridView >
+                                    <GridViewColumn Width="80"  DisplayMemberBinding="{Binding Name}" />
+                                    <GridViewColumn Width="100" >
+
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Image Source="{Binding ImgPath}" MaxWidth="32" MaxHeight="32" Stretch="Uniform"/>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                        <Grid Height="50"></Grid>
+                        <Button Height="50" Content="手动添加exe文件" FontSize="20" HorizontalAlignment="Right" BorderBrush="#FFDCD5D5" Margin="0,0,10,0" Click="add"></Button>
                     </StackPanel>
                 </Grid>
             </Border>
         </hc:Drawer>
-        <StackPanel Grid.Column="1">
-            <WpfPlot x:Name="WpfPlot2" HorizontalAlignment="Left" VerticalAlignment="Top" Height="372" Width="600"/>
+        <StackPanel Grid.Row="1" x:Name="Allapptexts">
             <Grid Height="20"></Grid>
-            <WrapPanel>
-                <Grid Width="50"></Grid>
-                <RadioButton GroupName="1" Content="按天" FontSize="20" IsChecked="True"></RadioButton>
-                <Grid Width="50"></Grid>
-                <RadioButton GroupName="1" Content="按周" FontSize="20" IsChecked="False"></RadioButton>
-                <Grid Width="50"></Grid>
-                <RadioButton GroupName="1" Content="按月" FontSize="20" IsChecked="False"></RadioButton>
-                <Grid Width="150"></Grid>
-                <Image Source="..\Resources\4.jpg" Width="50" Height="40"></Image>
-            </WrapPanel>
-            <Grid Height="40"></Grid>
-            <Border BorderThickness="10" BorderBrush="Black" CornerRadius="8,8,8,8" Height="120"  Background="#FF0079F6" Margin="10,0,10,0" Padding="0,10,0,10">
-                <StackPanel>
-                    <TextBlock Text="距离上次使用已经过去60分钟" FontSize="20" Foreground="White" HorizontalAlignment="Center"></TextBlock>
-                    <TextBlock Text="本周共使用6次" FontSize="20" Foreground="White" HorizontalAlignment="Center"></TextBlock>
-                    <TextBlock Text="平均每周使用8个小时" FontSize="20" Foreground="White" HorizontalAlignment="Center"></TextBlock>
-                </StackPanel>
-            </Border>
+            <RadioButton Content="按天" FontSize="20" Click="Day" ></RadioButton>
+            <Grid Height="20"></Grid>
+            <RadioButton Content="按周" FontSize="20" Click="Week" ></RadioButton>
+            <Grid Height="20"></Grid>
+            <RadioButton Content="按月" FontSize="20" Click="Month" ></RadioButton>
+            <Grid Height="20"></Grid>
+            <TextBlock Width="100" Text="起始日期" FontSize="20" HorizontalAlignment="Center"></TextBlock>
+            <TextBox Width="150" x:Name="box" MaxLength="8" FontSize="20"></TextBox>
+            <Grid Height="80"></Grid>
+            <TextBlock Height="30"  Text="{Binding text1}" FontSize="20" HorizontalAlignment="Center"></TextBlock>
+            <Grid Height="10"></Grid>
+            <TextBlock Height="30" Text="{Binding text2}" FontSize="20" HorizontalAlignment="Center"></TextBlock>
+            <Grid Height="10"></Grid>
+            <TextBlock Height="30" Text="{Binding text3}" FontSize="20"  HorizontalAlignment="Center"></TextBlock>
         </StackPanel>
+        <Button Content="切换样式" Click="style" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top"></Button>
+        <!--绘制视图-->
     </Grid>
+   
+            
+          
+     
 </UserControl>

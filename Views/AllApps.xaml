@@ -6,57 +6,78 @@
       xmlns:local="clr-namespace:MvvmTutorials.ToolkitMessages.ViewModels"
       xmlns:hc="https://handyorg.github.io/handycontrol"
       mc:Ignorable="d" 
-      d:DesignHeight="600" d:DesignWidth="1000">
-    
-
+      Height="600" Width="1000">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="500"></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
+        <!--左侧视图-->
         <StackPanel>
-            <WrapPanel Height="50">
-                <Grid Width="20"></Grid>
-                <Button Height="40" Content="折线图" FontSize="20" Click="Right1"></Button>
-                <Grid Width="60"></Grid>
-                <Button Height="40" Content="扇形图" FontSize="20" Click="Right2"></Button>
- 
-                <Grid Width="140"></Grid>
-                <Button Height="40" Content="确认" FontSize="20"></Button>
+            <Grid Height="20"></Grid>
+            <WrapPanel Height="80">
+                <Grid Width="20" Height="100"></Grid>
+                <TextBlock Text="勾选要查看的应用" FontSize="30" VerticalAlignment="Center"></TextBlock>
+                <Grid Width="100" Height="100"></Grid>
+                <Button Height="50" Content="确认" FontSize="20" Click="sure"></Button>
             </WrapPanel>
-        <DataGrid Height="500" hc:DataGridAttach.CanUnselectAllWithBlankArea="True" HeadersVisibility="All" RowHeaderWidth="50" AutoGenerateColumns="False" ItemsSource="{Binding DataList}">
-            <DataGrid.RowHeaderTemplate>
-                <DataTemplate>
-                    <CheckBox IsChecked="{Binding IsSelected,RelativeSource={RelativeSource AncestorType=DataGridRow}}"/>
-                </DataTemplate>
-            </DataGrid.RowHeaderTemplate>
-            <DataGrid.Columns>
-                <DataGridTextColumn IsReadOnly="True" Width="60" CanUserResize="False" Binding="{Binding Index}" Header="index"/>
-                <DataGridTemplateColumn Width="60" CanUserResize="False">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Image Source="{Binding ImgPath}" MaxWidth="32" MaxHeight="32" Stretch="Uniform"/>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTextColumn Binding="{Binding Name}" Header="name"/>
-                <DataGridCheckBoxColumn Width="60" CanUserResize="False" Binding="{Binding IsSelected}" Header="check"/>
-                <DataGridComboBoxColumn  Width="100" CanUserResize="False" SelectedValueBinding="{Binding Type}" Header="type"/>
-                <DataGridTextColumn Binding="{Binding Remark}" Header="remark"/>
-            </DataGrid.Columns>
-        </DataGrid>
-            
+            <Grid Height="20"></Grid>
+            <!--应用列表-->
+            <DataGrid Height="400" Width="400" hc:DataGridAttach.CanUnselectAllWithBlankArea="True" HeadersVisibility="All" RowHeaderWidth="50" AutoGenerateColumns="False" ItemsSource="{Binding DataList}" Background="White" x:Name="Appname">
+                <DataGrid.Columns>
+                    <DataGridTextColumn IsReadOnly="True" Width="60" CanUserResize="False" Binding="{Binding Index}" Header="序号"/>
+
+                    <DataGridTextColumn IsReadOnly="True" Width="80"   Binding="{Binding Name}" Header="名称"/>
+                    <DataGridTemplateColumn Width="40" CanUserResize="False">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Image Source="{Binding ImgPath}" MaxWidth="32" MaxHeight="32" Stretch="Uniform"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridCheckBoxColumn Width="60" CanUserResize="False" Binding="{Binding IsSelected}" Header="选中"/>
+                    <DataGridComboBoxColumn  Width="90" CanUserResize="False" SelectedValueBinding="{Binding Time}" Header="使用时长"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </StackPanel>
+        <!--右侧视图-->
+        <StackPanel Grid.Column="1">
+            <Grid Height="30"></Grid>
             <WrapPanel Height="50">
-                <Grid Width="20"></Grid>
-                <Button Height="40" Content="主页" FontSize="20" Click="HomePageClick"></Button>
-                <Grid Width="20"></Grid>
-                <Button Height="40" Content="单个应用" FontSize="20" Click="SingleAppClick"></Button>
-                <Grid Width="20"></Grid>
-                <Button Height="40" Content="监视" FontSize="20" Click="MonitorClick"></Button>
-                <Grid Width="20"></Grid>
-                <Button Height="40" Content="设置" FontSize="20" Click="SetClick"></Button>
+                <Grid Width="50"></Grid>
+                <RadioButton Content="按天" FontSize="20" Click="Day" ></RadioButton>
+                <Grid Width="50"></Grid>
+                <RadioButton Content="按周" FontSize="20" Click="Week" ></RadioButton>
+                <Grid Width="50"></Grid>
+                <RadioButton Content="按月" FontSize="20" Click="Month" ></RadioButton>
+            </WrapPanel>
+            <WrapPanel Height="60">
+                <Grid Width="30"></Grid>
+                <TextBlock Width="100" Text="起始日期" FontSize="20"></TextBlock>
+                <TextBox Width="150" x:Name="box" MaxLength="8" FontSize="20"></TextBox>
+                <Grid Width="100"></Grid>
+                <Button Content="切换样式" Click="style"></Button>
+            </WrapPanel>
+            <!--绘制图表-->
+            <Grid Height="300" Width="450">
+      
+            </Grid>
+            <Grid Height="50"></Grid>
+            <!--右下角文字数据绑定-->
+            <StackPanel Height="110" x:Name="Allapptexts" >
+                <TextBlock Height="30"  Text="{Binding text1}" FontSize="20" HorizontalAlignment="Center"></TextBlock>
+                <Grid Height="10"></Grid>
+                <TextBlock Height="30" Text="{Binding text2}" FontSize="20" HorizontalAlignment="Center"></TextBlock>
+                <Grid Height="10"></Grid>
+                <TextBlock Height="30" Text="{Binding text3}" FontSize="20"  HorizontalAlignment="Center"></TextBlock>
+            </StackPanel>
+            <WrapPanel>
+
             </WrapPanel>
         </StackPanel>
-        <ContentPresenter  Content="{Binding RightContent}" Grid.Column="1"/>
+
     </Grid>
+
+
+   
 </UserControl>
