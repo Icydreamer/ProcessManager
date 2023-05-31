@@ -11,6 +11,8 @@ using System.Threading;
 using System.Windows.Media.Media3D;
 using DataBase.Models;
 using DataBase.Services;
+using System.Drawing;
+
 namespace ProcessMonitor
 {
     //class Program
@@ -108,9 +110,8 @@ namespace ProcessMonitor
                             Console.WriteLine($"应用: {activeProcessName} | 开始时间: {DateTime.Now:yyyy-MM-dd HH:mm:ss} | 使用时长: {elapsedRoundedSeconds} 秒");
                             WriteLog($"应用: {activeProcessName} | 开始时间: {DateTime.Now:yyyy-MM-dd HH:mm:ss} | 使用时长: {elapsedRoundedSeconds} 秒");
 
-
-
                             // 提取icon
+                            SaveProcessIcon(activeProcessName);
 
                             // 添加到AppModel表
                             appData.AddApp(new AppModel()
@@ -209,6 +210,40 @@ namespace ProcessMonitor
                 writer.WriteLine($"{DateTime.Now:yyyy-MM-dd HH:mm:ss}");
                 writer.WriteLine($" {message}");
                 writer.WriteLine("--------------------------------------------------------------------");
+            }
+        }
+
+        // 获取进程的图标
+        private void SaveProcessIcon(string processName)
+        {
+            string iconDirectory = "ico";
+            string iconFileName = $"{processName}.ico";
+            string iconFilePath = Path.Combine(iconDirectory, iconFileName);
+
+            // 创建ico文件夹（如果不存在）
+            Directory.CreateDirectory(iconDirectory);
+
+            // 检查是否已存在ico图标文件，如果存在则不执行任何操作
+            if (File.Exists(iconFilePath))
+            {
+                return;
+            }
+
+            // 获取进程的图标
+            using (Process process = Process.GetProcessesByName(processName).FirstOrDefault())
+            {
+                if (process != null)
+                {
+                    Icon processIcon = Icon.ExtractAssociatedIcon(process.MainModule.FileName);
+                    if (processIcon != null)
+                    {
+                        // 保存图标为ico文件
+                        using (FileStream stream = new FileStream(iconFilePath, FileMode.Create))
+                        {
+                            processIcon.Save(stream);
+                        }
+                    }
+                }
             }
         }
     }
