@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using DataBase.Models;
 using Microsoft.EntityFrameworkCore;
-using DataBase.Models.Data;
 using System.IO;
 using System.Runtime.CompilerServices;
 namespace DataBase.Services
