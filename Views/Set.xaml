@@ -1,33 +1,50 @@
-﻿<Window x:Class="MvvmTutorials.ToolkitMessages.Views.Set"
+<UserControl x:Class="MvvmTutorials.ToolkitMessages.Views.Set"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:MvvmTutorials.ToolkitMessages.Views"
+                   xmlns:hc="https://handyorg.github.io/handycontrol"
       mc:Ignorable="d" 
-     Height="450" Width="600"
-      Title="设置">
+     Height="600" Width="1000"
+   >
 
     <Grid Margin="10,20,0,0" >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
         <StackPanel>
-            <CheckBox Content="开机自动启动" FontSize="20"></CheckBox>
+            <Grid Height="20"></Grid>
+            <CheckBox Content="开机自动启动" FontSize="20" ></CheckBox>
+            <Grid Height="20"></Grid>
             <CheckBox Content="后台运行" FontSize="20"></CheckBox>
+            <Grid Height="20"></Grid>
             <CheckBox Content="启用悬浮球" FontSize="20"></CheckBox>
-            <Grid Height="20"></Grid>
+            <Grid Height="30"></Grid>
             <TextBlock  Text=" 消息通知类型" FontSize="20" HorizontalAlignment="Left"/>
+            <Grid Height="20"></Grid>
             <CheckBox Content="消息框"  FontSize="20"></CheckBox>
+            <Grid Height="20"></Grid>
             <CheckBox Content="程序闪烁"  FontSize="20"></CheckBox>
+        </StackPanel>
+        <StackPanel Grid.Column="1">
             <Grid Height="20"></Grid>
-            <Button Content="导出csv文件" Height="40" FontSize="20" HorizontalAlignment="Left"></Button>
+            <TextBlock Text="主题" FontSize="20"></TextBlock>
+            <Grid Height="10"></Grid>
+            <ToggleButton IsChecked="True" Margin="5,9"  Style="{StaticResource ToggleButtonSwitch}" hc:VisualElement.HighlightBrush="{DynamicResource ReverseTextBrush}" HorizontalAlignment="Left" Click="ToggleButton_Click"/>
+
             <Grid Height="20"></Grid>
-            <Button Content="清除缓存" Height="40" FontSize="20" HorizontalAlignment="Left"></Button>
+            <Button Content="导出csv文件" Height="40" FontSize="20" HorizontalAlignment="Left" Click="csv"></Button>
+            <Grid Height="20"></Grid>
+            <Button Content="清除缓存" Height="40" FontSize="20" HorizontalAlignment="Left" Click="dataremove"></Button>
             <Grid Height="50"></Grid>
             <WrapPanel HorizontalAlignment="Right">
-            <Button Content="确认" Height="40" FontSize="20" HorizontalAlignment="Right"></Button>
+            <Button Content="确认" Height="40" FontSize="20" HorizontalAlignment="Right" Click="sure"></Button>
                 <Grid Width="10"></Grid>
-            <Button Content="取消" Height="40" FontSize="20" HorizontalAlignment="Right"></Button>
-                <Grid Width="10"></Grid>
+            <Button Content="取消" Height="40" FontSize="20" HorizontalAlignment="Right" Click="cancel"></Button>
+                <Grid Width="20"></Grid>
             </WrapPanel>
         </StackPanel>
     </Grid>
-</Window>
+</UserControl>

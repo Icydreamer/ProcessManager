@@ -20,13 +20,53 @@ namespace ProcessMonitor
     //        var config = Config.LoadConfig();
     //        string themeColor = config.ThemeColor;
 
-    //        var processMonitorMonitor = new ProcessMonitor();
-    //        processMonitorMonitor.StartMonitoring();
+    //        // 用于 Debug
+    //        if (config.StartupEnabled)
+    //        {
+    //            EnableStartup();
+    //        }
+    //        else
+    //        {
+    //            DisableStartup();
+    //        }
+
+    //        if (config.NotificationEnabled)
+    //        {
+    //            Console.WriteLine("桌面通知已开启。");
+    //        }
+    //        else
+    //        {
+    //            Console.WriteLine("桌面通知未开启。");
+    //        }
+
+    //        var processMonitor = new ProcessMonitor();
+    //        processMonitor.StartMonitoring();
 
     //        Console.ReadLine();
+    //    }
 
+    //    static void EnableStartup()
+    //    {
+    //        // 获取当前应用程序的可执行文件路径
+    //        string appPath = System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName;
+
+    //        // 创建注册表项
+    //        RegistryKey rk = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
+
+    //        // 设置开机自启
+    //        rk.SetValue("ProcessMonitor", appPath);
+    //    }
+
+    //    static void DisableStartup()
+    //    {
+    //        // 创建注册表项
+    //        RegistryKey rk = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
+
+    //        // 取消开机自启
+    //        rk.DeleteValue("ProcessMonitor", false);
     //    }
     //}
+
     public class ProcessMonitor
     {
         private string activeProcessName;
@@ -89,27 +129,6 @@ namespace ProcessMonitor
                             stopwatch.Restart();
                             activeProcessName = currentProcessName;
                             records.Add(new Record(activeProcessName, DateTime.Now, elapsedRoundedSeconds));
-                            //var elapsed = stopwatch.Elapsed;
-
-                            //var existingRecord = records.FirstOrDefault(r => r.ProcessName == activeProcessName);
-
-                            //if (existingRecord != null)
-                            //{
-                            //    existingRecord.Duration += elapsed;
-                            //}
-                            //else
-                            //{
-                            //    records.Add(new Record(activeProcessName, elapsed));
-                            //}
-
-                            //records = records.OrderByDescending(r => r.Duration).ToList();
-
-                            //foreach (var record in records)
-                            //{
-                            //    var formattedDuration = DurationFormatter.FormatDuration(record.Duration);
-                            //    Console.WriteLine($"应用: {record.ProcessName}, 使用时长: {formattedDuration}");
-                            //    record.FormattedDuration = formattedDuration;
-                            //}
 
                             CsvWriter.WriteRecordsToCsv(records, "Record.csv");
 
