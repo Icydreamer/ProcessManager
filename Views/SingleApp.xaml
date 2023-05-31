@@ -45,7 +45,7 @@
                                 </GridView>
                             </ListView.View>
                         </ListView>
-                        <Grid Height="50"></Grid>
+                        <Grid Height="20"></Grid>
                         <Button Height="50" Content="手动添加exe文件" FontSize="20" HorizontalAlignment="Right" BorderBrush="#FFDCD5D5" Margin="0,0,10,0" Click="add"></Button>
                     </StackPanel>
                 </Grid>
