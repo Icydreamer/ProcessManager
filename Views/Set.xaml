@@ -14,33 +14,37 @@
             <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <StackPanel>
-            <Grid Height="20"></Grid>
-            <CheckBox Content="开机自动启动" FontSize="20"  Foreground="{DynamicResource TEXTCOLOR}"></CheckBox>
-            <Grid Height="20"></Grid>
-            <CheckBox Content="后台运行" FontSize="20" Foreground="{DynamicResource TEXTCOLOR}"></CheckBox>
-            <Grid Height="20"></Grid>
-            <CheckBox Content="启用悬浮球" FontSize="20" Foreground="{DynamicResource TEXTCOLOR}"></CheckBox>
-            <Grid Height="30"></Grid>
-            <TextBlock  Text=" 消息通知类型" FontSize="20" HorizontalAlignment="Left" Foreground="{DynamicResource TEXTCOLOR}"/>
-            <Grid Height="20"></Grid>
-            <CheckBox Content="消息框"  FontSize="20" Foreground="{DynamicResource TEXTCOLOR}"></CheckBox>
-            <Grid Height="20"></Grid>
-            <CheckBox Content="程序闪烁"  FontSize="20" Foreground="{DynamicResource TEXTCOLOR}"></CheckBox>
+        <StackPanel Margin="150, 50, 100, 50">
+            <hc:SimpleText Text="设置" FontSize="30" TextAlignment="Center" Height="50" Width="166" HorizontalAlignment="Center"/>
+            <Grid Height="40"/>
+            <DockPanel>
+                <TextBlock Text="开机自启" FontSize="20" Foreground="{DynamicResource TEXTCOLOR}" Height="25" VerticalAlignment="Center" />
+                <ToggleButton IsChecked="False" Margin="5,9" Style="{StaticResource ToggleButtonSwitch}" HorizontalAlignment="Right" />
+            </DockPanel>
+            <!--<Grid Height="10"/>-->
+            <!--DockPanel>
+                <TextBlock Text="后台运行" FontSize="20" Foreground="{DynamicResource TEXTCOLOR}" Height="25" VerticalAlignment="Center"/>
+                <ToggleButton IsChecked="False" Margin="5,9" Style="{StaticResource ToggleButtonSwitch}" HorizontalAlignment="Right" />
+            </DockPanel>-->
+            <Grid Height="10"/>
+            <DockPanel>
+                <TextBlock Text="桌面提醒" FontSize="20" Foreground="{DynamicResource TEXTCOLOR}" Height="25" VerticalAlignment="Center"/>
+                <ToggleButton IsChecked="False" Margin="5,9" Style="{StaticResource ToggleButtonSwitch}" HorizontalAlignment="Right" />
+            </DockPanel>
+            <Grid Height="10"/>
+            <DockPanel>
+                <TextBlock Text="深色模式" FontSize="20" Foreground="{DynamicResource TEXTCOLOR}" Height="25" VerticalAlignment="Center"/>
+                <ToggleButton IsChecked="False" Margin="5,9"  Style="{StaticResource ToggleButtonSwitch}" HorizontalAlignment="Right" hc:VisualElement.HighlightBrush="{DynamicResource ReverseTextBrush}" Click="ToggleButton_Click"/>
+            </DockPanel>
+            <Grid Height="20"/>
         </StackPanel>
-        <StackPanel Grid.Column="1">
-            <Grid Height="20"></Grid>
-            <TextBlock Text="主题模式" FontSize="20" Foreground="{DynamicResource TEXTCOLOR}"></TextBlock>
-            <Grid Height="10"></Grid>
-            <ToggleButton IsChecked="False" Margin="5,9"  Style="{StaticResource ToggleButtonSwitch}" hc:VisualElement.HighlightBrush="{DynamicResource ReverseTextBrush}" HorizontalAlignment="Left" Click="ToggleButton_Click"/>
-
-            <Grid Height="20"></Grid>
-            <Button Content="导出csv文件" Height="40" FontSize="20" HorizontalAlignment="Left" Click="csv"  Background="{DynamicResource BUTTONCOLOR}" Foreground="{DynamicResource TEXTCOLOR}"></Button>
-            <Grid Height="20"></Grid>
-            <Button Content="清除缓存" Height="40" FontSize="20" HorizontalAlignment="Left" Click="dataremove"  Background="{DynamicResource BUTTONCOLOR}" Foreground="{DynamicResource TEXTCOLOR}"></Button>
-            <Grid Height="50"></Grid>
-            <WrapPanel HorizontalAlignment="Right">
-            </WrapPanel>
+        <StackPanel Grid.Column="1" Margin="50">
+            <Grid Height="125"/>
+            <Button Content="导出csv文件" Height="40" FontSize="20" HorizontalAlignment="Left" Click="csv"  Background="{DynamicResource BUTTONCOLOR}" Foreground="{DynamicResource TEXTCOLOR}"/>
+            <Grid Height="20"/>
+            <Button Content="清除缓存" Height="40" FontSize="20" HorizontalAlignment="Left" Click="dataremove"  Background="{DynamicResource BUTTONCOLOR}" Foreground="{DynamicResource TEXTCOLOR}"/>
+            <Grid Height="50"/>
+            <WrapPanel HorizontalAlignment="Right"/>
         </StackPanel>
     </Grid>
 </UserControl>
