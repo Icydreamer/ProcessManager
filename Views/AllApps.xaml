@@ -43,7 +43,14 @@
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
-                    <DataGridCheckBoxColumn Width="60" CanUserResize="False" Binding="{Binding IsSelected}" Header="选中"/>
+                    <DataGridTemplateColumn Header="选中" Width="*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <CheckBox HorizontalAlignment="Center" Click="CheckBox_Click" IsChecked="{Binding IsSelected}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
                     <DataGridComboBoxColumn  Width="90" CanUserResize="False" SelectedValueBinding="{Binding Time}" Header="使用时长"/>
                 </DataGrid.Columns>
             </DataGrid>
@@ -71,9 +78,35 @@
             </Border>
 
             <!--绘制图表-->
-            <Grid Height="300" Width="500">
-                <Border BorderThickness="4" CornerRadius="30" Background="{DynamicResource BORDERINSIDECOLOR}" Margin="10,0,10,10">
-                </Border>
+            <Grid Height="300" Width="450">
+                <syncfusion:SfChart Grid.Row="1" Grid.Column="1" >
+
+                    <syncfusion:SfChart.PrimaryAxis>
+
+                        <syncfusion:CategoryAxis Header="应用"  LabelsIntersectAction="Auto"/>
+
+                    </syncfusion:SfChart.PrimaryAxis>
+
+                    <syncfusion:SfChart.SecondaryAxis>
+                        <syncfusion:NumericalAxis Header="使用时长/分钟">
+                            <syncfusion:NumericalAxis.RangeStyles>
+                                <syncfusion:ChartAxisRangeStyleCollection>
+                                    <syncfusion:ChartAxisRangeStyle Start="0" End="60" >
+                                        <syncfusion:ChartAxisRangeStyle.LabelStyle>
+                                            <syncfusion:LabelStyle Foreground="RoyalBlue" />
+                                        </syncfusion:ChartAxisRangeStyle.LabelStyle>
+                                    </syncfusion:ChartAxisRangeStyle>
+                                </syncfusion:ChartAxisRangeStyleCollection>
+                            </syncfusion:NumericalAxis.RangeStyles>
+                        </syncfusion:NumericalAxis>
+
+
+                    </syncfusion:SfChart.SecondaryAxis>
+
+                    <syncfusion:ColumnSeries x:Name="AllAppsTimer" ItemsSource="{Binding appTimers}" XBindingPath="appName" YBindingPath="length" >
+                    </syncfusion:ColumnSeries>
+
+                </syncfusion:SfChart >
             </Grid>
             
             <!--右下角文字数据绑定-->

@@ -50,11 +50,11 @@ namespace MvvmTutorials.ToolkitMessages.Views
             }
             return false;//不包含该时间点
         }
-        public void setDayTimer(int appId)
+        public void setDayTimer(int appId, DateTime dt)
         {
             //右侧时间折线图
             List<AppTimer> a1 = new List<AppTimer>();
-            var totayAllAppsTime = GlobalData.DataInstance.GetAppDayData(appId, DateTime.Now);
+            var totayAllAppsTime = GlobalData.DataInstance.GetAppDayData(appId, dt);
             foreach (var timer in totayAllAppsTime)
             {
                 a1.Add(new AppTimer(timer.DataTime.ToString("t"), timer.Time));
@@ -107,24 +107,57 @@ namespace MvvmTutorials.ToolkitMessages.Views
             testGlobal = test;
             AppTimers.DataContext = testGlobal;
         }
+        public void setMonthTimer(int appId, DateTime dt)
+        {
+            var weekTimer = GlobalData.DataInstance.GetProcessMonthLogList(appId, dt);
+            List<AppTimer> a1 = new List<AppTimer>();
+            int month = int.Parse(dt.Month.ToString());
+            DateTime monthEnd = new DateTime(2023, int.Parse(dt.Month.ToString()), 1, 0, 0, 0);
+            foreach (var day in weekTimer)
+            {
+                a1.Add(new AppTimer(day.Date.ToString("MM-dd"), day.Time));
+            }
+            int p = 0;
+            List<AppTimer> a2 = new List<AppTimer>();
+            for (int i = 0; i < 31; i++)
+            {
+                DateTime toJudge = monthEnd.AddDays(i);
+                if (int.Parse(toJudge.Month.ToString()) != month)
+                    break;
+                if (!ifContainTimeByDay(a1, toJudge))
+                {
+                    a2.Add(new AppTimer(toJudge.ToString("MM-dd"), 0));
+                }
+                else
+                {
+                    a2.Add(a1[p]);
+                    p++;
+                }
+            }
+            AllTimer test = new AllTimer();
+            test.appTimersAll2 = a2;
+            testGlobal = test;
+            AppTimers.DataContext = testGlobal;
+        }
+
         public void Appname_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             app emp = Appname.SelectedItem as app;
             appIndex = emp.Index;
+            DateTime dateToSelect = strTransToDate(box.Text);
             //右侧时间折线图
             if (AllappstextGlobal.day)
             {
-                setDayTimer(emp.Index);
+                setDayTimer(emp.Index, dateToSelect);
 /*                MessageBox.Show("setDayTimer");*/
             }
             else if (AllappstextGlobal.week)
             {
-                setWeekTimer(emp.Index, strTransToDate(box.Text));
+                setWeekTimer(emp.Index, dateToSelect);
 /*                MessageBox.Show("setWeekTimer");*/
             }
             else
-                //setDayTimer(emp.Index);
-                MessageBox.Show("month");
+                setMonthTimer(emp.Index, dateToSelect);
 
             //应用allapps里的app类，可考虑迁移
             AllApps.app Singleapp = new AllApps.app()
@@ -154,6 +187,7 @@ namespace MvvmTutorials.ToolkitMessages.Views
             AllappstextGlobal.week = false;
             AllappstextGlobal.month = false;
             Allapptexts.DataContext = Allappstext;
+            box.Text = DateTime.Now.ToString("yyyy-MM-dd");
 
             //左侧应用修改
             var appList = GlobalData.AppDataInstance.GetAllApps();
@@ -266,31 +300,18 @@ namespace MvvmTutorials.ToolkitMessages.Views
         //三个按钮
         private void Month(object sender, RoutedEventArgs e)
         {
-            //添加默认起始日期
-            box.Text = DateTime.Now.ToString("yyyy-MM-dd");
             //其他数据更改
             //MessageBox.Show(AllappstextGlobal.day.ToString() + AllappstextGlobal.week.ToString() + AllappstextGlobal.month.ToString());
             AllappstextGlobal.day = false;
             AllappstextGlobal.week = false;
             AllappstextGlobal.month = true;
+            setMonthTimer(appIndex, strTransToDate(box.Text));
         }
         private void Week(object sender, RoutedEventArgs e)
         {
             AllappstextGlobal.day = false;
             AllappstextGlobal.week = true;
             AllappstextGlobal.month = false;
-            //添加默认起始日期
-            box.Text = DateTime.Now.ToString("yyyy-MM-dd");
-            //其他数据更改
-            /*            var weektimers = GlobalData.DataInstance.GetThisWeeklogList();
-                        List<AppTimer> week1 = new List<AppTimer>();
-                        foreach (var w in weektimers)
-                        {
-                            week1.Add(new AppTimer(w.Date.ToString("MM-dd"), w.Time));
-                        }
-                        AllTimer test = new AllTimer();
-                        test.appTimersAll2 = week1;
-                        AppTimers.DataContext = test;*/
             setWeekTimer(appIndex, strTransToDate(box.Text));
         }
 
@@ -299,10 +320,8 @@ namespace MvvmTutorials.ToolkitMessages.Views
             AllappstextGlobal.day = true;
             AllappstextGlobal.week = false;
             AllappstextGlobal.month = false;
-            //添加默认起始日期
-            box.Text = DateTime.Now.ToString("yyyy-MM-dd");
             //其他数据更改
-            setDayTimer(appIndex);
+            setDayTimer(appIndex,strTransToDate(box.Text));
 
         }
         public class WeekTimer

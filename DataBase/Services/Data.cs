@@ -321,6 +321,47 @@ namespace DataBase.Services
                 return new List<DailyLogModel>();
             }
         }
+
+        /// <summary> 
+        /// 判断两个日期是否在同一周 
+        /// </summary> 
+        /// <param name="dtmS">开始日期</param> 
+        /// <param name="dtmE">结束日期</param>
+        /// <returns></returns> 
+        private bool IsInSameWeek(DateTime dtmS, DateTime dtmE)
+        {
+            TimeSpan ts = dtmE - dtmS;
+            double dbl = ts.TotalDays;
+            int intDow = Convert.ToInt32(dtmE.DayOfWeek);
+            if (intDow == 0) intDow = 7;
+            if (dbl >= 7 || dbl >= intDow) return false;
+            else return true;
+        }
+            /// <summary>
+            /// 获取指定进程某周的数据
+            /// </summary>
+            /// <param name="processName"></param>
+            /// <param name="week"></param>
+            /// <returns></returns>
+            public List<DailyLogModel> GetProcessWeekLogList(int AppID, DateTime week)
+        {
+            using (var db = dataBase.GetReaderContext())
+            {
+
+                var res = db.DailyLog.Include(m => m.AppModel).Where(
+                m =>
+                m.Date.Year == week.Year
+                && m.Date.Month == week.Month
+                && m.Date.AddDays(-(int)m.Date.DayOfWeek).Date== week.AddDays(-(int)week.DayOfWeek).Date
+                && m.AppModelID == AppID
+                );
+                if (res != null)
+                {
+                    return res.ToList();
+                }
+                return new List<DailyLogModel>();
+            }
+        }
         /// <summary>
         /// 获取指定进程某个月的数据
         /// </summary>
