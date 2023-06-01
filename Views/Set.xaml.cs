@@ -28,6 +28,16 @@ namespace MvvmTutorials.ToolkitMessages.Views
         //主题切换
         private void ToggleButton_Click(object sender, RoutedEventArgs e)
         {
+            ResourceDictionary resource = new ResourceDictionary();
+            if (Application.Current.Resources.MergedDictionaries[0].Source.ToString() == "pack://application:,,,/ProcessManager;component/Resources/color.xaml")
+            {
+                resource.Source = new Uri("pack://application:,,,/ProcessManager;component/Resources/darkcolor.xaml");
+            }
+            else
+            {
+                resource.Source = new Uri("pack://application:,,,/ProcessManager;component/Resources/color.xaml");
+            }
+            Application.Current.Resources.MergedDictionaries[0] = resource;
 
         }
         //清除缓存

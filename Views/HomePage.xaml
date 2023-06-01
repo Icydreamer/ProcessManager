@@ -30,8 +30,8 @@
                     </Image.RenderTransform>
                 </Image>
                 <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <hc:OutlineText StrokePosition="InSide" FontFamily="FZShuTi" FontSize="80" FontWeight="Bold" StrokeThickness="3" Stroke="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" Text="白" Fill="White" HorizontalAlignment="Center" Margin="-60,-20,0,-20"/>
-                    <hc:OutlineText StrokePosition="InSide" FontFamily="FZShuTi" FontSize="80" FontWeight="Bold" StrokeThickness="3" Stroke="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" Text="驹" Fill="White" HorizontalAlignment="Center" Margin="60,-20,0,0"/>
+                    <hc:OutlineText StrokePosition="InSide" FontFamily="FZShuTi" FontSize="80" FontWeight="Bold" StrokeThickness="3" Stroke="{DynamicResource TEXTCOLOR}" Text="白" Fill="White" HorizontalAlignment="Center" Margin="-60,-20,0,-20"/>
+                    <hc:OutlineText StrokePosition="InSide" FontFamily="FZShuTi" FontSize="80" FontWeight="Bold" StrokeThickness="3" Stroke="{DynamicResource TEXTCOLOR}" Text="驹" Fill="White" HorizontalAlignment="Center" Margin="60,-20,0,0"/>
                 </StackPanel>
             </WrapPanel>
             <StackPanel  Height="50"  Orientation="Horizontal" Margin="32" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Center">
@@ -47,18 +47,20 @@
                 <hc:Shield Subject="c#" Status="7.0" Margin="4,0,0,0" Color="#1182c3"/>
                 <hc:Shield Subject="IDE" Status="2022" Margin="4,0,0,0" Color="#1182c3"/>
             </StackPanel>
-            <TextBlock Height="70" Text="高效进程时间统计工具" FontSize="30" FontFamily="Miscorft YaHei" FontWeight="Bold" HorizontalAlignment="Center"/>
+            <TextBlock Height="70" Text="高效进程时间统计工具" FontSize="30" FontFamily="Miscorft YaHei" FontWeight="Bold" HorizontalAlignment="Center"  Foreground="{DynamicResource TEXTCOLOR}"/>
             <WrapPanel Height="70" >
-                <TextBlock Height="40" Width="350" Text="开发者：倪海翔 李子萌 冯跃博 许凌波" FontSize="20" ></TextBlock>
+                <TextBlock Height="40" Width="350" Text="开发者：倪海翔 李子萌 冯跃博 许凌波" FontSize="20"  Foreground="{DynamicResource TEXTCOLOR}"></TextBlock>
 
-                <Button Height="10" hc:IconElement.Geometry="{StaticResource InfoGeometry}" Padding="0,-10,0,0" VerticalContentAlignment="Center"></Button>
+                <Button  hc:IconElement.Geometry="{StaticResource InfoGeometry}"  VerticalContentAlignment="Center"  Background="{DynamicResource MAINCOLOR}" Foreground="{DynamicResource TEXTCOLOR}" Click="Button_Click" Margin="0,-5,0,0" BorderBrush="{x:Null}">
+                   
+                </Button>
             </WrapPanel>
 
         </StackPanel>
         <StackPanel Width="600" Grid.Column="2">
             <Grid Height="50"></Grid>
             <Button Width="300" Height="100" Padding="0,0,0,0"  RenderTransformOrigin="0.5,0.5"   hc:BorderElement.CornerRadius="20">
-               
+
                 <WrapPanel>
                     <Grid Width="50"></Grid>
                     <TextBlock  Text="单个程序统计" FontSize="30" Height="75" Width="100" TextWrapping="Wrap"/>
@@ -127,7 +129,7 @@
             </Button>
             <Grid Height="70"></Grid>
             <Button Width="300" Height="100" Padding="0,0,0,0"  RenderTransformOrigin="0.5,0.5"  hc:BorderElement.CornerRadius="20" >
-          
+
                 <WrapPanel>
                     <Grid Width="50"></Grid>
                     <TextBlock  Text="程序使用追踪" FontSize="30" Height="75" Width="100" TextWrapping="Wrap" />
@@ -147,7 +149,7 @@
 
         </StackPanel>
         <Canvas HorizontalAlignment="Center" VerticalAlignment="Bottom" >
-            <TextBlock   Width="723" Height="100" FontSize="40" FontFamily="STCaiyun"  Text="白驹已守护您2天5小时100分钟" Padding="0,0,0,0" HorizontalAlignment="Left" Canvas.Left="176" Canvas.Top="-73" VerticalAlignment="Center"/>
+            <TextBlock   Width="723" Height="100" FontSize="20"  Text="白驹已守护您2天5小时100分钟" Padding="0,0,0,0" HorizontalAlignment="Left" Canvas.Left="325" Canvas.Top="-49" VerticalAlignment="Top"/>
         </Canvas>
         <Canvas Grid.Column="2">
         </Canvas>
