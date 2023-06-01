@@ -30,7 +30,7 @@
         </StackPanel>
         <StackPanel Grid.Column="1">
             <Grid Height="20"></Grid>
-            <TextBlock Text="主题" FontSize="20" Foreground="{DynamicResource TEXTCOLOR}"></TextBlock>
+            <TextBlock Text="主题模式" FontSize="20" Foreground="{DynamicResource TEXTCOLOR}"></TextBlock>
             <Grid Height="10"></Grid>
             <ToggleButton IsChecked="False" Margin="5,9"  Style="{StaticResource ToggleButtonSwitch}" hc:VisualElement.HighlightBrush="{DynamicResource ReverseTextBrush}" HorizontalAlignment="Left" Click="ToggleButton_Click"/>
 
@@ -40,10 +40,6 @@
             <Button Content="清除缓存" Height="40" FontSize="20" HorizontalAlignment="Left" Click="dataremove"  Background="{DynamicResource BUTTONCOLOR}" Foreground="{DynamicResource TEXTCOLOR}"></Button>
             <Grid Height="50"></Grid>
             <WrapPanel HorizontalAlignment="Right">
-                <Button Content="确认" Height="40" FontSize="20" HorizontalAlignment="Right" Click="sure"  Background="{DynamicResource BUTTONCOLOR}" Foreground="{DynamicResource TEXTCOLOR}"> </Button>
-                <Grid Width="10"></Grid>
-                <Button Content="取消" Height="40" FontSize="20" HorizontalAlignment="Right" Click="cancel" Background="{DynamicResource BUTTONCOLOR}" Foreground="{DynamicResource TEXTCOLOR}"></Button>
-                <Grid Width="20"></Grid>
             </WrapPanel>
         </StackPanel>
     </Grid>

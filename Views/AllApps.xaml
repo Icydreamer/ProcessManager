@@ -18,42 +18,42 @@
         <!--左侧视图-->
         <StackPanel>
             <Grid Height="20"></Grid>
-           
-            <Border BorderThickness="4" CornerRadius="30" Background="{DynamicResource BORDERINSIDECOLOR}" Margin="0,10,0,0">
+
+            <Border BorderThickness="4" CornerRadius="20" Background="{DynamicResource BORDERINSIDECOLOR}" Margin="10,10,10,0">
                 <WrapPanel Height="80" >
                     <Grid Width="20" Height="100"></Grid>
-                <TextBlock Text="勾选要查看的应用" FontSize="30" VerticalAlignment="Center" Foreground="{DynamicResource TEXTCOLOR}" Margin="20,0,0,0"></TextBlock>
-                <Grid Width="100" Height="100"></Grid>
-                    <Button Height="50" Content="确认" FontSize="20" Click="sure" Background="{DynamicResource BUTTONCOLOR}" Foreground="{DynamicResource TEXTCOLOR}"></Button>
+                    <TextBlock FontSize="20" VerticalAlignment="Center" Foreground="{DynamicResource TEXTCOLOR}" Margin="20,0,0,0"><Run Text="选择"/><Run Text="要查看的"/><Run Language="zh-cn" Text="应用"/><Run Text="："/></TextBlock>
+                    <Grid Width="100" Height="100"></Grid>
+                    <Button Height="35" Content="确认" FontSize="16" Click="sure" Background="{DynamicResource BUTTONCOLOR}" Foreground="{DynamicResource TEXTCOLOR}" Width="98"></Button>
                 </WrapPanel>
             </Border>
-          
+
             <Grid Height="20"></Grid>
             <!--应用列表-->
-            <Border BorderThickness="4" CornerRadius="30" Background="{DynamicResource BORDERINSIDECOLOR}" Margin="10,0,10,10">
+            <Border BorderThickness="4" CornerRadius="10" Background="{DynamicResource BORDERINSIDECOLOR}" Margin="10,0,10,10">
                 <DataGrid Height="400" Width="400" hc:DataGridAttach.CanUnselectAllWithBlankArea="True" HeadersVisibility="All" RowHeaderWidth="50" AutoGenerateColumns="False" ItemsSource="{Binding DataList}" Background="White" x:Name="Appname" Margin="0,10,0,10">
-                <DataGrid.Columns>
-                    <DataGridTextColumn IsReadOnly="True" Width="60" CanUserResize="False" Binding="{Binding Index}" Header="序号"/>
+                    <DataGrid.Columns>
+                        <DataGridTextColumn IsReadOnly="True" Width="60" CanUserResize="False" Binding="{Binding Index}" Header="序号"/>
 
-                    <DataGridTextColumn IsReadOnly="True" Width="80"   Binding="{Binding Name}" Header="名称"/>
-                    <DataGridTemplateColumn Width="40" CanUserResize="False">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <Image Source="{Binding ImgPath}" MaxWidth="32" MaxHeight="32" Stretch="Uniform"/>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                    <DataGridCheckBoxColumn Width="60" CanUserResize="False" Binding="{Binding IsSelected}" Header="选中"/>
-                    <DataGridComboBoxColumn  Width="90" CanUserResize="False" SelectedValueBinding="{Binding Time}" Header="使用时长"/>
-                </DataGrid.Columns>
-            </DataGrid>
+                        <DataGridTextColumn IsReadOnly="True" Width="80"   Binding="{Binding Name}" Header="名称"/>
+                        <DataGridTemplateColumn Width="40" CanUserResize="False">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Image Source="{Binding ImgPath}" MaxWidth="32" MaxHeight="32" Stretch="Uniform"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridCheckBoxColumn Width="60" CanUserResize="False" Binding="{Binding IsSelected}" Header="选中"/>
+                        <DataGridComboBoxColumn  Width="90" CanUserResize="False" SelectedValueBinding="{Binding Time}" Header="使用时长"/>
+                    </DataGrid.Columns>
+                </DataGrid>
             </Border>
         </StackPanel>
-       
+
         <!--右侧视图-->
         <StackPanel Grid.Column="1">
             <Grid Height="20"></Grid>
-            <Border BorderThickness="4" CornerRadius="30" Background="{DynamicResource BORDERINSIDECOLOR}" Margin="10,10,30,10">
+            <Border BorderThickness="4" CornerRadius="20" Background="{DynamicResource BORDERINSIDECOLOR}" Margin="10,10,10,10">
                 <WrapPanel Orientation="Horizontal">
                     <Grid Width="50"></Grid>
                     <RadioButton Content="按天" FontSize="20" Click="Day"  Foreground="{DynamicResource TEXTCOLOR}" Margin="0,10,0,0"></RadioButton>
@@ -65,19 +65,19 @@
                     <TextBlock Width="100" Text="起始日期" FontSize="20" Foreground="{DynamicResource TEXTCOLOR}" Margin="50,20,0,10"></TextBlock>
                     <DatePicker x:Name="box" Height="20" Width="150" Margin="10,10,0,0" />
                     <!--<Button Content="切换样式" Click="style" Background="{DynamicResource BUTTONCOLOR}" Foreground="{DynamicResource TEXTCOLOR}"></Button>-->
-            </WrapPanel>
-                
-                
+                </WrapPanel>
+
+
             </Border>
 
             <!--绘制图表-->
             <Grid Height="300" Width="500">
-                <Border BorderThickness="4" CornerRadius="30" Background="{DynamicResource BORDERINSIDECOLOR}" Margin="10,0,10,10">
+                <Border BorderThickness="4" CornerRadius="10" Background="{DynamicResource BORDERINSIDECOLOR}" Margin="10,0,10,10">
                 </Border>
             </Grid>
-            
+
             <!--右下角文字数据绑定-->
-            <Border BorderThickness="4" CornerRadius="30" Background="{DynamicResource BORDERINSIDECOLOR}" Margin="10,0,10,10" Padding="10,10,10,10" >
+            <Border BorderThickness="4" CornerRadius="10" Background="{DynamicResource BORDERINSIDECOLOR}" Margin="10,0,10,10" Padding="10,10,10,10" >
 
                 <StackPanel Height="110" x:Name="Allapptexts" >
                     <TextBlock Height="30"  Text="{Binding text1}" FontSize="20" HorizontalAlignment="Center" Foreground="{DynamicResource TEXTCOLOR}"></TextBlock>
@@ -87,11 +87,11 @@
                     <TextBlock Height="30" Text="{Binding text3}" FontSize="20"  HorizontalAlignment="Center" Foreground="{DynamicResource TEXTCOLOR}"></TextBlock>
                 </StackPanel>
             </Border>
-    
+
         </StackPanel>
 
     </Grid>
 
 
-   
+
 </UserControl>
