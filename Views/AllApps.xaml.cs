@@ -71,6 +71,9 @@ namespace MvvmTutorials.ToolkitMessages.Views
             public string text1 { get; set; }
             public string text2 { get; set; }
             public string text3 { get; set; }
+            public bool day { get; set; }
+            public bool week { get; set; }
+            public bool month { get; set; }
         }
 
         //应用类
