@@ -118,7 +118,7 @@ namespace MvvmTutorials.ToolkitMessages.Views
             ButtonGroup.DataContext = newcolor;
         }
 
-        private void ButtonClick2(object sender, RoutedEventArgs e)
+        public void ButtonClick2(object sender, RoutedEventArgs e)
         {
             UserContent = SingleApp;//内容呈现器绑定的UserContent赋值给用户控件2
             colors newcolor = new colors();
@@ -137,7 +137,7 @@ namespace MvvmTutorials.ToolkitMessages.Views
             ButtonGroup.DataContext = newcolor;
         }
 
-        private void ButtonClick3(object sender, RoutedEventArgs e)
+        public void ButtonClick3(object sender, RoutedEventArgs e)
         {
             UserContent = AllApps;//内容呈现器绑定的UserContent赋值给用户控件3
             colors newcolor = new colors();
@@ -155,7 +155,7 @@ namespace MvvmTutorials.ToolkitMessages.Views
             }
             ButtonGroup.DataContext = newcolor;
         }
-        private void ButtonClick4(object sender, RoutedEventArgs e)
+        public void ButtonClick4(object sender, RoutedEventArgs e)
         {
             UserContent = Monitor;//内容呈现器绑定的UserContent赋值给用户控件4
             colors newcolor = new colors();
