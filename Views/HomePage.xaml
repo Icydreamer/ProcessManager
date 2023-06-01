@@ -87,5 +87,17 @@
             </Button>
 
         </StackPanel>
+        <Canvas>
+            <hc:FlipClock RenderTransformOrigin="0,0" Width="600" Canvas.Left="117" Canvas.Top="499">
+                <hc:FlipClock.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="0.4" ScaleY="0.4"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </hc:FlipClock.RenderTransform>
+            </hc:FlipClock>
+        </Canvas>
     </Grid>
 </UserControl>
