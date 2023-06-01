@@ -27,6 +27,9 @@ namespace MvvmTutorials.ToolkitMessages.Views
             InitializeComponent();
         }
 
-      
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://github.com/Icydreamer/ProcessManager/tree/main");
+        }
     }
 }

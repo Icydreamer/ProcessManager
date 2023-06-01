@@ -1,0 +1,12 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:po="http://schemas.microsoft.com/winfx/2006/xaml/presentation/options" >
+    <SolidColorBrush x:Key="MAINLEFTCOLOR" Color="Black"/>
+    <SolidColorBrush x:Key="HORSECOLOR" Color="Green"/>
+    <SolidColorBrush x:Key="MAINCOLOR" Color=" SlateGray"/>
+    <SolidColorBrush x:Key="BORDERINSIDECOLOR" Color="	LightSlateGray"/>
+    <SolidColorBrush x:Key="TEXTCOLOR" Color="WHITE"/>
+    <SolidColorBrush x:Key="BARCOLOR" Color="LightCoral"/>
+    <SolidColorBrush x:Key="BUTTONCOLOR" Color="DimGray"/>
+    
+</ResourceDictionary>

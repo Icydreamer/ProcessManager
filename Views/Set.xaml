@@ -16,33 +16,33 @@
         </Grid.ColumnDefinitions>
         <StackPanel>
             <Grid Height="20"></Grid>
-            <CheckBox Content="开机自动启动" FontSize="20" ></CheckBox>
+            <CheckBox Content="开机自动启动" FontSize="20"  Foreground="{DynamicResource TEXTCOLOR}"></CheckBox>
             <Grid Height="20"></Grid>
-            <CheckBox Content="后台运行" FontSize="20"></CheckBox>
+            <CheckBox Content="后台运行" FontSize="20" Foreground="{DynamicResource TEXTCOLOR}"></CheckBox>
             <Grid Height="20"></Grid>
-            <CheckBox Content="启用悬浮球" FontSize="20"></CheckBox>
+            <CheckBox Content="启用悬浮球" FontSize="20" Foreground="{DynamicResource TEXTCOLOR}"></CheckBox>
             <Grid Height="30"></Grid>
-            <TextBlock  Text=" 消息通知类型" FontSize="20" HorizontalAlignment="Left"/>
+            <TextBlock  Text=" 消息通知类型" FontSize="20" HorizontalAlignment="Left" Foreground="{DynamicResource TEXTCOLOR}"/>
             <Grid Height="20"></Grid>
-            <CheckBox Content="消息框"  FontSize="20"></CheckBox>
+            <CheckBox Content="消息框"  FontSize="20" Foreground="{DynamicResource TEXTCOLOR}"></CheckBox>
             <Grid Height="20"></Grid>
-            <CheckBox Content="程序闪烁"  FontSize="20"></CheckBox>
+            <CheckBox Content="程序闪烁"  FontSize="20" Foreground="{DynamicResource TEXTCOLOR}"></CheckBox>
         </StackPanel>
         <StackPanel Grid.Column="1">
             <Grid Height="20"></Grid>
-            <TextBlock Text="主题" FontSize="20"></TextBlock>
+            <TextBlock Text="主题" FontSize="20" Foreground="{DynamicResource TEXTCOLOR}"></TextBlock>
             <Grid Height="10"></Grid>
-            <ToggleButton IsChecked="True" Margin="5,9"  Style="{StaticResource ToggleButtonSwitch}" hc:VisualElement.HighlightBrush="{DynamicResource ReverseTextBrush}" HorizontalAlignment="Left" Click="ToggleButton_Click"/>
+            <ToggleButton IsChecked="False" Margin="5,9"  Style="{StaticResource ToggleButtonSwitch}" hc:VisualElement.HighlightBrush="{DynamicResource ReverseTextBrush}" HorizontalAlignment="Left" Click="ToggleButton_Click"/>
 
             <Grid Height="20"></Grid>
-            <Button Content="导出csv文件" Height="40" FontSize="20" HorizontalAlignment="Left" Click="csv"></Button>
+            <Button Content="导出csv文件" Height="40" FontSize="20" HorizontalAlignment="Left" Click="csv"  Background="{DynamicResource BUTTONCOLOR}" Foreground="{DynamicResource TEXTCOLOR}"></Button>
             <Grid Height="20"></Grid>
-            <Button Content="清除缓存" Height="40" FontSize="20" HorizontalAlignment="Left" Click="dataremove"></Button>
+            <Button Content="清除缓存" Height="40" FontSize="20" HorizontalAlignment="Left" Click="dataremove"  Background="{DynamicResource BUTTONCOLOR}" Foreground="{DynamicResource TEXTCOLOR}"></Button>
             <Grid Height="50"></Grid>
             <WrapPanel HorizontalAlignment="Right">
-            <Button Content="确认" Height="40" FontSize="20" HorizontalAlignment="Right" Click="sure"></Button>
+                <Button Content="确认" Height="40" FontSize="20" HorizontalAlignment="Right" Click="sure"  Background="{DynamicResource BUTTONCOLOR}" Foreground="{DynamicResource TEXTCOLOR}"> </Button>
                 <Grid Width="10"></Grid>
-            <Button Content="取消" Height="40" FontSize="20" HorizontalAlignment="Right" Click="cancel"></Button>
+                <Button Content="取消" Height="40" FontSize="20" HorizontalAlignment="Right" Click="cancel" Background="{DynamicResource BUTTONCOLOR}" Foreground="{DynamicResource TEXTCOLOR}"></Button>
                 <Grid Width="20"></Grid>
             </WrapPanel>
         </StackPanel>

@@ -24,16 +24,20 @@ namespace MvvmTutorials.ToolkitMessages.Views
         private Monitor Monitor= new Monitor();
         private Set Set = new Set();
         public MainWindow()
+        {
+            colors newcolor = new colors();
+            newcolor.YY = -590;
+            if (Application.Current.Resources.MergedDictionaries[0].Source.ToString() == "pack://application:,,,/ProcessManager;component/Resources/color.xaml")
             {
-            colors newcolor = new colors()
+                Func1(newcolor);
+                newcolor.br1 = new System.Windows.Media.SolidColorBrush(Colors.AliceBlue);
+            }
+            else
             {
-                br1 = new System.Windows.Media.SolidColorBrush(Colors.AliceBlue),
-                br2 = new System.Windows.Media.SolidColorBrush(Colors.White),
-                br3 = new System.Windows.Media.SolidColorBrush(Colors.White),
-                br4 = new System.Windows.Media.SolidColorBrush(Colors.White),
-                br5 = new System.Windows.Media.SolidColorBrush(Colors.White),
-                YY=-590
-            };
+                Func2(newcolor);
+                newcolor.br1 = new System.Windows.Media.SolidColorBrush(Colors.Ivory);
+
+            }
             UserContent = HomePage;
             InitializeComponent();
             ButtonGroup.DataContext = newcolor;
@@ -41,12 +45,41 @@ namespace MvvmTutorials.ToolkitMessages.Views
        
         }
 
+        //两个主题
+        void Func1(colors newcolor)
+        {
+            newcolor.br1 = new System.Windows.Media.SolidColorBrush(Colors.White);
+            newcolor.br2 = new System.Windows.Media.SolidColorBrush(Colors.White);
+            newcolor.br3 = new System.Windows.Media.SolidColorBrush(Colors.White);
+            newcolor.br4 = new System.Windows.Media.SolidColorBrush(Colors.White);
+            newcolor.br5 = new System.Windows.Media.SolidColorBrush(Colors.White);
+   
+        }
+        void Func2(colors newcolor)
+        {
+            newcolor.br1 = new System.Windows.Media.SolidColorBrush(Colors.Silver);
+            newcolor.br2 = new System.Windows.Media.SolidColorBrush(Colors.Silver);
+            newcolor.br3 = new System.Windows.Media.SolidColorBrush(Colors.Silver);
+            newcolor.br4 = new System.Windows.Media.SolidColorBrush(Colors.Silver);
+            newcolor.br5 = new System.Windows.Media.SolidColorBrush(Colors.Silver);
+
+        }
         private void ButtonClick1(object sender, RoutedEventArgs e)
         {
             UserContent = HomePage;//内容呈现器绑定的UserContent赋值给用户控件1
             colors newcolor = new colors();
+            if (Application.Current.Resources.MergedDictionaries[0].Source.ToString() == "pack://application:,,,/ProcessManager;component/Resources/color.xaml")
+            {
+                Func1(newcolor);
+                newcolor.br1 = new System.Windows.Media.SolidColorBrush(Colors.AliceBlue);
+            }
+            else
+            {
+                Func2(newcolor);
+                newcolor.br1 = new System.Windows.Media.SolidColorBrush(Colors.Ivory);
+
+            }
             newcolor.YY = -590;
-            newcolor.br1 = new System.Windows.Media.SolidColorBrush(Colors.AliceBlue);
             ButtonGroup.DataContext = newcolor;
         }
 
@@ -54,8 +87,18 @@ namespace MvvmTutorials.ToolkitMessages.Views
         {
             UserContent = SingleApp;//内容呈现器绑定的UserContent赋值给用户控件2
             colors newcolor = new colors();
+            if (Application.Current.Resources.MergedDictionaries[0].Source.ToString() == "pack://application:,,,/ProcessManager;component/Resources/color.xaml")
+            {
+                Func1(newcolor);
+                newcolor.br2 = new System.Windows.Media.SolidColorBrush(Colors.AliceBlue);
+            }
+            else
+            {
+                Func2(newcolor);
+                newcolor.br2 = new System.Windows.Media.SolidColorBrush(Colors.Ivory);
+
+            }
             newcolor.YY = -510;
-            newcolor.br2 = new System.Windows.Media.SolidColorBrush(Colors.AliceBlue);
             ButtonGroup.DataContext = newcolor;
         }
 
@@ -64,7 +107,17 @@ namespace MvvmTutorials.ToolkitMessages.Views
             UserContent = AllApps;//内容呈现器绑定的UserContent赋值给用户控件3
             colors newcolor = new colors();
             newcolor.YY = -430;
-            newcolor.br3 = new System.Windows.Media.SolidColorBrush(Colors.AliceBlue);
+            if (Application.Current.Resources.MergedDictionaries[0].Source.ToString() == "pack://application:,,,/ProcessManager;component/Resources/color.xaml")
+            {
+                Func1(newcolor);
+                newcolor.br3 = new System.Windows.Media.SolidColorBrush(Colors.AliceBlue);
+            }
+            else
+            {
+                Func2(newcolor);
+                newcolor.br3 = new System.Windows.Media.SolidColorBrush(Colors.Ivory);
+
+            }
             ButtonGroup.DataContext = newcolor;
         }
         private void ButtonClick4(object sender, RoutedEventArgs e)
@@ -72,7 +125,17 @@ namespace MvvmTutorials.ToolkitMessages.Views
             UserContent = Monitor;//内容呈现器绑定的UserContent赋值给用户控件4
             colors newcolor = new colors();
             newcolor.YY = -350;
-            newcolor.br4 = new System.Windows.Media.SolidColorBrush(Colors.AliceBlue);
+            if (Application.Current.Resources.MergedDictionaries[0].Source.ToString() == "pack://application:,,,/ProcessManager;component/Resources/color.xaml")
+            {
+                Func1(newcolor);
+                newcolor.br4 = new System.Windows.Media.SolidColorBrush(Colors.AliceBlue);
+            }
+            else
+            {
+                Func2(newcolor);
+                newcolor.br4 = new System.Windows.Media.SolidColorBrush(Colors.Ivory);
+
+            }
             ButtonGroup.DataContext = newcolor;
         }
         private void ButtonClick5(object sender, RoutedEventArgs e)
@@ -80,7 +143,17 @@ namespace MvvmTutorials.ToolkitMessages.Views
             UserContent = Set;//内容呈现器绑定的UserContent赋值给用户控件5
             colors newcolor = new colors();
             newcolor.YY = -50;
-            newcolor.br5 = new System.Windows.Media.SolidColorBrush(Colors.AliceBlue);
+            if (Application.Current.Resources.MergedDictionaries[0].Source.ToString() == "pack://application:,,,/ProcessManager;component/Resources/color.xaml")
+            {
+                Func1(newcolor);
+                newcolor.br5 = new System.Windows.Media.SolidColorBrush(Colors.AliceBlue);
+            }
+            else
+            {
+                Func2(newcolor);
+                newcolor.br5 = new System.Windows.Media.SolidColorBrush(Colors.Ivory);
+
+            }
             ButtonGroup.DataContext = newcolor;
         }
 

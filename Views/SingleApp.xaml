@@ -17,13 +17,20 @@
             <ColumnDefinition Width="300"></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <TextBlock Text="当前应用:" FontSize="30" Grid.Column="0" Grid.Row="0"  VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
-        <WrapPanel Grid.Column="1" x:Name="singleapp">
-            <Grid Width="50"></Grid>
-            <TextBlock Text="{Binding Name}" FontSize="40" Margin="0,45,0,0"/>
-            <Image Source="{Binding ImgPath}" Width="64" Height="64" Margin="45,40,0,0"/>
-        </WrapPanel>
-        <ToggleButton  Grid.Column="1" Height="40" Content="更换应用" FontSize="20" IsChecked="{Binding IsOpen,ElementName=DrawerLeft}" HorizontalAlignment="Right" Margin="0,0,30,0"/>
+        <Border BorderThickness="4" CornerRadius="30" Background="{DynamicResource BORDERINSIDECOLOR}" Margin="10,10,10,10">
+            <WrapPanel>
+
+                <TextBlock Text="当前:" FontSize="20" Grid.Column="0" Grid.Row="0"  VerticalAlignment="Top" HorizontalAlignment="Left" Margin="15,0,15,0" Foreground="{DynamicResource TEXTCOLOR}"></TextBlock>
+                <WrapPanel  x:Name="singleapp">
+                    <TextBlock Text="{Binding Name}" FontSize="20" Margin="0,45,0,0" Foreground="{DynamicResource TEXTCOLOR}"/>
+                    <Image Source="{Binding ImgPath}" Width="32" Height="32" Margin="45,40,0,0"/>
+                </WrapPanel>
+                <Canvas>
+                    <ToggleButton  Height="30" Content="更换应用" FontSize="10" IsChecked="{Binding IsOpen,ElementName=DrawerLeft}" HorizontalAlignment="Right" VerticalAlignment="Top" Canvas.Left="-20" Canvas.Top="85" Background="{DynamicResource BUTTONCOLOR}" Foreground="{DynamicResource TEXTCOLOR}"/>
+                </Canvas>
+            </WrapPanel>
+
+        </Border>
         <!--展开框定义-->
         <hc:Drawer Name="DrawerLeft" Dock="Left" ShowMode="Push">
             <Border Grid.Column="1" Background="{DynamicResource RegionBrush}" Width="300" BorderThickness="0,1,0,0" BorderBrush="{DynamicResource BorderBrush}">
@@ -51,45 +58,57 @@
                 </Grid>
             </Border>
         </hc:Drawer>
-        <StackPanel Grid.Row="1" x:Name="Allapptexts">
-            <Grid Height="20"></Grid>
-            <RadioButton Content="按天" FontSize="20" Click="Day" IsChecked="{Binding day}"></RadioButton>
-            <Grid Height="20"></Grid>
-            <RadioButton Content="按周" FontSize="20" Click="Week" IsChecked="{Binding week}"></RadioButton>
-            <Grid Height="20"></Grid>
-            <RadioButton Content="按月" FontSize="20" Click="Month" IsChecked="{Binding month}"></RadioButton>
-            <Grid Height="20"></Grid>
-            <TextBlock Width="100" Text="起始日期" FontSize="20" HorizontalAlignment="Center"></TextBlock>
-            <DatePicker x:Name="box" Width="150" />
-            <Grid Height="80"></Grid>
-            <TextBlock Height="30"  Text="{Binding text1}" FontSize="20" HorizontalAlignment="Center"></TextBlock>
-            <Grid Height="10"></Grid>
-            <TextBlock Height="30" Text="{Binding text2}" FontSize="20" HorizontalAlignment="Center"></TextBlock>
-            <Grid Height="10"></Grid>
-            <TextBlock Height="30" Text="{Binding text3}" FontSize="20"  HorizontalAlignment="Center"></TextBlock>
+
+            <StackPanel  x:Name="Allapptexts" Grid.Row="1">
+            <Border BorderThickness="4" CornerRadius="30" Background="{DynamicResource BORDERINSIDECOLOR}" Margin="10,10,10,10" Padding="0,0,0,15" >
+                <StackPanel>
+                    <Grid Height="20"></Grid>
+                    <RadioButton Content="按天" FontSize="20" Click="Day" IsChecked="{Binding day}" Foreground="{DynamicResource TEXTCOLOR}"></RadioButton>
+                    <Grid Height="20"></Grid>
+                    <RadioButton Content="按周" FontSize="20" Click="Week" IsChecked="{Binding week}" Foreground="{DynamicResource TEXTCOLOR}"></RadioButton>
+                    <Grid Height="20"></Grid>
+                    <RadioButton Content="按月" FontSize="20" Click="Month" IsChecked="{Binding month}" Foreground="{DynamicResource TEXTCOLOR}"></RadioButton>
+                    <Grid Height="20"></Grid>
+                    <TextBlock Width="100" Text="起始日期" Foreground="{DynamicResource TEXTCOLOR}" FontSize="20" HorizontalAlignment="Center"></TextBlock>
+                    <DatePicker x:Name="box" Width="150" />
+                </StackPanel>
+            </Border>
+            <Grid Height="40"></Grid>
+            <Border BorderThickness="4" CornerRadius="30" Background="{DynamicResource BORDERINSIDECOLOR}" Margin="10,10,10,10" Padding="10,10,10,10" >
+
+                <StackPanel>
+                    <TextBlock Height="30"  Text="{Binding text1}" FontSize="15" HorizontalAlignment="Center" Foreground="{DynamicResource TEXTCOLOR}"></TextBlock>
+                    <Grid Height="10"></Grid>
+                    <TextBlock Height="30" Text="{Binding text2}" FontSize="15" HorizontalAlignment="Center" Foreground="{DynamicResource TEXTCOLOR}"></TextBlock>
+                    <Grid Height="10"></Grid>
+                    <TextBlock Height="30" Text="{Binding text3}" FontSize="15"  HorizontalAlignment="Center" Foreground="{DynamicResource TEXTCOLOR}"></TextBlock>
+                </StackPanel>
+            </Border>
         </StackPanel>
-        <Button Content="切换样式" Click="style" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top"></Button>
+    
+        
         <!--绘制视图-->
-        <syncfusion:SfChart Grid.Row="1" Grid.Column="1" >
+        <Border BorderThickness="4" CornerRadius="30" Background="{DynamicResource BORDERINSIDECOLOR}" Margin="10,10,10,10" Padding="20,20,20,18"  Grid.Column="1"  Grid.RowSpan="2">
+            <syncfusion:SfChart >
 
                 <syncfusion:SfChart.PrimaryAxis>
 
-                <syncfusion:CategoryAxis Header="时间"  LabelsIntersectAction="Auto"/>
+                    <syncfusion:CategoryAxis Header="时间"  LabelsIntersectAction="Auto"/>
 
                 </syncfusion:SfChart.PrimaryAxis>
 
                 <syncfusion:SfChart.SecondaryAxis>
-                <syncfusion:NumericalAxis Header="使用时长/分钟">
-                    <syncfusion:NumericalAxis.RangeStyles>
-                        <syncfusion:ChartAxisRangeStyleCollection>
-                            <syncfusion:ChartAxisRangeStyle Start="0" End="60" >
-                                <syncfusion:ChartAxisRangeStyle.LabelStyle>
-                                    <syncfusion:LabelStyle Foreground="RoyalBlue" />
-                                </syncfusion:ChartAxisRangeStyle.LabelStyle>
-                            </syncfusion:ChartAxisRangeStyle>
-                        </syncfusion:ChartAxisRangeStyleCollection>
-                    </syncfusion:NumericalAxis.RangeStyles>
-                </syncfusion:NumericalAxis>
+                    <syncfusion:NumericalAxis Header="使用时长/分钟">
+                        <syncfusion:NumericalAxis.RangeStyles>
+                            <syncfusion:ChartAxisRangeStyleCollection>
+                                <syncfusion:ChartAxisRangeStyle Start="0" End="60" >
+                                    <syncfusion:ChartAxisRangeStyle.LabelStyle>
+                                        <syncfusion:LabelStyle Foreground="RoyalBlue" />
+                                    </syncfusion:ChartAxisRangeStyle.LabelStyle>
+                                </syncfusion:ChartAxisRangeStyle>
+                            </syncfusion:ChartAxisRangeStyleCollection>
+                        </syncfusion:NumericalAxis.RangeStyles>
+                    </syncfusion:NumericalAxis>
 
 
                 </syncfusion:SfChart.SecondaryAxis>
@@ -98,9 +117,11 @@
                 </syncfusion:ColumnSeries>
 
             </syncfusion:SfChart >
-        </Grid>
-   
-            
-          
-     
+        </Border>
+        <Button Content="切换样式" Click="style" Grid.Column="1"  HorizontalAlignment="Right" VerticalAlignment="Top" Margin="15,20,20,0" Background="{DynamicResource BUTTONCOLOR}" Foreground="{DynamicResource TEXTCOLOR}"></Button>
+    </Grid>
+
+
+
+
 </UserControl>
