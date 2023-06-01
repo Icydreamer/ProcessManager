@@ -53,11 +53,11 @@
         </hc:Drawer>
         <StackPanel Grid.Row="1" x:Name="Allapptexts">
             <Grid Height="20"></Grid>
-            <RadioButton Content="按天" FontSize="20" Click="Day" ></RadioButton>
+            <RadioButton Content="按天" FontSize="20" Click="Day" IsChecked="{Binding day}"></RadioButton>
             <Grid Height="20"></Grid>
-            <RadioButton Content="按周" FontSize="20" Click="Week" ></RadioButton>
+            <RadioButton Content="按周" FontSize="20" Click="Week" IsChecked="{Binding week}"></RadioButton>
             <Grid Height="20"></Grid>
-            <RadioButton Content="按月" FontSize="20" Click="Month" ></RadioButton>
+            <RadioButton Content="按月" FontSize="20" Click="Month" IsChecked="{Binding month}"></RadioButton>
             <Grid Height="20"></Grid>
             <TextBlock Width="100" Text="起始日期" FontSize="20" HorizontalAlignment="Center"></TextBlock>
             <TextBox Width="150" x:Name="box" MaxLength="8" FontSize="20"></TextBox>
@@ -74,7 +74,7 @@
 
                 <syncfusion:SfChart.PrimaryAxis>
 
-                <syncfusion:CategoryAxis Header="应用名称"  LabelsIntersectAction="Auto"/>
+                <syncfusion:CategoryAxis Header="时间"  LabelsIntersectAction="Auto"/>
 
                 </syncfusion:SfChart.PrimaryAxis>
 
