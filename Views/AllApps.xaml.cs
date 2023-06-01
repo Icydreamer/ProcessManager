@@ -16,6 +16,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using DataBase.Models;
+using System.Globalization;
 
 namespace MvvmTutorials.ToolkitMessages.Views;
 
@@ -105,11 +106,11 @@ public partial class AllApps : UserControl
             selectItem.IsSelected = !selectItem.IsSelected;//这里是拿到MyList类中的isEnable属性 即上面 xmal中 Checkbox中绑定的变量
 
             if(allAppsTextGlobal.day)
-                setDayTimerForApps(new DateTime(2023,5,31));
+                setDayTimerForApps(BoxStringTran(box.Text));
             else if(allAppsTextGlobal.week)
-                setWeekTimerForApps(new DateTime(2023,5,31));
+                setWeekTimerForApps(BoxStringTran(box.Text));
             else
-                setDayTimerForApps(new DateTime(2023,5,31));
+                setDayTimerForApps(BoxStringTran(box.Text));
         }
     }
     public AllApps()
@@ -128,7 +129,7 @@ public partial class AllApps : UserControl
         Allapptexts.DataContext = allAppsTextGlobal;
         ShowMode.DataContext = allAppsTextGlobal;
         var appList=GlobalData.AppDataInstance.GetAllApps();
-
+        box.Text = DateTime.Now.ToString();
         //左侧应用修改
         foreach(var i in appList)
         {
@@ -199,36 +200,36 @@ public partial class AllApps : UserControl
     private void Month(object sender, RoutedEventArgs e)
     {
         //添加默认起始日期
-        box.Text = "2023.3.1";
+        //box.Text = "2023.6.1";
         //其他数据更改
         allAppsTextGlobal.day = false;
         allAppsTextGlobal.week = false;
         allAppsTextGlobal.month = true;
 
-        setMonthTimerForApps(new DateTime(2023,5,31));
+        setMonthTimerForApps(BoxStringTran(box.Text));
     }
     private void Week(object sender, RoutedEventArgs e)
     {
         //添加默认起始日期
-        box.Text = "2023.2.1";
+        //box.Text = "2023.2.1";
         //其他数据更改
         allAppsTextGlobal.day = false;
         allAppsTextGlobal.week = true;
         allAppsTextGlobal.month = false;
 
-        setWeekTimerForApps(new DateTime(2023,5,31));
+        setWeekTimerForApps(BoxStringTran(box.Text));
     }
 
     private void Day(object sender, RoutedEventArgs e)
     {
         //添加默认起始日期
-        box.Text = "2023.1.1";
+        //box.Text = "2023.1.1";
         //其他数据更改
         allAppsTextGlobal.day = true;
         allAppsTextGlobal.week = false;
         allAppsTextGlobal.month = false;
 
-        setDayTimerForApps(new DateTime(2023,5,31));
+        setDayTimerForApps(BoxStringTran(box.Text));
     }
 
     //确认按钮
@@ -245,6 +246,33 @@ public partial class AllApps : UserControl
 
     //textbox相关内容指令！！！
 
+    public DateTime BoxStringTran(string date)
+    {
+        var str = date.Split("/");
+        var month = int.Parse(str[1]);
+        var day = int.Parse(str[2]);
+        string m;
+        string d;
+        string res;
+        if (month <= 9)
+        {
+            m = "0" + str[1];
+        }
+        else
+        {
+            m = str[1];
+        }
+        if (day <= 9)
+        {
+            d = "0" + str[2];
+        }
+        else
+        {
+            d = str[2];
+        }
+        res = str[0] + "-" + m + "-" + d;
+        return DateTime.ParseExact(res, "yyyy-MM-dd", CultureInfo.InvariantCulture);
+    }
 }
 
 
