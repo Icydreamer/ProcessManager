@@ -53,13 +53,13 @@
         <!--右侧视图-->
         <StackPanel Grid.Column="1">
             <Grid Height="30"></Grid>
-            <WrapPanel Height="50">
+            <WrapPanel Height="50" x:Name="ShowMode">
                 <Grid Width="50"></Grid>
-                <RadioButton Content="按天" FontSize="20" Click="Day" ></RadioButton>
+                <RadioButton Content="按天" FontSize="20" Click="Day" IsChecked="{Binding day}"></RadioButton>
                 <Grid Width="50"></Grid>
-                <RadioButton Content="按周" FontSize="20" Click="Week" ></RadioButton>
+                <RadioButton Content="按周" FontSize="20" Click="Week" IsChecked="{Binding week}"></RadioButton>
                 <Grid Width="50"></Grid>
-                <RadioButton Content="按月" FontSize="20" Click="Month" ></RadioButton>
+                <RadioButton Content="按月" FontSize="20" Click="Month" IsChecked="{Binding month}"></RadioButton>
             </WrapPanel>
             <WrapPanel Height="60">
                 <Grid Width="30"></Grid>
