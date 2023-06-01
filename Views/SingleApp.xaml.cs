@@ -324,9 +324,38 @@ namespace MvvmTutorials.ToolkitMessages.Views
 
         public DateTime strTransToDate(string date)//格式为yyyy-MM-dd
         {
-            return DateTime.ParseExact(date, "yyyy-MM-dd", CultureInfo.InvariantCulture);
+            var newDate = BoxStringTran(date);
+            return DateTime.ParseExact(newDate, "yyyy-MM-dd", CultureInfo.InvariantCulture);
         }
         //实例化自定义command：searchcommand!!!
         //textbox相关内容指令！！
+
+        public string BoxStringTran(string date)
+        {
+            var str = date.Split("/");
+            var month = int.Parse(str[1]);
+            var day = int.Parse(str[2]);
+            string m;
+            string d;
+            string res;
+            if(month <= 9)
+            {
+                m = "0" + str[1];
+            }
+            else
+            {
+                m = str[1];
+            }
+            if(day <= 9)
+            {
+                d = "0" + str[2];
+            }
+            else
+            {
+                d = str[2];
+            }
+            res = str[0] + "-" + m + "-" + d;
+            return res;
+        }
     }
 }
