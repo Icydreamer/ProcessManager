@@ -91,6 +91,17 @@ namespace MvvmTutorials.ToolkitMessages.Views
         private void ButtonClick1(object sender, RoutedEventArgs e)
         {
             UserContent = HomePage;//内容呈现器绑定的UserContent赋值给用户控件1
+            // 通过更新路径来重新播放gif图片
+            HomePage homePage = UserContent as HomePage;
+            if (homePage != null)
+            {
+                GifImage gifImage = homePage.FindName("GifImage1") as GifImage;
+                if (gifImage != null)
+                {
+                    gifImage.Uri=new Uri("pack://application:,,,/ProcessManager;component/Resources/1.gif");
+                }
+            }
+
             colors newcolor = new colors();
             if (Application.Current.Resources.MergedDictionaries[0].Source.ToString() == "pack://application:,,,/ProcessManager;component/Resources/color.xaml")
             {

@@ -34,7 +34,7 @@
                     <hc:OutlineText StrokePosition="InSide" FontFamily="FZShuTi" FontSize="80" FontWeight="Bold" StrokeThickness="3" Stroke="{DynamicResource TEXTCOLOR}" Text="驹" Fill="White" HorizontalAlignment="Center" Margin="60,-20,0,0"/>
                 </StackPanel>
                 <Canvas Height="100" Width="184">
-                    <hc:GifImage  Stretch="None" Uri="/ProcessManager;component/Resources/1.gif" RenderTransformOrigin="0,0" Canvas.Left="62" Canvas.Top="22" HorizontalAlignment="Center" VerticalAlignment="Top">
+                    <hc:GifImage x:Name="GifImage1"  Stretch="None" Uri="/ProcessManager;component/Resources/1.gif" RenderTransformOrigin="0,0" Canvas.Left="62" Canvas.Top="22" HorizontalAlignment="Center" VerticalAlignment="Top">
                         <hc:GifImage.RenderTransform>
                             <TransformGroup>
                                 <ScaleTransform ScaleX="0.7" ScaleY="0.7"/>
