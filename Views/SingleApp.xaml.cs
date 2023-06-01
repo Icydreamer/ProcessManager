@@ -111,15 +111,19 @@ namespace MvvmTutorials.ToolkitMessages.Views
         {
             var weekTimer = GlobalData.DataInstance.GetProcessMonthLogList(appId, dt);
             List<AppTimer> a1 = new List<AppTimer>();
+            int month = int.Parse(dt.Month.ToString());
+            DateTime monthEnd = new DateTime(2023, int.Parse(dt.Month.ToString()), 1, 0, 0, 0);
             foreach (var day in weekTimer)
             {
                 a1.Add(new AppTimer(day.Date.ToString("MM-dd"), day.Time));
             }
-/*            int p = 0;
+            int p = 0;
             List<AppTimer> a2 = new List<AppTimer>();
-            for (int i = -6; i < 1; i++)
+            for (int i = 0; i < 31; i++)
             {
-                DateTime toJudge = dt.AddDays(i);
+                DateTime toJudge = monthEnd.AddDays(i);
+                if (int.Parse(toJudge.Month.ToString()) != month)
+                    break;
                 if (!ifContainTimeByDay(a1, toJudge))
                 {
                     a2.Add(new AppTimer(toJudge.ToString("MM-dd"), 0));
@@ -129,12 +133,13 @@ namespace MvvmTutorials.ToolkitMessages.Views
                     a2.Add(a1[p]);
                     p++;
                 }
-            }*/
+            }
             AllTimer test = new AllTimer();
-            test.appTimersAll2 = a1;
+            test.appTimersAll2 = a2;
             testGlobal = test;
             AppTimers.DataContext = testGlobal;
         }
+
         public void Appname_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             app emp = Appname.SelectedItem as app;
