@@ -29,7 +29,14 @@ namespace MvvmTutorials.ToolkitMessages.Views
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            System.Diagnostics.Process.Start("https://github.com/Icydreamer/ProcessManager/tree/main");
+            try
+            {
+                System.Diagnostics.Process.Start("https://github.com/Icydreamer/ProcessManager");
+            }
+            catch (Exception ex)
+            {
+                // 处理异常，例如显示错误消息或记录日志
+            }
         }
     }
 }
