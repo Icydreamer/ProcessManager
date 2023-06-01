@@ -60,7 +60,7 @@
             <RadioButton Content="按月" FontSize="20" Click="Month" IsChecked="{Binding month}"></RadioButton>
             <Grid Height="20"></Grid>
             <TextBlock Width="100" Text="起始日期" FontSize="20" HorizontalAlignment="Center"></TextBlock>
-            <TextBox Width="150" x:Name="box" MaxLength="8" FontSize="20"></TextBox>
+            <TextBox Width="150" x:Name="box" MaxLength="10" FontSize="20"></TextBox>
             <Grid Height="80"></Grid>
             <TextBlock Height="30"  Text="{Binding text1}" FontSize="20" HorizontalAlignment="Center"></TextBlock>
             <Grid Height="10"></Grid>
