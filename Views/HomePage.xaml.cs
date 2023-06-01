@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,18 +26,24 @@ namespace MvvmTutorials.ToolkitMessages.Views
         public HomePage()
         {
             InitializeComponent();
+
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            try
+            string githubUrl = "https://github.com/Icydreamer/ProcessManager";
+
+            // 创建一个启动信息对象
+            var startInfo = new ProcessStartInfo
             {
-                System.Diagnostics.Process.Start("https://github.com/Icydreamer/ProcessManager");
-            }
-            catch (Exception ex)
-            {
-                // 处理异常，例如显示错误消息或记录日志
-            }
+                FileName = "cmd",
+                Arguments = $"/c start {githubUrl}",  // 使用命令提示符打开默认浏览器并导航到链接
+                UseShellExecute = false,
+                CreateNoWindow = true
+            };
+
+            // 启动进程
+            Process.Start(startInfo);
         }
     }
 }
