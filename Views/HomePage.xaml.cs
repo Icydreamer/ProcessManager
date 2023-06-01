@@ -45,5 +45,10 @@ namespace MvvmTutorials.ToolkitMessages.Views
             // 启动进程
             Process.Start(startInfo);
         }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
     }
 }

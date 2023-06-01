@@ -87,5 +87,9 @@
             </Button>
 
         </StackPanel>
+
+        <Grid Grid.ColumnSpan="2" Margin="146,546,250,0" Grid.Column="1">
+            <Label Content="白驹已守护您x天x小时x分钟" FontSize="14"/>
+        </Grid>
     </Grid>
 </UserControl>
