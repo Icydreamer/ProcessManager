@@ -34,7 +34,7 @@
                     <hc:OutlineText StrokePosition="InSide" FontFamily="FZShuTi" FontSize="80" FontWeight="Bold" StrokeThickness="3" Stroke="{DynamicResource TEXTCOLOR}" Text="驹" Fill="White" HorizontalAlignment="Center" Margin="60,-20,0,0"/>
                 </StackPanel>
                 <Canvas Height="100" Width="184">
-                    <hc:GifImage  Stretch="None" Uri="/ProcessManager;component/Resources/1.gif" RenderTransformOrigin="0,0" Canvas.Left="62" Canvas.Top="22" HorizontalAlignment="Center" VerticalAlignment="Top">
+                    <hc:GifImage x:Name="GifImage1"  Stretch="None" Uri="/ProcessManager;component/Resources/1.gif" RenderTransformOrigin="0,0" Canvas.Left="62" Canvas.Top="22" HorizontalAlignment="Center" VerticalAlignment="Top">
                         <hc:GifImage.RenderTransform>
                             <TransformGroup>
                                 <ScaleTransform ScaleX="0.7" ScaleY="0.7"/>
@@ -73,15 +73,15 @@
         </StackPanel>
         <StackPanel Width="600" Grid.Column="2">
             <Grid Height="90"></Grid>
-            <Button Width="300" Height="70" Padding="0,0,0,0"  RenderTransformOrigin="0.5,0.5"   hc:BorderElement.CornerRadius="15">
-                <TextBlock FontSize="20" TextWrapping="Wrap" Height="27" Width="151"><Run Text="单"/><Run Language="zh-cn" Text=" "/><Run Text="个"/><Run Language="zh-cn" Text=" "/><Run Text="程"/><Run Language="zh-cn" Text=" "/><Run Text="序"/><Run Language="zh-cn" Text=" "/><Run Text="统"/><Run Language="zh-cn" Text=" "/><Run Text="计"/></TextBlock>
+            <Button Click="ButtonClick2" Width="300" Height="70" Padding="0,0,0,0"  RenderTransformOrigin="0.5,0.5"  hc:BorderElement.CornerRadius="15">
+                <TextBlock FontSize="20" TextWrapping="Wrap" Height="27" Width="151"><Run Language="zh-cn" Text="单 个 程 序 统 计"/></TextBlock>
             </Button>
             <Grid Height="70"></Grid>
-            <Button Width="300" Height="72" Padding="0,0,0,0"   hc:BorderElement.CornerRadius="15" >
-                <TextBlock FontSize="20" Height="27" Width="151" TextWrapping="Wrap"><Run Language="zh-cn" Text="全 部"/><Run Text=" "/><Run Text="程"/><Run Text=" "/><Run Text="序"/><Run Text=" "/><Run Text="统"/><Run Text=" "/><Run Text="计"/></TextBlock>
+            <Button Click="ButtonClick3" Width="300" Height="72" Padding="0,0,0,0"  RenderTransformOrigin="0.5,0.5"  hc:BorderElement.CornerRadius="15" >
+                <TextBlock FontSize="20" TextWrapping="Wrap" Height="27" Width="151"><Run Language="zh-cn" Text="全 部 程 序 统 计"/></TextBlock>
             </Button>
             <Grid Height="70"></Grid>
-            <Button Width="300" Height="74" Padding="0,0,0,0"  RenderTransformOrigin="0.5,0.5"  hc:BorderElement.CornerRadius="15" >
+            <Button Click="ButtonClick4" Width="300" Height="74" Padding="0,0,0,0"  RenderTransformOrigin="0.5,0.5"  hc:BorderElement.CornerRadius="15" >
 
                 <TextBlock FontSize="20" TextWrapping="Wrap" Height="27" Width="151"><Run Language="zh-cn" Text="程 序 使 用 追 踪"/></TextBlock>
             </Button>

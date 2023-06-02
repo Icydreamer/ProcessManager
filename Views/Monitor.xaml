@@ -13,7 +13,7 @@
             <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <Border BorderThickness="4" CornerRadius="30" Background="{DynamicResource BORDERINSIDECOLOR}" Margin="10,10,10,10" Padding="20,20,20,18" >
+        <Border BorderThickness="4" CornerRadius="10" Background="{DynamicResource BORDERINSIDECOLOR}" Margin="10,10,10,10" Padding="20,20,20,18" >
 
             <StackPanel>
                 <Grid Height="20"></Grid>
@@ -25,7 +25,7 @@
         </Border>
         <StackPanel Grid.Column="1"  x:Name="progress">
             <Grid Height="50"></Grid>
-            <Border BorderThickness="4" CornerRadius="30" Background="{DynamicResource BORDERINSIDECOLOR}" Margin="10,10,10,10" Padding="10,10,10,10" >
+            <Border BorderThickness="4" CornerRadius="20" Background="{DynamicResource BORDERINSIDECOLOR}" Margin="10,10,10,10" Padding="10,10,10,10" >
                 <StackPanel>
                     <RadioButton Content="选择禁用时段" FontSize="20"  Foreground="{DynamicResource TEXTCOLOR}"></RadioButton>
                 <hc:RangeSlider  Width="400" IsSnapToTickEnabled="True" ValueStart="2" ValueEnd="8"  />
@@ -45,7 +45,7 @@
                     </StackPanel>
             </Border>
           
-            <Border BorderThickness="4" CornerRadius="30" Background="{DynamicResource BORDERINSIDECOLOR}" Margin="10,10,10,10" Padding="10,10,10,10" >
+            <Border BorderThickness="4" CornerRadius="20" Background="{DynamicResource BORDERINSIDECOLOR}" Margin="10,10,10,10" Padding="10,10,10,10" >
                 <StackPanel>
 
                     <TextBlock Text="填写最长使用时间"  FontSize="20" HorizontalAlignment="Center" Foreground="{DynamicResource TEXTCOLOR}"></TextBlock>
@@ -55,7 +55,7 @@
             <Grid Height="50"></Grid>
             <Button Content="启动监视" FontSize="20" Height="40" HorizontalAlignment="Right" Margin="0,0,20,0" Click="monitor" Background="{DynamicResource BUTTONCOLOR}" Foreground="{DynamicResource TEXTCOLOR}"></Button>
             <Grid Height="100"></Grid>
-            <Border BorderThickness="4" CornerRadius="30" Background="{DynamicResource BORDERINSIDECOLOR}" Margin="10,10,10,10" Padding="10,10,10,10" >
+            <Border BorderThickness="4" CornerRadius="20" Background="{DynamicResource BORDERINSIDECOLOR}" Margin="10,10,10,10" Padding="10,10,10,10" >
                 <StackPanel>
 
                     <TextBlock Text="{Binding text}" FontSize="20" HorizontalAlignment="Center" Foreground="{DynamicResource TEXTCOLOR}"></TextBlock>

@@ -45,5 +45,30 @@ namespace MvvmTutorials.ToolkitMessages.Views
             // 启动进程
             Process.Start(startInfo);
         }
+
+        private void ButtonClick2(object sender, RoutedEventArgs e)
+        {
+            MainWindow mainWindow = Application.Current.MainWindow as MainWindow;
+            if (mainWindow != null)
+            {
+                mainWindow.ButtonClick2(sender, e);
+            }
+        }
+        private void ButtonClick3(object sender, RoutedEventArgs e)
+        {
+            MainWindow mainWindow = Application.Current.MainWindow as MainWindow;
+            if (mainWindow != null)
+            {
+                mainWindow.ButtonClick3(sender, e);
+            }
+        }
+        private void ButtonClick4(object sender, RoutedEventArgs e)
+        {
+            MainWindow mainWindow = Application.Current.MainWindow as MainWindow;
+            if (mainWindow != null)
+            {
+                mainWindow.ButtonClick4(sender, e);
+            }
+        }
     }
 }
