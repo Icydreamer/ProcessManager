@@ -136,7 +136,7 @@ public partial class AllApps : UserControl
             DataList.Add(new app()
             {
                 Index = i.ID,
-                ImgPath = i.IconFile,
+                ImgPath = "pack://siteoforigin:,,,/" + i.IconFile,
                 Name = i.Name,
                 IsSelected = true,
                 Time=i.TotalTime
