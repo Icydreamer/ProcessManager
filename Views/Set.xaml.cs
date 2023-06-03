@@ -1,20 +1,10 @@
 ﻿using Microsoft.Win32;
+using ProcessMonitor;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace MvvmTutorials.ToolkitMessages.Views
 {
@@ -23,27 +13,41 @@ namespace MvvmTutorials.ToolkitMessages.Views
     /// </summary>
     public partial class Set : UserControl
     {
+        Config config;
         public Set()
         {
             InitializeComponent();
+            config = Config.LoadConfig();
+            Desktop_Reminder.IsChecked = config.NotificationEnabled;
+            Auto_Start.IsChecked = config.StartupEnabled;
+            if (config.ThemeColor == "light")
+            {
+                Color_Switch.IsChecked = true;
+            }
+            else
+            {
+                Color_Switch.IsChecked = false;
+            }
         }
 
         //主题切换
-        private void ToggleButton_Click(object sender, RoutedEventArgs e)
+        private void color_switch(object sender, RoutedEventArgs e)
         {
             ResourceDictionary resource = new ResourceDictionary();
             if (Application.Current.Resources.MergedDictionaries[0].Source.ToString() == "pack://application:,,,/ProcessManager;component/Resources/color.xaml")
             {
                 resource.Source = new Uri("pack://application:,,,/ProcessManager;component/Resources/darkcolor.xaml");
+                config.ThemeColor = "dark";
             }
             else
             {
                 resource.Source = new Uri("pack://application:,,,/ProcessManager;component/Resources/color.xaml");
+                config.ThemeColor = "light";
             }
             Application.Current.Resources.MergedDictionaries[0] = resource;
 
         }
-        //导出csv文件
+        // 另存为 CSV 文件
         private void export_csv(object sender, RoutedEventArgs e)
         {
             // 获取当前目录
@@ -72,6 +76,8 @@ namespace MvvmTutorials.ToolkitMessages.Views
                 }
             }
         }
+
+        // 查看日志文件夹
         private void check_log(object sender, RoutedEventArgs e)
         {
             string currentDirectory = Directory.GetCurrentDirectory();
@@ -89,22 +95,30 @@ namespace MvvmTutorials.ToolkitMessages.Views
 
         private void auto_start(object sender, RoutedEventArgs e)
         {
-
+            if (Auto_Start.IsChecked == true)
+            {
+                // 启用开机自启
+                config.EnableStartup();
+                config.StartupEnabled = true;
+            }
+            else
+            {
+                // 禁用开机自启
+                config.DisableStartup();
+                config.StartupEnabled = false;
+            }
         }
-        ////清除缓存
-        //private void dataremove(object sender, RoutedEventArgs e)
-        //{
 
-        //}
-        ////确认
-        //private void sure(object sender, RoutedEventArgs e)
-        //{
-
-        //}
-        ////取消
-        //private void cancel(object sender, RoutedEventArgs e)
-        //{
-
-        //}
+        private void desktop_reminder(object sender, RoutedEventArgs e)
+        {
+            if (Desktop_Reminder.IsChecked == true)
+            {
+                config.NotificationEnabled = true;
+            }
+            else
+            {
+                config.NotificationEnabled = false;
+            }
+        }
     }
 }

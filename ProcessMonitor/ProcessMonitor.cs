@@ -12,63 +12,10 @@ using System.Windows.Media.Media3D;
 using DataBase.Models;
 using DataBase.Services;
 using System.Drawing;
+using System.Windows;
 
 namespace ProcessMonitor
 {
-    //class Program
-    //{
-    //    static void Main(string[] args)
-    //    {
-    //        var config = Config.LoadConfig();
-    //        string themeColor = config.ThemeColor;
-
-    //        // 用于 Debug
-    //        if (config.StartupEnabled)
-    //        {
-    //            EnableStartup();
-    //        }
-    //        else
-    //        {
-    //            DisableStartup();
-    //        }
-
-    //        if (config.NotificationEnabled)
-    //        {
-    //            Console.WriteLine("桌面通知已开启。");
-    //        }
-    //        else
-    //        {
-    //            Console.WriteLine("桌面通知未开启。");
-    //        }
-
-    //        var processMonitor = new ProcessMonitor();
-    //        processMonitor.StartMonitoring();
-
-    //        Console.ReadLine();
-    //    }
-
-    //    static void EnableStartup()
-    //    {
-    //        // 获取当前应用程序的可执行文件路径
-    //        string appPath = System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName;
-
-    //        // 创建注册表项
-    //        RegistryKey rk = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
-
-    //        // 设置开机自启
-    //        rk.SetValue("ProcessMonitor", appPath);
-    //    }
-
-    //    static void DisableStartup()
-    //    {
-    //        // 创建注册表项
-    //        RegistryKey rk = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
-
-    //        // 取消开机自启
-    //        rk.DeleteValue("ProcessMonitor", false);
-    //    }
-    //}
-
     public class ProcessMonitor
     {
         private string activeProcessName;
@@ -139,7 +86,7 @@ namespace ProcessMonitor
                             activeProcessName = currentProcessName;
                         }
 
-                        Thread.Sleep(10);
+                        Thread.Sleep(100);
                     }
                 }
             }
@@ -156,12 +103,12 @@ namespace ProcessMonitor
             if (e.Reason == SessionSwitchReason.SessionLock)
             {
                 isMonitoring = false;
-                Console.WriteLine("记录已暂停!");
+                Console.WriteLine("因屏幕锁定，记录已暂停!");
             }
             else if (e.Reason == SessionSwitchReason.SessionUnlock)
             {
                 isMonitoring = true;
-                Console.WriteLine("记录已恢复~");
+                Console.WriteLine("因屏幕解锁，记录已恢复~");
             }
         }
 
@@ -244,6 +191,10 @@ namespace ProcessMonitor
                         {
                             processIcon.Save(stream);
                         }
+                    }
+                    else
+                    {
+                        
                     }
                 }
             }
