@@ -30,30 +30,36 @@
 
             <Grid Height="20"></Grid>
             <!--应用列表-->
-            <Border BorderThickness="4" CornerRadius="10" Background="{DynamicResource BORDERINSIDECOLOR}" Margin="10,0,10,10">
-                <DataGrid Height="400" Width="400" hc:DataGridAttach.CanUnselectAllWithBlankArea="True" HeadersVisibility="All" RowHeaderWidth="50" AutoGenerateColumns="False" ItemsSource="{Binding DataList}" Background="White" x:Name="Appname" Margin="0,10,0,10">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn IsReadOnly="True" Width="60" CanUserResize="False" Binding="{Binding Index}" Header="序号"/>
+            <Border BorderThickness="4" CornerRadius="30" Background="{DynamicResource BORDERINSIDECOLOR}" Margin="10,0,10,10">
+                <DataGrid Height="400" Width="400" hc:DataGridAttach.CanUnselectAllWithBlankArea="True" HeadersVisibility="All" RowHeaderWidth="50" AutoGenerateColumns="False" ItemsSource="{Binding DataList}" Background="White" x:Name="Appname" Margin="0,10,0,10" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" >
+                <DataGrid.Columns>
+                    <DataGridTextColumn IsReadOnly="True" Width="60" Binding="{Binding Index}" Header="序号"/>
+                    <DataGridTextColumn IsReadOnly="True" Width="80" Binding="{Binding Name}" Header="名称"/>
+                    <DataGridTemplateColumn Width="60" CanUserResize="False" Header="图标">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Image Source="{Binding ImgPath}" MaxWidth="32" MaxHeight="32" Stretch="Uniform"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="选中" Width="*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <CheckBox HorizontalAlignment="Center" Click="CheckBox_Click" IsChecked="{Binding IsSelected}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
 
-                        <DataGridTextColumn IsReadOnly="True" Width="80"   Binding="{Binding Name}" Header="名称"/>
-                        <DataGridTemplateColumn Width="40" CanUserResize="False">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <Image Source="{Binding ImgPath}" MaxWidth="32" MaxHeight="32" Stretch="Uniform"/>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-                        <DataGridCheckBoxColumn Width="60" CanUserResize="False" Binding="{Binding IsSelected}" Header="选中"/>
-                        <DataGridComboBoxColumn  Width="90" CanUserResize="False" SelectedValueBinding="{Binding Time}" Header="使用时长"/>
-                    </DataGrid.Columns>
-                </DataGrid>
+                    <DataGridComboBoxColumn  Width="90" CanUserResize="False" SelectedValueBinding="{Binding Time}" Header="使用时长"/>
+                </DataGrid.Columns>
+            </DataGrid>
             </Border>
         </StackPanel>
 
         <!--右侧视图-->
         <StackPanel Grid.Column="1">
             <Grid Height="20"></Grid>
-            <Border BorderThickness="4" CornerRadius="20" Background="{DynamicResource BORDERINSIDECOLOR}" Margin="10,10,10,10">
+            <Border BorderThickness="4" CornerRadius="30" Background="{DynamicResource BORDERINSIDECOLOR}" Margin="10,10,30,10" x:Name="ShowMode">
                 <WrapPanel Orientation="Horizontal">
                     <Grid Width="50"></Grid>
                     <RadioButton Content="按天" FontSize="20" Click="Day"  Foreground="{DynamicResource TEXTCOLOR}" Margin="0,10,0,0"></RadioButton>
@@ -71,9 +77,35 @@
             </Border>
 
             <!--绘制图表-->
-            <Grid Height="300" Width="500">
-                <Border BorderThickness="4" CornerRadius="10" Background="{DynamicResource BORDERINSIDECOLOR}" Margin="10,0,10,10">
-                </Border>
+            <Grid Height="300" Width="450">
+                <syncfusion:SfChart Grid.Row="1" Grid.Column="1" >
+
+                    <syncfusion:SfChart.PrimaryAxis>
+
+                        <syncfusion:CategoryAxis Header="应用"  LabelsIntersectAction="Auto"/>
+
+                    </syncfusion:SfChart.PrimaryAxis>
+
+                    <syncfusion:SfChart.SecondaryAxis>
+                        <syncfusion:NumericalAxis Header="使用时长/分钟">
+                            <syncfusion:NumericalAxis.RangeStyles>
+                                <syncfusion:ChartAxisRangeStyleCollection>
+                                    <syncfusion:ChartAxisRangeStyle Start="0" End="60" >
+                                        <syncfusion:ChartAxisRangeStyle.LabelStyle>
+                                            <syncfusion:LabelStyle Foreground="RoyalBlue" />
+                                        </syncfusion:ChartAxisRangeStyle.LabelStyle>
+                                    </syncfusion:ChartAxisRangeStyle>
+                                </syncfusion:ChartAxisRangeStyleCollection>
+                            </syncfusion:NumericalAxis.RangeStyles>
+                        </syncfusion:NumericalAxis>
+
+
+                    </syncfusion:SfChart.SecondaryAxis>
+
+                    <syncfusion:ColumnSeries x:Name="AllAppsTimer" ItemsSource="{Binding appTimers}" XBindingPath="appName" YBindingPath="length" >
+                    </syncfusion:ColumnSeries>
+
+                </syncfusion:SfChart >
             </Grid>
 
             <!--右下角文字数据绑定-->

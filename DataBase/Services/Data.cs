@@ -322,6 +322,45 @@ namespace DataBase.Services
             }
         }
         /// <summary>
+        /// 获取指定进程某周的数据
+        /// </summary>
+        /// <param name="processName"></param>
+        /// <param name="week"></param>
+        /// <returns></returns>
+        public List<DailyLogModel> GetProcessWeekLogList(int AppID, DateTime week)
+        {
+            DateTime weekStartDate = week, weekEndDate = week;
+            if (week.DayOfWeek == DayOfWeek.Monday)
+            {
+                weekStartDate = week.Date;
+                weekEndDate = week.Date.AddDays(6);
+            }
+            else
+            {
+                int weekNum = (int)week.DayOfWeek;
+                if (weekNum == 0)
+                {
+                    weekNum = 7;
+                }
+                weekNum -= 1;
+                weekStartDate = week.Date.AddDays(-weekNum);
+                weekEndDate = weekStartDate.Date.AddDays(6);
+            }
+            using (var db = dataBase.GetReaderContext())
+            {
+                var res = db.DailyLog.Include(m => m.AppModel).Where(
+                m =>
+                m.Date >= weekStartDate && m.Date <= weekEndDate
+                && m.AppModelID == AppID
+                );
+                if (res != null)
+                {
+                    return res.ToList();
+                }
+                return new List<DailyLogModel>();
+            }
+        }
+        /// <summary>
         /// 获取指定进程某个月的数据
         /// </summary>
         /// <param name="processName"></param>

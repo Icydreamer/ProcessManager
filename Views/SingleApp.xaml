@@ -57,8 +57,8 @@
             </Border>
         </hc:Drawer>
 
-            <StackPanel  x:Name="Allapptexts" Grid.Row="1">
-            <Border BorderThickness="4" CornerRadius="10" Background="{DynamicResource BORDERINSIDECOLOR}" Margin="10,50,10,10" Padding="0,0,0,10" >
+        <StackPanel  x:Name="Allapptexts" Grid.Row="1">
+            <Border BorderThickness="4" CornerRadius="30" Background="{DynamicResource BORDERINSIDECOLOR}" Margin="10,50,10,10" Padding="0,0,0,10" >
                 <WrapPanel Orientation="Horizontal">
                     <RadioButton Content="按天" FontSize="20" Click="Day" IsChecked="{Binding day}" Foreground="{DynamicResource TEXTCOLOR}" Margin="15,10,0,0"></RadioButton>
                     <RadioButton Content="按周" FontSize="20" Click="Week" IsChecked="{Binding week}" Foreground="{DynamicResource TEXTCOLOR}" Margin="10,10,0,0"></RadioButton>
@@ -78,9 +78,10 @@
                     <TextBlock Height="30" Text="{Binding text3}" FontSize="15"  HorizontalAlignment="Center" Foreground="{DynamicResource TEXTCOLOR}"></TextBlock>
                 </StackPanel>
             </Border>
+
         </StackPanel>
-    
-        
+
+
         <!--绘制视图-->
         <Border BorderThickness="4" CornerRadius="20" Background="{DynamicResource BORDERINSIDECOLOR}" Margin="10,10,10,10" Padding="20,20,20,18"  Grid.Column="1"  Grid.RowSpan="2">
             <syncfusion:SfChart >
@@ -112,6 +113,18 @@
 
             </syncfusion:SfChart >
         </Border>
+        <Canvas>
+            <hc:FlipClock RenderTransformOrigin="0,0" Width="600" Canvas.Left="44" Canvas.Top="520">
+                <hc:FlipClock.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="0.4" ScaleY="0.4"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </hc:FlipClock.RenderTransform>
+            </hc:FlipClock>
+        </Canvas>
         <!--<Button Content="切换样式" Click="style" Grid.Column="1"  HorizontalAlignment="Right" VerticalAlignment="Top" Margin="15,20,20,0" Background="{DynamicResource BUTTONCOLOR}" Foreground="{DynamicResource TEXTCOLOR}"></Button>-->
     </Grid>
 

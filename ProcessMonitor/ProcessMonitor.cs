@@ -112,7 +112,9 @@ namespace ProcessMonitor
 
                             // 提取icon
                             SaveProcessIcon(activeProcessName);
-
+                            string iconDirectory = "ico";
+                            string iconFileName = $"{activeProcessName}.ico";
+                            string iconFilePath = Path.Combine(iconDirectory, iconFileName);
                             // 添加到AppModel表
                             appData.AddApp(new AppModel()
                             {
@@ -120,7 +122,7 @@ namespace ProcessMonitor
                                 Description = "test",
                                 File = "test",
                                 CategoryID = 0,
-                                IconFile = "test",
+                                IconFile = iconFilePath,
                             });
 
                             // 更新description、file
