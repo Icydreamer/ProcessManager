@@ -13,6 +13,7 @@ using DataBase.Models;
 using DataBase.Services;
 using System.Drawing;
 using System.Windows;
+using System.Drawing.Imaging;
 
 namespace ProcessMonitor
 {
@@ -60,7 +61,7 @@ namespace ProcessMonitor
                             // 提取icon
                             SaveProcessIcon(activeProcessName);
                             string iconDirectory = "ico";
-                            string iconFileName = $"{activeProcessName}.ico";
+                            string iconFileName = $"{activeProcessName}.png";
                             string iconFilePath = Path.Combine(iconDirectory, iconFileName);
                             // 添加到AppModel表
                             appData.AddApp(new AppModel()
@@ -166,13 +167,13 @@ namespace ProcessMonitor
         private void SaveProcessIcon(string processName)
         {
             string iconDirectory = "ico";
-            string iconFileName = $"{processName}.ico";
+            string iconFileName = $"{processName}.png"; // 将文件扩展名改为 .png
             string iconFilePath = Path.Combine(iconDirectory, iconFileName);
 
             // 创建ico文件夹（如果不存在）
             Directory.CreateDirectory(iconDirectory);
 
-            // 检查是否已存在ico图标文件，如果存在则不执行任何操作
+            // 检查是否已存在png图标文件，如果存在则不执行任何操作
             if (File.Exists(iconFilePath))
             {
                 return;
@@ -186,15 +187,16 @@ namespace ProcessMonitor
                     Icon processIcon = Icon.ExtractAssociatedIcon(process.MainModule.FileName);
                     if (processIcon != null)
                     {
-                        // 保存图标为ico文件
+                        // 保存图标为png文件
                         using (FileStream stream = new FileStream(iconFilePath, FileMode.Create))
                         {
-                            processIcon.Save(stream);
+                            Bitmap bitmap = processIcon.ToBitmap();
+                            bitmap.Save(stream, ImageFormat.Png);
                         }
                     }
                     else
                     {
-                        
+                        // 处理图标为空的情况
                     }
                 }
             }
