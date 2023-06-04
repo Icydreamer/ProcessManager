@@ -33,6 +33,18 @@
   </ItemGroup>
 
   <ItemGroup>
+    <COMReference Include="IWshRuntimeLibrary">
+      <WrapperTool>tlbimp</WrapperTool>
+      <VersionMinor>0</VersionMinor>
+      <VersionMajor>1</VersionMajor>
+      <Guid>f935dc20-1cf0-11d0-adb9-00c04fd58a0b</Guid>
+      <Lcid>0</Lcid>
+      <Isolated>false</Isolated>
+      <EmbedInteropTypes>true</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Include="Resources\1.ico" />
   </ItemGroup>
 
@@ -74,6 +86,7 @@
     <PackageReference Include="ScottPlot" Version="4.1.64" />
     <PackageReference Include="ScottPlot.WPF" Version="4.1.64" />
     <PackageReference Include="Syncfusion.SfChart.WPF" Version="21.2.8" />
+    <PackageReference Include="TaskScheduler" Version="2.10.1" />
   </ItemGroup>
 
   <ItemGroup>

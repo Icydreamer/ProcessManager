@@ -19,30 +19,25 @@
             <Grid Height="40"/>
             <DockPanel>
                 <TextBlock Text="开机自启" FontSize="20" Foreground="{DynamicResource TEXTCOLOR}" Height="25" VerticalAlignment="Center" />
-                <ToggleButton IsChecked="False" Margin="5,9" Style="{StaticResource ToggleButtonSwitch}" HorizontalAlignment="Right" />
+                <ToggleButton x:Name="Auto_Start" IsChecked="False" Margin="5,9" Style="{StaticResource ToggleButtonSwitch}" HorizontalAlignment="Right" Click="auto_start" />
             </DockPanel>
-            <!--<Grid Height="10"/>-->
-            <!--DockPanel>
-                <TextBlock Text="后台运行" FontSize="20" Foreground="{DynamicResource TEXTCOLOR}" Height="25" VerticalAlignment="Center"/>
-                <ToggleButton IsChecked="False" Margin="5,9" Style="{StaticResource ToggleButtonSwitch}" HorizontalAlignment="Right" />
-            </DockPanel>-->
             <Grid Height="10"/>
             <DockPanel>
                 <TextBlock Text="桌面提醒" FontSize="20" Foreground="{DynamicResource TEXTCOLOR}" Height="25" VerticalAlignment="Center"/>
-                <ToggleButton IsChecked="False" Margin="5,9" Style="{StaticResource ToggleButtonSwitch}" HorizontalAlignment="Right" />
+                <ToggleButton x:Name="Desktop_Reminder" IsChecked="False" Margin="5,9" Style="{StaticResource ToggleButtonSwitch}" HorizontalAlignment="Right" Click="desktop_reminder"/>
             </DockPanel>
             <Grid Height="10"/>
             <DockPanel>
                 <TextBlock Text="深色模式" FontSize="20" Foreground="{DynamicResource TEXTCOLOR}" Height="25" VerticalAlignment="Center"/>
-                <ToggleButton IsChecked="False" Margin="5,9"  Style="{StaticResource ToggleButtonSwitch}" HorizontalAlignment="Right" hc:VisualElement.HighlightBrush="{DynamicResource ReverseTextBrush}" Click="ToggleButton_Click"/>
+                <ToggleButton x:Name="Color_Switch" IsChecked="False" Margin="5,9"  Style="{StaticResource ToggleButtonSwitch}" HorizontalAlignment="Right" hc:VisualElement.HighlightBrush="{DynamicResource ReverseTextBrush}" Click="color_switch"/>
             </DockPanel>
             <Grid Height="20"/>
         </StackPanel>
         <StackPanel Grid.Column="1" Margin="50">
             <Grid Height="125"/>
-            <Button Content="导出csv文件" Height="40" FontSize="20" HorizontalAlignment="Left" Click="csv"  Background="{DynamicResource BUTTONCOLOR}" Foreground="{DynamicResource TEXTCOLOR}"/>
+            <Button Content="导出原始监控数据" Height="40" FontSize="20" HorizontalAlignment="Left" Click="export_csv"  Background="{DynamicResource BUTTONCOLOR}" Foreground="{DynamicResource TEXTCOLOR}"/>
             <Grid Height="20"/>
-            <Button Content="清除缓存" Height="40" FontSize="20" HorizontalAlignment="Left" Click="dataremove"  Background="{DynamicResource BUTTONCOLOR}" Foreground="{DynamicResource TEXTCOLOR}"/>
+            <Button Content="查看所有日志" Height="40" FontSize="20" HorizontalAlignment="Left" Click="check_log"  Background="{DynamicResource BUTTONCOLOR}" Foreground="{DynamicResource TEXTCOLOR}"/>
             <Grid Height="50"/>
             <WrapPanel HorizontalAlignment="Right"/>
         </StackPanel>

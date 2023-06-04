@@ -12,63 +12,11 @@ using System.Windows.Media.Media3D;
 using DataBase.Models;
 using DataBase.Services;
 using System.Drawing;
+using System.Windows;
+using System.Drawing.Imaging;
 
 namespace ProcessMonitor
 {
-    //class Program
-    //{
-    //    static void Main(string[] args)
-    //    {
-    //        var config = Config.LoadConfig();
-    //        string themeColor = config.ThemeColor;
-
-    //        // 用于 Debug
-    //        if (config.StartupEnabled)
-    //        {
-    //            EnableStartup();
-    //        }
-    //        else
-    //        {
-    //            DisableStartup();
-    //        }
-
-    //        if (config.NotificationEnabled)
-    //        {
-    //            Console.WriteLine("桌面通知已开启。");
-    //        }
-    //        else
-    //        {
-    //            Console.WriteLine("桌面通知未开启。");
-    //        }
-
-    //        var processMonitor = new ProcessMonitor();
-    //        processMonitor.StartMonitoring();
-
-    //        Console.ReadLine();
-    //    }
-
-    //    static void EnableStartup()
-    //    {
-    //        // 获取当前应用程序的可执行文件路径
-    //        string appPath = System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName;
-
-    //        // 创建注册表项
-    //        RegistryKey rk = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
-
-    //        // 设置开机自启
-    //        rk.SetValue("ProcessMonitor", appPath);
-    //    }
-
-    //    static void DisableStartup()
-    //    {
-    //        // 创建注册表项
-    //        RegistryKey rk = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
-
-    //        // 取消开机自启
-    //        rk.DeleteValue("ProcessMonitor", false);
-    //    }
-    //}
-
     public class ProcessMonitor
     {
         private string activeProcessName;
@@ -113,7 +61,7 @@ namespace ProcessMonitor
                             // 提取icon
                             SaveProcessIcon(activeProcessName);
                             string iconDirectory = "ico";
-                            string iconFileName = $"{activeProcessName}.ico";
+                            string iconFileName = $"{activeProcessName}.png";
                             string iconFilePath = Path.Combine(iconDirectory, iconFileName);
                             // 添加到AppModel表
                             appData.AddApp(new AppModel()
@@ -139,7 +87,7 @@ namespace ProcessMonitor
                             activeProcessName = currentProcessName;
                         }
 
-                        Thread.Sleep(10);
+                        Thread.Sleep(100);
                     }
                 }
             }
@@ -156,12 +104,12 @@ namespace ProcessMonitor
             if (e.Reason == SessionSwitchReason.SessionLock)
             {
                 isMonitoring = false;
-                Console.WriteLine("记录已暂停!");
+                Console.WriteLine("因屏幕锁定，记录已暂停!");
             }
             else if (e.Reason == SessionSwitchReason.SessionUnlock)
             {
                 isMonitoring = true;
-                Console.WriteLine("记录已恢复~");
+                Console.WriteLine("因屏幕解锁，记录已恢复~");
             }
         }
 
@@ -219,13 +167,13 @@ namespace ProcessMonitor
         private void SaveProcessIcon(string processName)
         {
             string iconDirectory = "ico";
-            string iconFileName = $"{processName}.ico";
+            string iconFileName = $"{processName}.png"; // 将文件扩展名改为 .png
             string iconFilePath = Path.Combine(iconDirectory, iconFileName);
 
             // 创建ico文件夹（如果不存在）
             Directory.CreateDirectory(iconDirectory);
 
-            // 检查是否已存在ico图标文件，如果存在则不执行任何操作
+            // 检查是否已存在png图标文件，如果存在则不执行任何操作
             if (File.Exists(iconFilePath))
             {
                 return;
@@ -239,11 +187,16 @@ namespace ProcessMonitor
                     Icon processIcon = Icon.ExtractAssociatedIcon(process.MainModule.FileName);
                     if (processIcon != null)
                     {
-                        // 保存图标为ico文件
+                        // 保存图标为png文件
                         using (FileStream stream = new FileStream(iconFilePath, FileMode.Create))
                         {
-                            processIcon.Save(stream);
+                            Bitmap bitmap = processIcon.ToBitmap();
+                            bitmap.Save(stream, ImageFormat.Png);
                         }
+                    }
+                    else
+                    {
+                        // 处理图标为空的情况
                     }
                 }
             }
