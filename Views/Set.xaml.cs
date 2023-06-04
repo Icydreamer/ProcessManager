@@ -19,14 +19,25 @@ namespace MvvmTutorials.ToolkitMessages.Views
             InitializeComponent();
             config = Config.LoadConfig();
             Desktop_Reminder.IsChecked = config.NotificationEnabled;
-            Auto_Start.IsChecked = config.StartupEnabled;
+            if (config.StartupEnabled)
+            {
+                config.EnableStartup();
+                Auto_Start.IsChecked = true;
+            }
+            else
+            {
+                config.DisableStartup();
+                Auto_Start.IsChecked = false;
+            }
             if (config.ThemeColor == "light")
             {
                 Color_Switch.IsChecked = false;
+                EnableLightTheme();
             }
             else
             {
                 Color_Switch.IsChecked = true;
+                EnableDarkTheme();
             }
         }
 
