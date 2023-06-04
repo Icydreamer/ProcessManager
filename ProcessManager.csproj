@@ -25,7 +25,6 @@
     <None Remove="Resources\3.jpg" />
     <None Remove="Resources\3.png" />
     <None Remove="Resources\4.jpg" />
-    <None Remove="Resources\AllApps.png" />
     <None Remove="Resources\主页-32.png" />
     <None Remove="Resources\扇形-50.png" />
     <None Remove="Resources\折线-50.png" />
@@ -58,16 +57,10 @@
     <Resource Include="Resources\1.gif">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Resources\2.jpg">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
     <Resource Include="Resources\2.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\3.jpg" />
-    <Resource Include="Resources\3.png" />
-    <Resource Include="Resources\4.jpg" />
-    <Resource Include="Resources\AllApps.png" />
     <Resource Include="Resources\主页-32.png" />
     <Resource Include="Resources\扇形-50.png" />
     <Resource Include="Resources\折线-50.png" />

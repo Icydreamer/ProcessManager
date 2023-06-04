@@ -21,7 +21,6 @@ namespace DataBase.Services
         /// </summary>
         public void Load()
         {
-            //Debug.WriteLine("加载app开始");
             using (var db = dataBase.GetReaderContext())
             {
                 apps = db.App.ToList()
@@ -36,25 +35,6 @@ namespace DataBase.Services
                         TotalTime = m.TotalTime
                     })
                     .ToList();
-                //apps = (
-                //    from app in db.App
-                //    join c in db.Categorys
-                //    on app.CategoryID equals c.ID into itdata
-                //    from n in itdata.DefaultIfEmpty()
-                //    select app
-                //    ).ToList()
-                //    .Select(m => new AppModel
-                //    {
-                //        ID = m.ID,
-                //        Category = m.Category != null ? m.Category : null,
-                //        CategoryID = m.CategoryID,
-                //        Description = m.Description,
-                //        File = m.File,
-                //        IconFile = m.IconFile,
-                //        Name = m.Name,
-                //        TotalTime = m.TotalTime
-                //    })
-                //    .ToList();
             }
         }
 
