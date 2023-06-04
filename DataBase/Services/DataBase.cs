@@ -32,10 +32,6 @@ namespace DataBase.Services
                         _locked = false;
                     }
                 }
-                //_locked = true;
-
-                //_readerContext = new TaiDbContext();
-                //return _readerContext;
                 return new MyDbContext();
             }
         }

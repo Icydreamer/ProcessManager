@@ -83,7 +83,6 @@ namespace DataBase.Services
                                 dailyLog.Time += time;
                             }
                         }
-
                         // 更新时间段数据
                         var newTime = new DateTime(startDateTime.Year, startDateTime.Month, startDateTime.Day, startDateTime.Hour, 0, 0);
                         var hoursLog = db.HoursLog.SingleOrDefault(m => m.DataTime == newTime && m.AppModelID == app.ID);
@@ -114,7 +113,7 @@ namespace DataBase.Services
                 }
                 catch (Exception ex)
                 {
-
+                    Console.WriteLine(ex.Message);
                 }
             });
         }
