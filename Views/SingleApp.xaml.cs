@@ -204,14 +204,22 @@ namespace MvvmTutorials.ToolkitMessages.Views
             }
             Appname.DataContext = this;
             //应用allapps里的app类，可考虑迁移
-            AllApps.app Singleapp = new AllApps.app()
+            AllApps.app Singleapp=new AllApps.app();
+            if (DataList.Count != 0)
             {
-                Index = 0,
-                ImgPath = "pack://siteoforigin:,,,/" + DataList[0].ImgPath,
-                Name = DataList[0].Name,
-                IsSelected = true,
-                Time = 100
-            };
+                Singleapp = new AllApps.app()
+                {
+                    Index = 0,
+                    ImgPath = "pack://siteoforigin:,,,/" + DataList[0].ImgPath,
+                    Name = DataList[0].Name,
+                    IsSelected = true,
+                    Time = 100
+                };
+            }
+            else
+            {
+                MessageBox.Show("目前数据库中没有APP记录！请让白驹运行一会，记录部分APP信息，然后关闭再次打开");
+            }
             //绑定数据
             singleapp.DataContext = Singleapp;
 
