@@ -216,6 +216,10 @@ namespace MvvmTutorials.ToolkitMessages.Views
                     Time = 100
                 };
             }
+            else
+            {
+                MessageBox.Show("目前数据库中没有APP记录！请让白驹运行一会，记录部分APP信息，然后关闭再次打开");
+            }
             //绑定数据
             singleapp.DataContext = Singleapp;
 
