@@ -50,8 +50,8 @@
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
 
-                    <DataGridComboBoxColumn  Width="90" CanUserResize="False" SelectedValueBinding="{Binding Time}" Header="使用时长"/>
-                </DataGrid.Columns>
+                        <DataGridTextColumn IsReadOnly="True" Width="80" Binding="{Binding Time}" Header="使用时长"/>
+                    </DataGrid.Columns>
             </DataGrid>
             </Border>
         </StackPanel>
@@ -62,11 +62,11 @@
             <Border BorderThickness="4" CornerRadius="30" Background="{DynamicResource BORDERINSIDECOLOR}" Margin="10,10,30,10" x:Name="ShowMode">
                 <WrapPanel Orientation="Horizontal">
                     <Grid Width="50"></Grid>
-                    <RadioButton Content="按天" FontSize="20" Click="Day"  Foreground="{DynamicResource TEXTCOLOR}" Margin="0,10,0,0"></RadioButton>
+                    <RadioButton Content="按天" FontSize="20" Click="Day"  Foreground="{DynamicResource TEXTCOLOR}" Margin="0,10,0,0" IsChecked="{Binding day}"></RadioButton>
                     <Grid Width="50"></Grid>
-                    <RadioButton Content="按周" FontSize="20" Click="Week" Foreground="{DynamicResource TEXTCOLOR}" Margin="0,10,0,0" ></RadioButton>
+                    <RadioButton Content="按周" FontSize="20" Click="Week" Foreground="{DynamicResource TEXTCOLOR}" Margin="0,10,0,0" IsChecked="{Binding week}"></RadioButton>
                     <Grid Width="50"></Grid>
-                    <RadioButton Content="按月" FontSize="20" Click="Month" Foreground="{DynamicResource TEXTCOLOR}" Margin="0,10,0,0" ></RadioButton>
+                    <RadioButton Content="按月" FontSize="20" Click="Month" Foreground="{DynamicResource TEXTCOLOR}" Margin="0,10,0,0" IsChecked="{Binding month}"></RadioButton>
                     <Grid HorizontalAlignment="Right" Width="50" />
                     <TextBlock Width="100" Text="起始日期" FontSize="20" Foreground="{DynamicResource TEXTCOLOR}" Margin="50,20,0,10"></TextBlock>
                     <DatePicker x:Name="box" Height="20" Width="150" Margin="10,10,0,0" />
@@ -79,13 +79,11 @@
             <!--绘制图表-->
             <Grid Height="300" Width="450">
                 <syncfusion:SfChart Grid.Row="1" Grid.Column="1" >
-
                     <syncfusion:SfChart.PrimaryAxis>
 
                         <syncfusion:CategoryAxis Header="应用"  LabelsIntersectAction="Auto"/>
 
                     </syncfusion:SfChart.PrimaryAxis>
-
                     <syncfusion:SfChart.SecondaryAxis>
                         <syncfusion:NumericalAxis Header="使用时长/分钟">
                             <syncfusion:NumericalAxis.RangeStyles>
@@ -101,10 +99,8 @@
 
 
                     </syncfusion:SfChart.SecondaryAxis>
-
                     <syncfusion:ColumnSeries x:Name="AllAppsTimer" ItemsSource="{Binding appTimers}" XBindingPath="appName" YBindingPath="length" >
                     </syncfusion:ColumnSeries>
-
                 </syncfusion:SfChart >
             </Grid>
 

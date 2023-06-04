@@ -204,14 +204,18 @@ namespace MvvmTutorials.ToolkitMessages.Views
             }
             Appname.DataContext = this;
             //应用allapps里的app类，可考虑迁移
-            AllApps.app Singleapp = new AllApps.app()
+            AllApps.app Singleapp=new AllApps.app();
+            if (DataList.Count != 0)
             {
-                Index = 0,
-                ImgPath = "pack://siteoforigin:,,,/" + DataList[0].ImgPath,
-                Name = DataList[0].Name,
-                IsSelected = true,
-                Time = 100
-            };
+                Singleapp = new AllApps.app()
+                {
+                    Index = 0,
+                    ImgPath = "pack://siteoforigin:,,,/" + DataList[0].ImgPath,
+                    Name = DataList[0].Name,
+                    IsSelected = true,
+                    Time = 100
+                };
+            }
             //绑定数据
             singleapp.DataContext = Singleapp;
 

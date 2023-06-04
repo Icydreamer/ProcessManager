@@ -91,11 +91,6 @@ public partial class AllApps : UserControl
         AllAppsTimer.DataContext = appTimeModel;
 
     }
-    public void OnChecked(object sender, RoutedEventArgs e)
-    {
-        setDayTimerForApps(new DateTime(2023,5,31));
-        MessageBox.Show(DataList[1].Name + DataList[1].IsSelected.ToString());
-    }
     private void CheckBox_Click(object sender, RoutedEventArgs e)
     {
         CheckBox checkBox = sender as CheckBox;
@@ -144,7 +139,7 @@ public partial class AllApps : UserControl
         }
         Appname.DataContext = this;
         AllAppsTimer.DataContext = appTimeModel;
-        setDayTimerForApps(new DateTime(2023,5,31));
+        setDayTimerForApps(BoxStringTran(box.Text));
     }
 
 
@@ -180,19 +175,11 @@ public partial class AllApps : UserControl
     //可考虑迁移
     public class app
     {
-        public int time;
         public int Index { get; set; }
         public string ImgPath { get; set; }
         public string Name { get; set; }
         public bool IsSelected { set; get; }
-        public int Time
-        {
-            get => time;
-            set
-            {
-
-            }
-        }
+        public int Time { get; set; }
 
     }
 
