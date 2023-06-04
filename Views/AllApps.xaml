@@ -12,72 +12,68 @@
       Height="600" Width="1000">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="500"></ColumnDefinition>
+            <ColumnDefinition Width="450"></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <!--左侧视图-->
         <StackPanel>
             <Grid Height="20"></Grid>
 
-            <Border BorderThickness="4" CornerRadius="20" Background="{DynamicResource BORDERINSIDECOLOR}" Margin="10,10,10,0">
-                <WrapPanel Height="80" >
-                    <Grid Width="20" Height="100"></Grid>
-                    <TextBlock FontSize="20" VerticalAlignment="Center" Foreground="{DynamicResource TEXTCOLOR}" Margin="20,0,0,0"><Run Text="选择"/><Run Text="要查看的"/><Run Language="zh-cn" Text="应用"/><Run Text="："/></TextBlock>
-                    <Grid Width="100" Height="100"></Grid>
-                    <Button Height="35" Content="确认" FontSize="16" Click="sure" Background="{DynamicResource BUTTONCOLOR}" Foreground="{DynamicResource TEXTCOLOR}" Width="98"></Button>
-                </WrapPanel>
+            <Border BorderThickness="4" CornerRadius="20"  Margin="10,10,0,0">
+                <TextBlock FontSize="17" TextAlignment="Center" Foreground="{DynamicResource TEXTCOLOR}"><Run Text="选 择 要 查 看 的 应 用"/></TextBlock>
             </Border>
 
             <Grid Height="20"></Grid>
             <!--应用列表-->
-            <Border BorderThickness="4" CornerRadius="30" Background="{DynamicResource BORDERINSIDECOLOR}" Margin="10,0,10,10">
-                <DataGrid Height="400" Width="400" hc:DataGridAttach.CanUnselectAllWithBlankArea="True" HeadersVisibility="All" RowHeaderWidth="50" AutoGenerateColumns="False" ItemsSource="{Binding DataList}" Background="White" x:Name="Appname" Margin="0,10,0,10" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" >
-                <DataGrid.Columns>
-                    <DataGridTextColumn IsReadOnly="True" Width="60" Binding="{Binding Index}" Header="序号"/>
-                    <DataGridTextColumn IsReadOnly="True" Width="80" Binding="{Binding Name}" Header="名称"/>
-                    <DataGridTemplateColumn Width="60" CanUserResize="False" Header="图标">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <Image Source="{Binding ImgPath}" MaxWidth="32" MaxHeight="32" Stretch="Uniform"/>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                    <DataGridTemplateColumn Header="选中" Width="*">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <CheckBox HorizontalAlignment="Center" Click="CheckBox_Click" IsChecked="{Binding IsSelected}"/>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
+            <Border BorderThickness="4" CornerRadius="15"  Margin="10,0,0,10" Height="502" Background="{DynamicResource BORDERINSIDECOLOR}">
+                <DataGrid Width="410" hc:DataGridAttach.CanUnselectAllWithBlankArea="True" HeadersVisibility="All" RowHeaderWidth="50" AutoGenerateColumns="False" ItemsSource="{Binding DataList}" Background="White" x:Name="Appname" Margin="0,6,0,21" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" >
+                    <DataGrid.Columns>
+                        <DataGridTextColumn IsReadOnly="True" Width="60" Binding="{Binding Index}" Header="序号"/>
+                        <DataGridTextColumn IsReadOnly="True" Width="80" Binding="{Binding Name}" Header="名称"/>
+                        <DataGridTemplateColumn Width="60" CanUserResize="False" Header="图标">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Image Source="{Binding ImgPath}" MaxWidth="32" MaxHeight="32" Stretch="Uniform"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="选中" Width="*">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <CheckBox HorizontalAlignment="Center" Click="CheckBox_Click" IsChecked="{Binding IsSelected}"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
 
-                    <DataGridComboBoxColumn  Width="90" CanUserResize="False" SelectedValueBinding="{Binding Time}" Header="使用时长"/>
-                </DataGrid.Columns>
-            </DataGrid>
+                        <DataGridComboBoxColumn  Width="90" CanUserResize="False" SelectedValueBinding="{Binding Time}" Header="使用时长"/>
+                    </DataGrid.Columns>
+                </DataGrid>
             </Border>
         </StackPanel>
 
         <!--右侧视图-->
         <StackPanel Grid.Column="1">
-            <Grid Height="20"></Grid>
-            <Border BorderThickness="4" CornerRadius="30" Background="{DynamicResource BORDERINSIDECOLOR}" Margin="10,10,30,10" x:Name="ShowMode">
+            <Grid Height="60"></Grid>
+            <Border BorderThickness="4" CornerRadius="10" Background="{DynamicResource BORDERINSIDECOLOR}" Margin="0,10,30,10" x:Name="ShowMode" Width="456">
                 <WrapPanel Orientation="Horizontal">
                     <Grid Width="50"></Grid>
-                    <RadioButton Content="按天" FontSize="20" Click="Day"  Foreground="{DynamicResource TEXTCOLOR}" Margin="0,10,0,0"></RadioButton>
+                    <RadioButton BorderBrush="DimGray" Content="按天" FontSize="20" Click="Day"  Foreground="{DynamicResource TEXTCOLOR}" Margin="0,10,0,0"></RadioButton>
                     <Grid Width="50"></Grid>
-                    <RadioButton Content="按周" FontSize="20" Click="Week" Foreground="{DynamicResource TEXTCOLOR}" Margin="0,10,0,0" ></RadioButton>
+                    <RadioButton BorderBrush="DimGray" Content="按周" FontSize="20" Click="Week" Foreground="{DynamicResource TEXTCOLOR}" Margin="0,10,0,0" ></RadioButton>
                     <Grid Width="50"></Grid>
-                    <RadioButton Content="按月" FontSize="20" Click="Month" Foreground="{DynamicResource TEXTCOLOR}" Margin="0,10,0,0" ></RadioButton>
+                    <RadioButton BorderBrush="DimGray" Content="按月" FontSize="20" Click="Month" Foreground="{DynamicResource TEXTCOLOR}" Margin="0,10,0,0" ></RadioButton>
                     <Grid HorizontalAlignment="Right" Width="50" />
                     <TextBlock Width="100" Text="起始日期" FontSize="20" Foreground="{DynamicResource TEXTCOLOR}" Margin="50,20,0,10"></TextBlock>
-                    <DatePicker x:Name="box" Height="20" Width="150" Margin="10,10,0,0" />
+                    <DatePicker BorderThickness="3" BorderBrush="Black" x:Name="box" Height="20" Width="150" Margin="10,10,0,0" />
                     <!--<Button Content="切换样式" Click="style" Background="{DynamicResource BUTTONCOLOR}" Foreground="{DynamicResource TEXTCOLOR}"></Button>-->
                 </WrapPanel>
 
 
             </Border>
+            <Grid Height="50"></Grid>
 
             <!--绘制图表-->
-            <Grid Height="300" Width="450">
+            <Grid Height="300" Width="450" Margin="0,10,30,10">
                 <syncfusion:SfChart Grid.Row="1" Grid.Column="1" >
 
                     <syncfusion:SfChart.PrimaryAxis>
@@ -102,23 +98,13 @@
 
                     </syncfusion:SfChart.SecondaryAxis>
 
-                    <syncfusion:ColumnSeries x:Name="AllAppsTimer" ItemsSource="{Binding appTimers}" XBindingPath="appName" YBindingPath="length" >
+                    <syncfusion:ColumnSeries x:Name="AllAppsTimer" ItemsSource="{Binding appTimers}" XBindingPath="appName" YBindingPath="length"  >
                     </syncfusion:ColumnSeries>
 
                 </syncfusion:SfChart >
             </Grid>
 
             <!--右下角文字数据绑定-->
-            <Border BorderThickness="4" CornerRadius="10" Background="{DynamicResource BORDERINSIDECOLOR}" Margin="10,0,10,10" Padding="10,10,10,10" >
-
-                <StackPanel Height="110" x:Name="Allapptexts" >
-                    <TextBlock Height="30"  Text="{Binding text1}" FontSize="20" HorizontalAlignment="Center" Foreground="{DynamicResource TEXTCOLOR}"></TextBlock>
-                    <Grid Height="10"></Grid>
-                    <TextBlock Height="30" Text="{Binding text2}" FontSize="20" HorizontalAlignment="Center" Foreground="{DynamicResource TEXTCOLOR}"></TextBlock>
-                    <Grid Height="10"></Grid>
-                    <TextBlock Height="30" Text="{Binding text3}" FontSize="20"  HorizontalAlignment="Center" Foreground="{DynamicResource TEXTCOLOR}"></TextBlock>
-                </StackPanel>
-            </Border>
 
         </StackPanel>
 

@@ -126,7 +126,7 @@ public partial class AllApps : UserControl
         initText.week = false;
         initText.month = false;
         allAppsTextGlobal = initText;
-        Allapptexts.DataContext = allAppsTextGlobal;
+        //Allapptexts.DataContext = allAppsTextGlobal;
         ShowMode.DataContext = allAppsTextGlobal;
         var appList=GlobalData.AppDataInstance.GetAllApps();
         box.Text = DateTime.Now.ToString();

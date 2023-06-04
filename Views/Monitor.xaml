@@ -13,49 +13,47 @@
             <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <Border BorderThickness="4" CornerRadius="10" Background="{DynamicResource BORDERINSIDECOLOR}" Margin="10,10,10,10" Padding="20,20,20,18" >
+        <Border BorderThickness="4" CornerRadius="10" Background="{DynamicResource BORDERINSIDECOLOR}" Margin="40,40,20,40" Padding="20,20,20,18" >
 
             <StackPanel>
                 <Grid Height="20"></Grid>
                 <TextBlock Text="选择应用添加监视" FontSize="20" HorizontalAlignment="Center"  Foreground="{DynamicResource TEXTCOLOR}"></TextBlock>
                 <Grid Height="20"></Grid>
+                <hc:Transfer ItemsSource="{Binding DataList}" MinWidth="300" Height="391" DisplayMemberPath="Name" Width="328"  x:Name="monitorapp"/>
                 <!--穿梭框-->
-                <hc:Transfer ItemsSource="{Binding DataList}" MinWidth="300" Height="500" DisplayMemberPath="Name" Width="450"  x:Name="monitorapp"/>
             </StackPanel>
         </Border>
         <StackPanel Grid.Column="1"  x:Name="progress">
             <Grid Height="50"></Grid>
-            <Border BorderThickness="4" CornerRadius="20" Background="{DynamicResource BORDERINSIDECOLOR}" Margin="10,10,10,10" Padding="10,10,10,10" >
+            <Border BorderThickness="4" CornerRadius="10" Background="{DynamicResource BORDERINSIDECOLOR}" Margin="10, 40,60,20" Padding="10,10,10,10" >
                 <StackPanel>
                     <RadioButton Content="选择禁用时段" FontSize="20"  Foreground="{DynamicResource TEXTCOLOR}"></RadioButton>
-                <hc:RangeSlider  Width="400" IsSnapToTickEnabled="True" ValueStart="2" ValueEnd="8"  />
-                
-            <WrapPanel>
-                <Grid Width="25"></Grid>
-                <TextBlock Width="50" Text="0:00"  Foreground="{DynamicResource TEXTCOLOR}"></TextBlock>
-                <Grid Width="40"></Grid>
-                <TextBlock Width="50" Text="6:00"  Foreground="{DynamicResource TEXTCOLOR}"></TextBlock>
-                <Grid Width="40"></Grid>
-                <TextBlock Width="50" Text="12:00"  Foreground="{DynamicResource TEXTCOLOR}"></TextBlock>
-                <Grid Width="45"></Grid>
-                <TextBlock Width="50" Text="18:00" Foreground="{DynamicResource TEXTCOLOR}"></TextBlock>
-                <Grid Width="45"></Grid>
-                <TextBlock Width="50" Text="24:00" Foreground="{DynamicResource TEXTCOLOR}"></TextBlock>
-            </WrapPanel>
-                    </StackPanel>
+                    <hc:RangeSlider  Width="400" IsSnapToTickEnabled="True" ValueStart="2" ValueEnd="8"  />
+
+                    <WrapPanel>
+                        <Grid Width="25"></Grid>
+                        <TextBlock Width="50" Text="0:00"  Foreground="{DynamicResource TEXTCOLOR}"></TextBlock>
+                        <Grid Width="40"></Grid>
+                        <TextBlock Width="50" Text="6:00"  Foreground="{DynamicResource TEXTCOLOR}"></TextBlock>
+                        <Grid Width="40"></Grid>
+                        <TextBlock Width="50" Text="12:00"  Foreground="{DynamicResource TEXTCOLOR}"></TextBlock>
+                        <Grid Width="45"></Grid>
+                        <TextBlock Width="50" Text="18:00" Foreground="{DynamicResource TEXTCOLOR}"></TextBlock>
+                        <Grid Width="45"></Grid>
+                        <TextBlock Width="50" Text="24:00" Foreground="{DynamicResource TEXTCOLOR}"></TextBlock>
+                    </WrapPanel>
+                </StackPanel>
             </Border>
-          
-            <Border BorderThickness="4" CornerRadius="20" Background="{DynamicResource BORDERINSIDECOLOR}" Margin="10,10,10,10" Padding="10,10,10,10" >
+
+            <Border BorderThickness="4" CornerRadius="10" Background="{DynamicResource BORDERINSIDECOLOR}" Margin="10, 20,60,40" Padding="10,10,10,10" >
                 <StackPanel>
 
                     <TextBlock Text="填写最长使用时间"  FontSize="20" HorizontalAlignment="Center" Foreground="{DynamicResource TEXTCOLOR}"></TextBlock>
                     <TextBox Width="200" ></TextBox>
                 </StackPanel>
             </Border>
-            <Grid Height="50"></Grid>
-            <Button Content="启动监视" FontSize="20" Height="40" HorizontalAlignment="Right" Margin="0,0,20,0" Click="monitor" Background="{DynamicResource BUTTONCOLOR}" Foreground="{DynamicResource TEXTCOLOR}"></Button>
-            <Grid Height="100"></Grid>
-            <Border BorderThickness="4" CornerRadius="20" Background="{DynamicResource BORDERINSIDECOLOR}" Margin="10,10,10,10" Padding="10,10,10,10" >
+            <Button Content="启动监视" FontSize="20" Height="40" HorizontalAlignment="Center" Margin="10, 0,60,0" Click="monitor" Background="{DynamicResource BUTTONCOLOR}" Foreground="{DynamicResource TEXTCOLOR}"></Button>
+            <Border BorderThickness="4" CornerRadius="10" Background="{DynamicResource BORDERINSIDECOLOR}" Margin="10, 50,60,40" Padding="10,10,10,10" Height="89" >
                 <StackPanel>
 
                     <TextBlock Text="{Binding text}" FontSize="20" HorizontalAlignment="Center" Foreground="{DynamicResource TEXTCOLOR}"></TextBlock>

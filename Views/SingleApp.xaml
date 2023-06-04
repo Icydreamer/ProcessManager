@@ -10,25 +10,13 @@
       Height="600" Width="1000">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="150"></RowDefinition>
+            <RowDefinition Height="100"></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="300"></ColumnDefinition>
+            <ColumnDefinition Width="350"></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <Border BorderThickness="4" CornerRadius="10" Background="{DynamicResource BORDERINSIDECOLOR}" Margin="10,10,10,10">
-            <StackPanel Orientation="Vertical">
-
-                <TextBlock Text="当前:" FontSize="20" Grid.Column="0" Grid.Row="0"  VerticalAlignment="Top" HorizontalAlignment="Left" Margin="15,10,15,0" Foreground="{DynamicResource TEXTCOLOR}"></TextBlock>
-                <WrapPanel  x:Name="singleapp" Height="50">
-                    <TextBlock Text="{Binding Name}" FontSize="20" Margin="0,20,0,0" Foreground="{DynamicResource TEXTCOLOR}" Width="200" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    <Image Source="{Binding ImgPath}" Width="40" Height="40" Margin="10,10,0,0" HorizontalAlignment="Right"/>
-                </WrapPanel>
-                <ToggleButton  Height="25" Content="更换应用" FontSize="10" IsChecked="{Binding IsOpen,ElementName=DrawerLeft}" HorizontalAlignment="Right" VerticalAlignment="Bottom" Background="{DynamicResource BUTTONCOLOR}" Foreground="{DynamicResource TEXTCOLOR}" Margin="0,5,10,0"/>
-            </StackPanel>
-
-        </Border>
         <!--展开框定义-->
         <hc:Drawer Name="DrawerLeft" Dock="Left" ShowMode="Push">
             <Border Grid.Column="1" Background="{DynamicResource RegionBrush}" Width="300" BorderThickness="0,1,0,0" BorderBrush="{DynamicResource BorderBrush}">
@@ -58,17 +46,29 @@
         </hc:Drawer>
 
         <StackPanel  x:Name="Allapptexts" Grid.Row="1">
-            <Border BorderThickness="4" CornerRadius="30" Background="{DynamicResource BORDERINSIDECOLOR}" Margin="10,50,10,10" Padding="0,0,0,10" >
+            <Border BorderThickness="4" CornerRadius="10" Background="{DynamicResource BORDERINSIDECOLOR}" Height="130" Width="280">
+                <StackPanel Orientation="Vertical">
+
+                    <TextBlock Text="当前:" FontSize="20" Grid.Column="0" Grid.Row="0"  VerticalAlignment="Top" HorizontalAlignment="Left" Margin="15,10,15,0" Foreground="{DynamicResource TEXTCOLOR}"/>
+                    <WrapPanel  x:Name="singleapp" Height="50">
+                        <TextBlock Text="{Binding Name}" FontSize="20" Margin="0,20,0,0" Foreground="{DynamicResource TEXTCOLOR}" Width="200" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <Image Source="{Binding ImgPath}" Width="40" Height="40" Margin="10,10,0,0" HorizontalAlignment="Right"/>
+                    </WrapPanel>
+                    <ToggleButton  Height="25" Content="更换应用" FontSize="10" IsChecked="{Binding IsOpen, ElementName=DrawerLeft}" HorizontalAlignment="Right" VerticalAlignment="Bottom" Background="{DynamicResource BUTTONCOLOR}" Foreground="{DynamicResource TEXTCOLOR}" Margin="0,5,10,0"/>
+                </StackPanel>
+
+            </Border>
+            <Border BorderThickness="4" CornerRadius="10" Background="{DynamicResource BORDERINSIDECOLOR}" Height="120" Width="280" Margin="10,50,10,10" Padding="0,0,0,10" >
                 <WrapPanel Orientation="Horizontal">
-                    <RadioButton Content="按天" FontSize="20" Click="Day" IsChecked="{Binding day}" Foreground="{DynamicResource TEXTCOLOR}" Margin="15,10,0,0"></RadioButton>
-                    <RadioButton Content="按周" FontSize="20" Click="Week" IsChecked="{Binding week}" Foreground="{DynamicResource TEXTCOLOR}" Margin="10,10,0,0"></RadioButton>
-                    <RadioButton Content="按月" FontSize="20" Click="Month" IsChecked="{Binding month}" Foreground="{DynamicResource TEXTCOLOR}" Margin="10,10,0,0"></RadioButton>
-                    <TextBlock Width="100" Text="起始日期" Foreground="{DynamicResource TEXTCOLOR}" FontSize="20" HorizontalAlignment="Center" Margin="15,20,0,0"></TextBlock>
-                    <DatePicker x:Name="box" Width="150" Margin="0,20,0,0" />
+                    <RadioButton BorderBrush="DimGray" Content="按天" FontSize="20" Click="Day" IsChecked="{Binding day}" Foreground="{DynamicResource TEXTCOLOR}" Margin="15,10,0,0"/>
+                    <RadioButton BorderBrush="DimGray" Content="按周" FontSize="20" Click="Week" IsChecked="{Binding week}" Foreground="{DynamicResource TEXTCOLOR}" Margin="10,10,0,0"/>
+                    <RadioButton BorderBrush="DimGray" Content="按月" FontSize="20" Click="Month" IsChecked="{Binding month}" Foreground="{DynamicResource TEXTCOLOR}" Margin="10,10,0,0"/>
+                    <TextBlock Width="100" Text="起始日期" Foreground="{DynamicResource TEXTCOLOR}" FontSize="20" HorizontalAlignment="Center" Margin="15,20,0,0"/>
+                    <DatePicker BorderThickness="3" BorderBrush="Black" x:Name="box" Width="150" Margin="0,20,0,0" />
                 </WrapPanel>
             </Border>
-            <Grid Height="40"></Grid>
-            <Border BorderThickness="4" CornerRadius="10" Background="{DynamicResource BORDERINSIDECOLOR}" Margin="10,10,10,10" Padding="10,10,10,10" >
+            <Grid Height="40"/>
+            <!--<Border BorderThickness="4" CornerRadius="10" Background="{DynamicResource BORDERINSIDECOLOR}" Margin="10,10,10,10" Padding="10,10,10,10" >
 
                 <StackPanel>
                     <TextBlock Height="30"  Text="{Binding text1}" FontSize="15" HorizontalAlignment="Center" Foreground="{DynamicResource TEXTCOLOR}"></TextBlock>
@@ -77,13 +77,13 @@
                     <Grid Height="10"></Grid>
                     <TextBlock Height="30" Text="{Binding text3}" FontSize="15"  HorizontalAlignment="Center" Foreground="{DynamicResource TEXTCOLOR}"></TextBlock>
                 </StackPanel>
-            </Border>
+            </Border>-->
 
         </StackPanel>
 
 
         <!--绘制视图-->
-        <Border BorderThickness="4" CornerRadius="20" Background="{DynamicResource BORDERINSIDECOLOR}" Margin="10,10,10,10" Padding="20,20,20,18"  Grid.Column="1"  Grid.RowSpan="2">
+        <Border BorderThickness="4" CornerRadius="10" Background="{DynamicResource BORDERINSIDECOLOR}" Margin="0,60,60,60" Padding="20,20,20,18"  Grid.Column="1"  Grid.RowSpan="2">
             <syncfusion:SfChart >
 
                 <syncfusion:SfChart.PrimaryAxis>
@@ -114,7 +114,7 @@
             </syncfusion:SfChart >
         </Border>
         <Canvas>
-            <hc:FlipClock RenderTransformOrigin="0,0" Width="600" Canvas.Left="44" Canvas.Top="520">
+            <hc:FlipClock RenderTransformOrigin="0,0" Width="600" Canvas.Left="66" Canvas.Top="478">
                 <hc:FlipClock.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform ScaleX="0.4" ScaleY="0.4"/>

@@ -4,7 +4,7 @@
     <SolidColorBrush x:Key="MAINLEFTCOLOR" Color="White"/>
     <SolidColorBrush x:Key="HORSECOLOR" Color="RED"/>
     <SolidColorBrush x:Key="MAINCOLOR" Color="WhiteSmoke"/>
-    <SolidColorBrush x:Key="BORDERINSIDECOLOR" Color="MintCream"/>
+    <SolidColorBrush x:Key="BORDERINSIDECOLOR" Color="White"/>
     <SolidColorBrush x:Key="TEXTCOLOR" Color="BLACK"/>
     <SolidColorBrush x:Key="BARCOLOR" Color="LightCoral"/>
     <SolidColorBrush x:Key="BUTTONCOLOR" Color="WHITE"/>

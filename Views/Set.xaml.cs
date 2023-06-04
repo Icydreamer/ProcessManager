@@ -22,31 +22,43 @@ namespace MvvmTutorials.ToolkitMessages.Views
             Auto_Start.IsChecked = config.StartupEnabled;
             if (config.ThemeColor == "light")
             {
-                Color_Switch.IsChecked = true;
+                Color_Switch.IsChecked = false;
             }
             else
             {
-                Color_Switch.IsChecked = false;
+                Color_Switch.IsChecked = true;
             }
         }
 
         //主题切换
         private void color_switch(object sender, RoutedEventArgs e)
         {
-            ResourceDictionary resource = new ResourceDictionary();
-            if (Application.Current.Resources.MergedDictionaries[0].Source.ToString() == "pack://application:,,,/ProcessManager;component/Resources/color.xaml")
+            if (Color_Switch.IsChecked == false)
             {
-                resource.Source = new Uri("pack://application:,,,/ProcessManager;component/Resources/darkcolor.xaml");
-                config.ThemeColor = "dark";
+                EnableLightTheme();
+                config.ThemeColor = "light";
             }
             else
             {
-                resource.Source = new Uri("pack://application:,,,/ProcessManager;component/Resources/color.xaml");
-                config.ThemeColor = "light";
+                EnableDarkTheme();
+                config.ThemeColor = "dark";
             }
-            Application.Current.Resources.MergedDictionaries[0] = resource;
-
         }
+        
+        private void EnableLightTheme()
+        {
+            ResourceDictionary resource = new ResourceDictionary();
+            resource.Source = new Uri("pack://application:,,,/ProcessManager;component/Resources/color.xaml");
+            Application.Current.Resources.MergedDictionaries[0] = resource;
+        }
+
+        private void EnableDarkTheme()
+        {
+            ResourceDictionary resource = new ResourceDictionary();
+            resource.Source = new Uri("pack://application:,,,/ProcessManager;component/Resources/darkcolor.xaml");
+            Application.Current.Resources.MergedDictionaries[0] = resource;
+        }
+
         // 另存为 CSV 文件
         private void export_csv(object sender, RoutedEventArgs e)
         {

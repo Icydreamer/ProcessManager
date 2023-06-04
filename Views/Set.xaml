@@ -19,17 +19,17 @@
             <Grid Height="40"/>
             <DockPanel>
                 <TextBlock Text="开机自启" FontSize="20" Foreground="{DynamicResource TEXTCOLOR}" Height="25" VerticalAlignment="Center" />
-                <ToggleButton x:Name="Auto_Start" IsChecked="False" Margin="5,9" Style="{StaticResource ToggleButtonSwitch}" HorizontalAlignment="Right" Click="auto_start" />
+                <ToggleButton x:Name="Auto_Start" Margin="5,9" Style="{StaticResource ToggleButtonSwitch}" HorizontalAlignment="Right" Click="auto_start" />
             </DockPanel>
             <Grid Height="10"/>
             <DockPanel>
                 <TextBlock Text="桌面提醒" FontSize="20" Foreground="{DynamicResource TEXTCOLOR}" Height="25" VerticalAlignment="Center"/>
-                <ToggleButton x:Name="Desktop_Reminder" IsChecked="False" Margin="5,9" Style="{StaticResource ToggleButtonSwitch}" HorizontalAlignment="Right" Click="desktop_reminder"/>
+                <ToggleButton x:Name="Desktop_Reminder" Margin="5,9" Style="{StaticResource ToggleButtonSwitch}" HorizontalAlignment="Right" Click="desktop_reminder"/>
             </DockPanel>
             <Grid Height="10"/>
             <DockPanel>
                 <TextBlock Text="深色模式" FontSize="20" Foreground="{DynamicResource TEXTCOLOR}" Height="25" VerticalAlignment="Center"/>
-                <ToggleButton x:Name="Color_Switch" IsChecked="False" Margin="5,9"  Style="{StaticResource ToggleButtonSwitch}" HorizontalAlignment="Right" hc:VisualElement.HighlightBrush="{DynamicResource ReverseTextBrush}" Click="color_switch"/>
+                <ToggleButton x:Name="Color_Switch" Margin="5,9"  Style="{StaticResource ToggleButtonSwitch}" HorizontalAlignment="Right" hc:VisualElement.HighlightBrush="{DynamicResource ReverseTextBrush}" Click="color_switch"/>
             </DockPanel>
             <Grid Height="20"/>
         </StackPanel>
